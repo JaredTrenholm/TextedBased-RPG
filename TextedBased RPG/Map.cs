@@ -8,6 +8,8 @@ namespace TextedBased_RPG
 {
     class Map
     {
+        public static int xOffset = 0; //Highest xoffset right now is ten
+        public static int yOffset = 0; //Highest yoffset right now is two
         public static string[,] map = new string[,] // dimensions defined by following data:
     {
         {"^","^","^","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'",},
@@ -26,14 +28,27 @@ namespace TextedBased_RPG
 
         public static void DrawMap()
         {
-            for(int y = 0; y < map.GetLength(0); y++)
+            Console.Write("┌");
+            for(int i = 0; i < 20; i++)
             {
-                for(int x = 0; x<map.GetLength(1); x++)
-                {
-                    Console.Write(map[y, x]);
-                }
-                Console.WriteLine(" ");
+                Console.Write("─");
             }
+            Console.WriteLine("┐");
+            for(int y = 0; y < 10; y++)
+            {
+                Console.Write("│");
+                for(int x = 0; x<20; x++)
+                {
+                    Console.Write(map[y+yOffset, x+xOffset]);
+                }
+                Console.WriteLine("│");
+            }
+            Console.Write("└");
+            for (int i = 0; i < 20; i++)
+            {
+                Console.Write("─");
+            }
+            Console.WriteLine("┘");
         }
     }
 }
