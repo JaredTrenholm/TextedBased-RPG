@@ -1,0 +1,7 @@
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\bin\Debug\TextedBased RPG.exe.config
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\bin\Debug\TextedBased RPG.exe
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\bin\Debug\TextedBased RPG.pdb
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.csprojAssemblyReference.cache
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.csproj.CoreCompileInputs.cache
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.exe
+C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.pdb
