@@ -39,17 +39,25 @@ namespace TextedBased_RPG
             }
             else if (input == ConsoleKey.A.ToString())
             {
-                if (Map.xOffset > 0)
+                if (CharacterXOffset > 0 && CharacterX > 10)
                 {
-                    Map.xOffset = Map.xOffset - 1;
+                    CharacterX = CharacterX - 1;
+                    CharacterXOffset = CharacterXOffset - 1;
                 }
                 else
                 {
-                    if (CharacterX > MinPos)
+                    if (Map.xOffset > 0)
                     {
-                        CharacterX = CharacterX - 1;
-                        CharacterXOffset = CharacterXOffset + 1;
+                        Map.xOffset = Map.xOffset - 1;
+                    }
+                    else
+                    {
+                        if (CharacterX > MinPos)
+                        {
+                            CharacterX = CharacterX - 1;
+                            CharacterXOffset = CharacterXOffset + 1;
 
+                        }
                     }
                 }
             }
@@ -63,19 +71,27 @@ namespace TextedBased_RPG
             }
             else if (input == ConsoleKey.D.ToString())
             {
-                if (Map.xOffset < 10)
+                if (CharacterXOffset > 0 && CharacterX < 10)
                 {
-                    Map.xOffset = Map.xOffset + 1;
+                    CharacterX = CharacterX + 1;
+                    CharacterXOffset = CharacterXOffset - 1;
                 }
                 else
                 {
-                    if (CharacterX < MaxPosX)
+                    if (Map.xOffset < 10)
                     {
-                        CharacterX = CharacterX + 1;
+                        Map.xOffset = Map.xOffset + 1;
+                    }
+                    else
+                    {
+                        if (CharacterX < MaxPosX)
+                        {
+                            CharacterX = CharacterX + 1;
+                            CharacterXOffset = CharacterXOffset + 1;
 
+                        }
                     }
                 }
-
             }
         }
     }
