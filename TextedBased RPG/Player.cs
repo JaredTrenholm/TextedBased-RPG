@@ -31,10 +31,26 @@ namespace TextedBased_RPG
             string input = Console.ReadKey(true).Key.ToString(); ;
             if (input == ConsoleKey.W.ToString())
             {
-                if (CharacterY > MinPos)
+                if (CharacterYOffset > 0 && CharacterY > 10)
                 {
                     CharacterY = CharacterY - 1;
+                    CharacterYOffset = CharacterYOffset - 1;
+                }
+                else
+                {
+                    if (Map.yOffset > 10)
+                    {
+                        Map.yOffset = Map.yOffset - 1;
+                    }
+                    else
+                    {
+                        if (CharacterY > MinPos)
+                        {
+                            CharacterY = CharacterY - 1;
+                            CharacterYOffset = CharacterYOffset + 1;
 
+                        }
+                    }
                 }
             }
             else if (input == ConsoleKey.A.ToString())
@@ -63,10 +79,26 @@ namespace TextedBased_RPG
             }
             else if (input == ConsoleKey.S.ToString())
             {
-                if (CharacterY < MaxPosY)
+                if (CharacterYOffset > 0 && CharacterY < 10)
                 {
                     CharacterY = CharacterY + 1;
+                    CharacterYOffset = CharacterYOffset - 1;
+                }
+                else
+                {
+                    if (Map.yOffset <= 10)
+                    {
+                        Map.yOffset = Map.yOffset + 1;
+                    }
+                    else
+                    {
+                        if (CharacterY < MaxPosY)
+                        {
+                            CharacterY = CharacterY + 1;
+                            CharacterYOffset = CharacterYOffset + 1;
 
+                        }
+                    }
                 }
             }
             else if (input == ConsoleKey.D.ToString())
