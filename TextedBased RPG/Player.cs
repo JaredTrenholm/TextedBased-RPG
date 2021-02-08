@@ -24,7 +24,9 @@ namespace TextedBased_RPG
         public void DrawPlayer()
         {
             Console.SetCursorPosition(CharacterX, CharacterY);
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("@");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public void MovePlayer()
         {
@@ -38,7 +40,7 @@ namespace TextedBased_RPG
                 }
                 else
                 {
-                    if (Map.yOffset > 10)
+                    if (Map.yOffset > 0)
                     {
                         Map.yOffset = Map.yOffset - 1;
                     }

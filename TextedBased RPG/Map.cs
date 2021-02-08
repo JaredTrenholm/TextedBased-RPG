@@ -8,9 +8,11 @@ namespace TextedBased_RPG
 {
     class Map
     {
+        private static int MapX;
+        private static int MapY;
         public static int xOffset = 5; //Highest xoffset right now is ten
         public static int yOffset = 1; //Highest yoffset right now is two
-        public static string[,] map = new string[,] // dimensions defined by following data:
+        public static string[,] mapData = new string[,] // dimensions defined by following data:
     {
         {"^","^","^","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'",},
         {"^","^","'","'","'","'","*","*","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","~","~","~","'","'","'",},
@@ -57,7 +59,11 @@ namespace TextedBased_RPG
                 Console.Write("│");
                 for(int x = 0; x<20; x++)
                 {
-                    Console.Write(map[y+yOffset, x+xOffset]);
+                    MapX = x+xOffset;
+                    MapY = y+yOffset;
+                    TileColor();
+                    Console.Write(mapData[y+yOffset, x+xOffset]);
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.WriteLine("│");
             }
@@ -67,6 +73,18 @@ namespace TextedBased_RPG
                 Console.Write("─");
             }
             Console.WriteLine("┘");
+        }
+
+        private static void TileColor()
+        {
+            if (mapData[MapY, MapX] == "^") { Console.ForegroundColor = ConsoleColor.Gray; }
+            else if (mapData[MapY, MapX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
+            else if (mapData[MapY, MapX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
+            else if (mapData[MapY, MapX] == "|") { Console.ForegroundColor = ConsoleColor.Red; }
+            else if (mapData[MapY, MapX] == "_") { Console.ForegroundColor = ConsoleColor.Red; }
+            else if (mapData[MapY, MapX] == "█") { Console.ForegroundColor = ConsoleColor.DarkYellow; }
+            else if (mapData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
+            else { Console.ForegroundColor = ConsoleColor.White; }
         }
     }
 }
