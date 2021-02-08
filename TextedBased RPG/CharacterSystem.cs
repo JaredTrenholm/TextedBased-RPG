@@ -25,15 +25,15 @@ namespace TextedBased_RPG
             {
                 damage = health;
                 health = 0;
-                Console.WriteLine(name + " took " + damage + " points of damage!");
                 Alive = false;
                
             }
             else
             {
                 health = health - damage;
-                Console.WriteLine(name + " took " + damage + " points of damage!");
             }
         }
+
+        
     }
 }
