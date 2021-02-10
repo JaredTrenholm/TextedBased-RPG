@@ -12,11 +12,12 @@ namespace TextedBased_RPG
         public int health;
         public int maxHealth;
         public bool Alive;
-        public int MinPos = 1;
-        public int MaxPosY = 10;
-        public int MaxPosX = 20;
+        public int MinPos = 0;
+        public int MaxPosY = 29;
+        public int MaxPosX = 29;
         public int CharacterX;
         public int CharacterY;
+        
 
         public void TakeDamage(int damage)
         {

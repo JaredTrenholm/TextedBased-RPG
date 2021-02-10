@@ -10,122 +10,210 @@ namespace TextedBased_RPG
     {
         public int CharacterXOffset = 0;
         public int CharacterYOffset = 0;
-        
-        
+        private string input;
+        private bool AttackOrMove = false; //false = attack    true = move
+
+        private int attack = 25;
+
+
+
         public Player()
         {
             maxHealth = 100;
             health = maxHealth;
             name = "You";
             Alive = true;
-            CharacterX = 10;
+            CharacterX = 14;
             CharacterY = 5;
         }
         public void DrawPlayer()
         {
-            Console.SetCursorPosition(CharacterX, CharacterY);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("@");
-            Console.ForegroundColor = ConsoleColor.White;
+            
+                Console.ForegroundColor = ConsoleColor.Red;
+                Map.mapData[CharacterY, CharacterX] = "@";
+                Console.ForegroundColor = ConsoleColor.White;
+            
+            
         }
-        public void MovePlayer()
+       
+        private bool CheckPlayerInput()
         {
-            string input = Console.ReadKey(true).Key.ToString(); ;
             if (input == ConsoleKey.W.ToString())
             {
-                if (CharacterYOffset > 0 && CharacterY > 10)
+                if(CharacterY > MinPos)
                 {
-                    CharacterY = CharacterY - 1;
-                    CharacterYOffset = CharacterYOffset - 1;
-                }
-                else
-                {
-                    if (Map.yOffset > 0)
+                    if(Map.mapData[CharacterY-1, CharacterX] == "E")
                     {
-                        Map.yOffset = Map.yOffset - 1;
+                        AttackOrMove = false;
                     }
                     else
                     {
-                        if (CharacterY > MinPos)
-                        {
-                            CharacterY = CharacterY - 1;
-                            CharacterYOffset = CharacterYOffset + 1;
-
-                        }
+                        AttackOrMove = true;
                     }
                 }
             }
             else if (input == ConsoleKey.A.ToString())
             {
-                if (CharacterXOffset > 0 && CharacterX > 10)
+                if (CharacterX > MinPos)
                 {
-                    CharacterX = CharacterX - 1;
-                    CharacterXOffset = CharacterXOffset - 1;
-                }
-                else
-                {
-                    if (Map.xOffset > 0)
+                    if (Map.mapData[CharacterY, CharacterX - 1] == "E")
                     {
-                        Map.xOffset = Map.xOffset - 1;
+                        AttackOrMove = false;
                     }
                     else
                     {
-                        if (CharacterX > MinPos)
-                        {
-                            CharacterX = CharacterX - 1;
-                            CharacterXOffset = CharacterXOffset + 1;
-
-                        }
+                        AttackOrMove = true;
                     }
                 }
             }
             else if (input == ConsoleKey.S.ToString())
             {
-                if (CharacterYOffset > 0 && CharacterY < 10)
+                if (CharacterY < MaxPosY)
                 {
-                    CharacterY = CharacterY + 1;
-                    CharacterYOffset = CharacterYOffset - 1;
-                }
-                else
-                {
-                    if (Map.yOffset <= 10)
+                    if (Map.mapData[CharacterY + 1, CharacterX] == "E")
                     {
-                        Map.yOffset = Map.yOffset + 1;
+                        AttackOrMove = false;
                     }
                     else
                     {
-                        if (CharacterY < MaxPosY)
-                        {
-                            CharacterY = CharacterY + 1;
-                            CharacterYOffset = CharacterYOffset + 1;
-
-                        }
+                        AttackOrMove = true;
                     }
                 }
             }
             else if (input == ConsoleKey.D.ToString())
             {
-                if (CharacterXOffset > 0 && CharacterX < 10)
+                if (CharacterX < MaxPosX)
                 {
-                    CharacterX = CharacterX + 1;
-                    CharacterXOffset = CharacterXOffset - 1;
-                }
-                else
-                {
-                    if (Map.xOffset < 10)
+                    if (Map.mapData[CharacterY, CharacterX + 1] == "E")
                     {
-                        Map.xOffset = Map.xOffset + 1;
+                        AttackOrMove = false;
                     }
                     else
                     {
-                        if (CharacterX < MaxPosX)
-                        {
-                            CharacterX = CharacterX + 1;
-                            CharacterXOffset = CharacterXOffset + 1;
+                        AttackOrMove = true;
+                    }
+                }
+            }
+            return AttackOrMove;
+        }
+        
+        public void MovePlayer()
+        {
 
+            input = Console.ReadKey(true).Key.ToString();
+            CheckPlayerInput();
+            
+            if (AttackOrMove == false)
+            {
+                Program.GM.enemy.TakeDamage(attack);
+                Program.GM.PlayerAttack = name + " attacked " + Program.GM.enemy.name + " for " + attack + " points of damage!";
+            }
+            else 
+            {
+                Program.GM.PlayerAttack = " ";
+                Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+
+                if (input == ConsoleKey.W.ToString())
+                {
+                    if (CharacterYOffset > 0 && CharacterY > 25)
+                    {
+                        CharacterY = CharacterY - 1;
+                        CharacterYOffset = CharacterYOffset - 1;
+                    }
+                    else
+                    {
+                        if (Map.yOffset > 0)
+                        {
+                            CharacterY = CharacterY - 1;
+                            Map.yOffset = Map.yOffset - 1;
+                        }
+                        else
+                        {
+                            if (CharacterY > MinPos)
+                            {
+                                CharacterY = CharacterY - 1;
+                                CharacterYOffset = CharacterYOffset + 1;
+
+                            }
                         }
                     }
                 }
+                else if (input == ConsoleKey.A.ToString())
+                {
+                    if (CharacterXOffset > 0 && CharacterX > 10)
+                    {
+                        CharacterX = CharacterX - 1;
+                        CharacterXOffset = CharacterXOffset - 1;
+                    }
+                    else
+                    {
+                        if (Map.xOffset > 0)
+                        {
+                            CharacterX = CharacterX - 1;
+                            Map.xOffset = Map.xOffset - 1;
+                        }
+                        else
+                        {
+                            if (CharacterX > MinPos)
+                            {
+                                CharacterX = CharacterX - 1;
+                                CharacterXOffset = CharacterXOffset + 1;
+
+                            }
+                        }
+                    }
+                }
+                else if (input == ConsoleKey.S.ToString())
+                {
+                    if (CharacterYOffset > 0 && CharacterY < 5)
+                    {
+                        CharacterY = CharacterY + 1;
+                        CharacterYOffset = CharacterYOffset - 1;
+                    }
+                    else
+                    {
+                        if (Map.yOffset < 20)
+                        {
+                            CharacterY = CharacterY + 1;
+                            Map.yOffset = Map.yOffset + 1;
+                        }
+                        else
+                        {
+                            if (CharacterY < MaxPosY)
+                            {
+                                CharacterY = CharacterY + 1;
+                                CharacterYOffset = CharacterYOffset + 1;
+
+                            }
+                        }
+                    }
+                }
+                else if (input == ConsoleKey.D.ToString())
+                {
+                    if (CharacterXOffset > 0 && CharacterX < 10)
+                    {
+                        CharacterX = CharacterX + 1;
+                        CharacterXOffset = CharacterXOffset - 1;
+                    }
+                    else
+                    {
+                        if (Map.xOffset < 10)
+                        {
+                            CharacterX = CharacterX + 1;
+                            Map.xOffset = Map.xOffset + 1;
+                        }
+                        else
+                        {
+                            if (CharacterX < MaxPosX)
+                            {
+                                CharacterX = CharacterX + 1;
+                                CharacterXOffset = CharacterXOffset + 1;
+
+                            }
+                        }
+                    }
+                }
+                
             }
         }
     }
