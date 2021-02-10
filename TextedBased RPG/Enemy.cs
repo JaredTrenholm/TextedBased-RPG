@@ -13,17 +13,17 @@ namespace TextedBased_RPG
         public bool EnemySeen = false;
 
 
-        public int attack;
+       
 
         public Enemy()
         {
             maxHealth = 100;
-            health = 100;
+            health = 50;
             Alive = true;
             name = "Your Foe";
-            CharacterX = 1;
-            CharacterY = 1;
-            attack = 25;
+            CharacterX = 10;
+            CharacterY = 4;
+            attack = 5;
         }
 
         public void DrawEnemy()

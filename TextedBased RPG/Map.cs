@@ -20,7 +20,7 @@ namespace TextedBased_RPG
         {"^","^","'","'","'","*","*","'","'","'","'","'","'","'","'","'","'","'","'","'","'","~","~","~","~","'","'","'","'","'",},
         {"^","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","'","~","~","~","~","'","'","'","'","'","'",},
         {"'","'","'","'","~","~","~","'","'","'","'","'","'","'","'","'","'","'","~","~","~","'","'","'","'","'","'","'","'","'",},
-        {"'","'","'","'","~","~","~","'","'","'","'","'","'","'","5","~","~","~","~","~","~","'","'","'","'","'","'","'","'","'",},
+        {"'","'","'","'","~","~","~","'","'","'","'","'","'","'","'","~","~","~","~","~","~","'","'","'","'","'","'","'","'","'",},
         {"'","'","'","~","~","~","~","'","'","'","'","'","'","'","~","~","~","~","~","~","'","'","^","^","'","'","'","'","'","'",},
         {"'","'","'","'","'","~","~","~","'","'","'","'","'","'","'","'","'","'","'","'","'","^","^","^","^","'","'","'","'","'",},
         {"'","'","'","'","'","~","~","~","~","'","'","'","'","'","'","'","'","'","'","'","'","'","'","^","^","^","^","'","'","'",},
@@ -118,6 +118,17 @@ namespace TextedBased_RPG
             else if (mapData[MapY, MapX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
             else if (mapData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
             else { Console.ForegroundColor = ConsoleColor.White; }
+        }
+
+        public static string MapTile()
+        {
+            string tile;
+            if (BaseMapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "^") { tile = "You climbed up a mountain."; }
+            else if (BaseMapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "~") { tile = "You crossed a body of water."; }
+            else if (BaseMapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "*") { tile = "You hiked through a forest."; }
+            else if (BaseMapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "'") { tile = "You walk through some plains."; }
+            else { tile = ""; }
+            return tile;
         }
     }
 }

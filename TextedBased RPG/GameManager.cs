@@ -13,7 +13,7 @@ namespace TextedBased_RPG
         public Enemy enemy = new Enemy();
         public string PlayerAttack = "";
         public string EnemyAttack = "";
-        public bool enemyAlive = true;
+        public bool enemyAlive;
         public bool playerAlive = true;
 
 
@@ -23,6 +23,13 @@ namespace TextedBased_RPG
         /// 4 up of the player is the map border
         /// 5 down of the player is the map border
         /// </summary>
+        /// 
+
+        public GameManager()
+        {
+            enemyAlive = true;
+            
+        }
 
 
         public void GameLoop()
@@ -84,19 +91,20 @@ namespace TextedBased_RPG
         public void DisplayHUD()
         {
             Console.WriteLine("Health: " + user.health);
+            Console.WriteLine(Map.MapTile());
             Console.WriteLine(PlayerAttack);
             Console.WriteLine(EnemyAttack);
-            Console.WriteLine("YOU: " + user.CharacterY+ ", " + user.CharacterX);
-            Console.WriteLine("FOE: " + enemy.CharacterY + ", " + enemy.CharacterX + ", " + enemy.health);
 
         }
 
         public void CheckHealth()
         {
-            if(enemy.health <= 0)
-            {
-                enemyAlive = false;
-            }
+            
+                if (enemy.health <= 0)
+                {
+                    enemyAlive = false;
+                }
+            
 
             if (user.health <= 0)
             {

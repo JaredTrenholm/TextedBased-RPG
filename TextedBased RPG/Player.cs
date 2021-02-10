@@ -12,8 +12,7 @@ namespace TextedBased_RPG
         public int CharacterYOffset = 0;
         private string input;
         private bool AttackOrMove = false; //false = attack    true = move
-
-        private int attack = 25;
+        private bool Moving = true;
 
 
 
@@ -25,6 +24,7 @@ namespace TextedBased_RPG
             Alive = true;
             CharacterX = 14;
             CharacterY = 5;
+            attack = 10;
         }
         public void DrawPlayer()
         {
@@ -46,9 +46,20 @@ namespace TextedBased_RPG
                     {
                         AttackOrMove = false;
                     }
+                    else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
+                    else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
                     else
                     {
                         AttackOrMove = true;
+                        Moving = true;
                     }
                 }
             }
@@ -60,9 +71,20 @@ namespace TextedBased_RPG
                     {
                         AttackOrMove = false;
                     }
+                    else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
+                    else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
                     else
                     {
                         AttackOrMove = true;
+                        Moving = true;
                     }
                 }
             }
@@ -74,9 +96,20 @@ namespace TextedBased_RPG
                     {
                         AttackOrMove = false;
                     }
+                    else if (Map.mapData[CharacterY+1, CharacterX] == "~")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
+                    else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
                     else
                     {
                         AttackOrMove = true;
+                        Moving = true;
                     }
                 }
             }
@@ -88,9 +121,20 @@ namespace TextedBased_RPG
                     {
                         AttackOrMove = false;
                     }
+                    else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
+                    else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                    {
+                        AttackOrMove = true;
+                        Moving = false;
+                    }
                     else
                     {
                         AttackOrMove = true;
+                        Moving = true;
                     }
                 }
             }
@@ -112,103 +156,105 @@ namespace TextedBased_RPG
             {
                 Program.GM.PlayerAttack = " ";
                 Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
-
-                if (input == ConsoleKey.W.ToString())
+                if (Moving == true)
                 {
-                    if (CharacterYOffset > 0 && CharacterY > 25)
+                    if (input == ConsoleKey.W.ToString())
                     {
-                        CharacterY = CharacterY - 1;
-                        CharacterYOffset = CharacterYOffset - 1;
-                    }
-                    else
-                    {
-                        if (Map.yOffset > 0)
+                        if (CharacterYOffset > 0 && CharacterY > 25)
                         {
                             CharacterY = CharacterY - 1;
-                            Map.yOffset = Map.yOffset - 1;
+                            CharacterYOffset = CharacterYOffset - 1;
                         }
                         else
                         {
-                            if (CharacterY > MinPos)
+                            if (Map.yOffset > 0)
                             {
                                 CharacterY = CharacterY - 1;
-                                CharacterYOffset = CharacterYOffset + 1;
+                                Map.yOffset = Map.yOffset - 1;
+                            }
+                            else
+                            {
+                                if (CharacterY > MinPos)
+                                {
+                                    CharacterY = CharacterY - 1;
+                                    CharacterYOffset = CharacterYOffset + 1;
 
+                                }
                             }
                         }
                     }
-                }
-                else if (input == ConsoleKey.A.ToString())
-                {
-                    if (CharacterXOffset > 0 && CharacterX > 10)
+                    else if (input == ConsoleKey.A.ToString())
                     {
-                        CharacterX = CharacterX - 1;
-                        CharacterXOffset = CharacterXOffset - 1;
-                    }
-                    else
-                    {
-                        if (Map.xOffset > 0)
+                        if (CharacterXOffset > 0 && CharacterX > 10)
                         {
                             CharacterX = CharacterX - 1;
-                            Map.xOffset = Map.xOffset - 1;
+                            CharacterXOffset = CharacterXOffset - 1;
                         }
                         else
                         {
-                            if (CharacterX > MinPos)
+                            if (Map.xOffset > 0)
                             {
                                 CharacterX = CharacterX - 1;
-                                CharacterXOffset = CharacterXOffset + 1;
+                                Map.xOffset = Map.xOffset - 1;
+                            }
+                            else
+                            {
+                                if (CharacterX > MinPos)
+                                {
+                                    CharacterX = CharacterX - 1;
+                                    CharacterXOffset = CharacterXOffset + 1;
 
+                                }
                             }
                         }
                     }
-                }
-                else if (input == ConsoleKey.S.ToString())
-                {
-                    if (CharacterYOffset > 0 && CharacterY < 5)
+                    else if (input == ConsoleKey.S.ToString())
                     {
-                        CharacterY = CharacterY + 1;
-                        CharacterYOffset = CharacterYOffset - 1;
-                    }
-                    else
-                    {
-                        if (Map.yOffset < 20)
+                        if (CharacterYOffset > 0 && CharacterY < 5)
                         {
                             CharacterY = CharacterY + 1;
-                            Map.yOffset = Map.yOffset + 1;
+                            CharacterYOffset = CharacterYOffset - 1;
                         }
                         else
                         {
-                            if (CharacterY < MaxPosY)
+                            if (Map.yOffset < 20)
                             {
                                 CharacterY = CharacterY + 1;
-                                CharacterYOffset = CharacterYOffset + 1;
+                                Map.yOffset = Map.yOffset + 1;
+                            }
+                            else
+                            {
+                                if (CharacterY < MaxPosY)
+                                {
+                                    CharacterY = CharacterY + 1;
+                                    CharacterYOffset = CharacterYOffset + 1;
 
+                                }
                             }
                         }
                     }
-                }
-                else if (input == ConsoleKey.D.ToString())
-                {
-                    if (CharacterXOffset > 0 && CharacterX < 10)
+                    else if (input == ConsoleKey.D.ToString())
                     {
-                        CharacterX = CharacterX + 1;
-                        CharacterXOffset = CharacterXOffset - 1;
-                    }
-                    else
-                    {
-                        if (Map.xOffset < 10)
+                        if (CharacterXOffset > 0 && CharacterX < 10)
                         {
                             CharacterX = CharacterX + 1;
-                            Map.xOffset = Map.xOffset + 1;
+                            CharacterXOffset = CharacterXOffset - 1;
                         }
                         else
                         {
-                            if (CharacterX < MaxPosX)
+                            if (Map.xOffset < 10)
                             {
                                 CharacterX = CharacterX + 1;
-                                CharacterXOffset = CharacterXOffset + 1;
+                                Map.xOffset = Map.xOffset + 1;
+                            }
+                            else
+                            {
+                                if (CharacterX < MaxPosX)
+                                {
+                                    CharacterX = CharacterX + 1;
+                                    CharacterXOffset = CharacterXOffset + 1;
 
+                                }
                             }
                         }
                     }

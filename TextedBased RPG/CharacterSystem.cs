@@ -17,7 +17,9 @@ namespace TextedBased_RPG
         public int MaxPosX = 29;
         public int CharacterX;
         public int CharacterY;
-        
+        protected int Damagetaken;
+        protected int attack;
+
 
         public void TakeDamage(int damage)
         {
@@ -25,6 +27,7 @@ namespace TextedBased_RPG
             if(damage > health)
             {
                 damage = health;
+                Damagetaken = damage;
                 health = 0;
                 Alive = false;
                
@@ -32,6 +35,7 @@ namespace TextedBased_RPG
             else
             {
                 health = health - damage;
+                Damagetaken = damage;
             }
         }
 
