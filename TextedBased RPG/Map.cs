@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    class Map
+    abstract class Map
     {
         private static int MapX;
         private static int MapY;

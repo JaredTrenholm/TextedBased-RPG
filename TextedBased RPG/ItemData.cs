@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    class ItemData
+    abstract class ItemData
     {
         private static string weaponName;
         public static string GetWeaponName(int WeaponID)

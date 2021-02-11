@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    class CharacterSystem
+    abstract class CharacterSystem
     {
         public string name;
         public int health;
