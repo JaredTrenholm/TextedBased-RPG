@@ -149,9 +149,38 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            CharacterX = CharacterX - 1;
-                            x++;
-                            Program.GM.EnemyAttack = "";
+                            if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else
+                            {
+                                CharacterX = CharacterX - 1;
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            
                         }
                     }
                     else if (AiChoice == 1)
@@ -162,9 +191,37 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            CharacterX = CharacterX + 1;
-                            x++;
-                            Program.GM.EnemyAttack = "";
+                            if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else
+                            {
+                                CharacterX = CharacterX + 1;
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
                         }
                     }
                     else if (AiChoice == 2)
@@ -175,9 +232,37 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            CharacterY = CharacterY + 1;
-                            x++;
-                            Program.GM.EnemyAttack = "";
+                            if (Map.mapData[CharacterY+1, CharacterX] == "E")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY + 1, CharacterX]  == "C")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else
+                            {
+                                CharacterY = CharacterY + 1;
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
                         }
                     }
                     else if (AiChoice == 3)
@@ -188,9 +273,37 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            CharacterY = CharacterY - 1;
-                            x++;
-                            Program.GM.EnemyAttack = "";
+                            if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else if (Map.mapData[CharacterY -1, CharacterX] == "^")
+                            {
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
+                            else
+                            {
+                                CharacterY = CharacterY - 1;
+                                x++;
+                                Program.GM.EnemyAttack = "";
+                            }
                         }
                     }
                     else

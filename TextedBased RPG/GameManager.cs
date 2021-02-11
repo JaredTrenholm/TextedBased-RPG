@@ -16,6 +16,9 @@ namespace TextedBased_RPG
         public bool enemyAlive;
         public bool playerAlive = true;
 
+        public FriendlyNPC npc = new FriendlyNPC();
+        private Chest chest = new Chest();
+
 
         /// <summary>
         /// 9 left of the player is the map border
@@ -28,6 +31,9 @@ namespace TextedBased_RPG
         public GameManager()
         {
             enemyAlive = true;
+            chest.y = 2;
+            chest.x = 12;
+            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking gear.";
             
         }
 
@@ -37,6 +43,7 @@ namespace TextedBased_RPG
             Console.CursorVisible = false;
             for (int x = 0; x < 1;)
             {
+                StartRound();
                 CheckHealth();
                 if(user.CharacterX == enemy.CharacterX)
                 {
@@ -84,13 +91,40 @@ namespace TextedBased_RPG
                 {
                     enemy.EnemyTurn();
                 }
+
+                EndRound();
                 
+            }
+        }
+
+        private void StartRound()
+        {
+            chest.DrawChest();
+            npc.DrawNPC();
+        }
+        private void EndRound()
+        {
+            if (user.CharacterX == chest.x)
+            {
+                if (user.CharacterY == chest.y)
+                {
+                    chest.CheckChest();
+                }
+            }
+            else if (user.CharacterX == npc.x)
+            {
+                if (user.CharacterY == npc.y)
+                {
+                    npc.Talk();
+                }
             }
         }
 
         public void DisplayHUD()
         {
-            Console.WriteLine("Health: " + user.health);
+            Console.WriteLine("Health: " + user.health + "       " + user.CharacterX + ", " + user.CharacterY);
+            Console.WriteLine("Weapon: " + user.Weapon);
+            Console.WriteLine("Attack: " + user.attack);
             Console.WriteLine(Map.MapTile());
             Console.WriteLine(PlayerAttack);
             Console.WriteLine(EnemyAttack);

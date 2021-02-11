@@ -24,7 +24,8 @@ namespace TextedBased_RPG
             Alive = true;
             CharacterX = 14;
             CharacterY = 5;
-            attack = 10;
+            baseAttack = 10;
+            attack = baseAttack;
         }
         public void DrawPlayer()
         {

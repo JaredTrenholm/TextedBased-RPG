@@ -18,7 +18,11 @@ namespace TextedBased_RPG
         public int CharacterX;
         public int CharacterY;
         protected int Damagetaken;
-        protected int attack;
+        public int attack;
+        public int baseAttack;
+
+        private int BonusAttack = 0;
+        public string Weapon = "None";
 
 
         public void TakeDamage(int damage)
@@ -37,6 +41,21 @@ namespace TextedBased_RPG
                 health = health - damage;
                 Damagetaken = damage;
             }
+        }
+
+        public void WeaponChange(int WeaponID)
+        {
+            
+            if(ItemData.GetWeaponName(WeaponID) == "None")
+            {
+                Weapon = ItemData.GetWeaponName(WeaponID);
+                BonusAttack = 0;
+            } else if (ItemData.GetWeaponName(WeaponID) == "Sword")
+            {
+                Weapon = ItemData.GetWeaponName(WeaponID);
+                BonusAttack = 10;
+            }
+            attack = baseAttack + BonusAttack;
         }
 
         
