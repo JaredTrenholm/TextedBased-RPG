@@ -10,7 +10,7 @@ namespace TextedBased_RPG
     {
         public static GameManager GM = new GameManager();
 
-        private static string gameOverMessage = GM.user.name + " have died!";
+        private static string gameOverMessage = GM.user.GetName() + " have died!";
 
 
 

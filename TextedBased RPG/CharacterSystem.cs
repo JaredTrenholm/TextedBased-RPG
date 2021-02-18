@@ -8,8 +8,9 @@ namespace TextedBased_RPG
 {
     abstract class CharacterSystem
     {
-        public string name;
-        public int health;
+        protected string name;
+        protected int health;
+        protected string AttackMessage = "";
         public int maxHealth;
         public bool Alive;
         public int MinPos = 0;
@@ -20,9 +21,75 @@ namespace TextedBased_RPG
         protected int Damagetaken;
         public int attack;
         public int baseAttack;
-
         private int BonusAttack = 0;
         public string Weapon = "None";
+        protected int movementType;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
+        protected int SpeciesType;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
+
+
+
+        public string GetAttackMessage()
+        {
+            return AttackMessage;
+        }
+
+        public void SetAttackMessage(string Message)
+        {
+            AttackMessage = Message;
+        }
+        public void CheckHealth()
+        {
+
+            if (health <= 0)
+            {
+                Alive = false;
+            }
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+        public void SetName(string nameChange)
+        {
+            name = nameChange;
+        }
+
+        public int GetHealth()
+        {
+            return health;
+        }
+        public void SetHealth(int HealthChange)
+        {
+            health = HealthChange;
+        }
+
+        public void SetSpeciesType(int Species)
+        {
+            SpeciesType = Species;
+            SetMovementType();
+        }
+        private void SetMovementType()
+        {
+            if (SpeciesType == 0)
+            {
+                movementType = 0;
+            }
+            else if (SpeciesType == 1)
+            {
+                movementType = 1;
+            }
+            else if (SpeciesType == 2)
+            {
+                movementType = 2;
+            }
+            else if (SpeciesType == 3)
+            {
+                movementType = 3;
+            }
+        }
+
+        
 
 
         public void TakeDamage(int damage)

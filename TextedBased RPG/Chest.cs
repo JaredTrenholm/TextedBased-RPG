@@ -49,7 +49,7 @@ namespace TextedBased_RPG
                     for(int x = 0; x < 1;)
                     {
                         Console.Clear();
-                        Console.WriteLine(Program.GM.user.name + " have found a " + ItemData.GetWeaponName(ItemID));
+                        Console.WriteLine(Program.GM.user.GetName() + " have found a " + ItemData.GetWeaponName(ItemID));
                         Console.WriteLine("Equip it? Y/N");
                         Opened = true;
                         input = Console.ReadKey(true).Key.ToString();

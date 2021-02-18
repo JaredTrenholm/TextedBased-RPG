@@ -14,10 +14,14 @@ namespace TextedBased_RPG
         private bool AttackOrMove = false; //false = attack    true = move
         private bool Moving = true;
 
+        private Enemy enemy;
+        private GameManager GM;
 
 
-        public Player()
+        public Player(Enemy enemyTarget, GameManager GMTarget)
         {
+            enemy = enemyTarget;
+            GM = GMTarget;
             maxHealth = 100;
             health = maxHealth;
             name = "You";
@@ -150,12 +154,12 @@ namespace TextedBased_RPG
             
             if (AttackOrMove == false)
             {
-                Program.GM.enemy.TakeDamage(attack);
-                Program.GM.PlayerAttack = name + " attacked " + Program.GM.enemy.name + " for " + attack + " points of damage!";
+                enemy.TakeDamage(attack);
+                AttackMessage = GetName() + " attacked " + enemy.GetName() + " for " + attack + " points of damage!";
             }
             else 
             {
-                Program.GM.PlayerAttack = " ";
+                AttackMessage = " ";
                 Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
                 if (Moving == true)
                 {

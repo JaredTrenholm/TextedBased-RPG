@@ -8,13 +8,10 @@ namespace TextedBased_RPG
 {
     class GameManager
     {
-        
-        public Player user = new Player();
-        public Enemy enemy = new Enemy();
-        public string PlayerAttack = "";
-        public string EnemyAttack = "";
-        public bool enemyAlive;
-        public bool playerAlive = true;
+
+        public Player user;
+        public Enemy enemy;
+
 
         public FriendlyNPC npc = new FriendlyNPC();
         private Chest chest = new Chest();
@@ -30,10 +27,17 @@ namespace TextedBased_RPG
 
         public GameManager()
         {
-            enemyAlive = true;
+            enemy = new Enemy(Program.GM);
+            user = new Player(enemy, Program.GM);
+            enemy.GetPlayerTarget(user);
+            user.Alive = true;
+            enemy.Alive = true;
             chest.y = 2;
             chest.x = 12;
             npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking gear.";
+
+            user.SetSpeciesType(0);
+            enemy.SetSpeciesType(1);
             
         }
 
@@ -44,16 +48,8 @@ namespace TextedBased_RPG
             for (int x = 0; x < 1;)
             {
                 StartRound();
-                CheckHealth();
-                if(user.CharacterX == enemy.CharacterX)
-                {
-                    if(user.CharacterY == enemy.CharacterY)
-                    {
-                        enemy.EmergencyEnemyTurn();
-                    }
-                }
                 Console.Clear();
-                if(enemyAlive == true)
+                if(enemy.Alive == true)
                 {
                     enemy.DrawEnemy();
                 }
@@ -61,9 +57,10 @@ namespace TextedBased_RPG
                 {
                     Console.Clear();
                     Map.mapData[enemy.CharacterY, enemy.CharacterX] = Map.BaseMapData[enemy.CharacterY, enemy.CharacterX];
+                    enemy.SetAttackMessage(" ");
                 }
 
-                if (playerAlive == true)
+                if (user.Alive == true)
                 {
                     user.DrawPlayer();
                 }
@@ -77,9 +74,10 @@ namespace TextedBased_RPG
                 DisplayHUD();
                 
 
-                if (playerAlive == true)
+                if (user.Alive == true)
                 {
                     user.MovePlayer();
+                    user.SetAttackMessage(" ");
                 }
                 else
                 {
@@ -87,7 +85,7 @@ namespace TextedBased_RPG
 
                 }
 
-                if (enemyAlive == true)
+                if (enemy.Alive == true)
                 {
                     enemy.EnemyTurn();
                 }
@@ -122,29 +120,16 @@ namespace TextedBased_RPG
 
         public void DisplayHUD()
         {
-            Console.WriteLine("Health: " + user.health + "       " + user.CharacterX + ", " + user.CharacterY);
+            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY);
             Console.WriteLine("Weapon: " + user.Weapon);
             Console.WriteLine("Attack: " + user.attack);
             Console.WriteLine(Map.MapTile());
-            Console.WriteLine(PlayerAttack);
-            Console.WriteLine(EnemyAttack);
+            Console.WriteLine(user.GetAttackMessage());
+            Console.WriteLine(enemy.GetAttackMessage());
 
         }
 
-        public void CheckHealth()
-        {
-            
-                if (enemy.health <= 0)
-                {
-                    enemyAlive = false;
-                }
-            
-
-            if (user.health <= 0)
-            {
-                playerAlive = false;
-            }
-        }
+        
 
 
         

@@ -12,11 +12,16 @@ namespace TextedBased_RPG
         private static int AiChoice;
         public bool EnemySeen = false;
 
+        private Player user;
+        private GameManager GM;
 
-       
+        
 
-        public Enemy()
+
+        public Enemy(GameManager GMTarget)
         {
+            GM = GMTarget;
+            
             maxHealth = 100;
             health = 50;
             Alive = true;
@@ -24,6 +29,11 @@ namespace TextedBased_RPG
             CharacterX = 10;
             CharacterY = 4;
             attack = 5;
+        }
+
+        public void GetPlayerTarget(Player userTarget)
+        {
+            user = userTarget;
         }
 
         public void DrawEnemy()
@@ -37,279 +47,740 @@ namespace TextedBased_RPG
             Map.mapData[CharacterY, CharacterX] = "E";
             }
         }
-        public void EmergencyEnemyTurn()
-        {
-            Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
-            for (int x = 0; x < 1;)
-            {
-                AiChoice = AiRandomizer.Next(0, 4);
-
-
-                if (AiChoice == 0)
-                {
-                    if (CharacterX == 0)
-                    {
-
-                    }
-                    else
-                    {
-                        CharacterX = CharacterX - 1;
-                        x++;
-                        Program.GM.EnemyAttack = "";
-                    }
-                }
-                else if (AiChoice == 1)
-                {
-                    if (CharacterX == 29)
-                    {
-
-                    }
-                    else
-                    {
-                        CharacterX = CharacterX + 1;
-                        x++;
-                        Program.GM.EnemyAttack = "";
-                    }
-                }
-                else if (AiChoice == 2)
-                {
-                    if (CharacterY == 29)
-                    {
-
-                    }
-                    else
-                    {
-                        CharacterY = CharacterY + 1;
-                        x++;
-                        Program.GM.EnemyAttack = "";
-                    }
-                }
-                else if (AiChoice == 3)
-                {
-                    if (CharacterY == 1)
-                    {
-
-                    }
-                    else
-                    {
-                        CharacterY = CharacterY - 1;
-                        x++;
-                        Program.GM.EnemyAttack = "";
-                    }
-                }
-                else
-                {
-
-                }
-            }
-        }
+        
+        
 
         public void EnemyTurn()
         {
-            if (CharacterX == Program.GM.user.CharacterX)
+            if (CharacterX == user.CharacterX)
             {
-                if (CharacterY == Program.GM.user.CharacterY - 1)
+                if (CharacterY == user.CharacterY - 1)
                 {
-                    Program.GM.user.TakeDamage(attack);
-                    Program.GM.EnemyAttack = name + " attacked " + Program.GM.user.name + " for " + attack + " points of damage!";
+                    user.TakeDamage(attack);
+                    AttackMessage = name + " attacked " + user.GetName() + " for " + attack + " points of damage!";
                 }
-                else if (CharacterY == Program.GM.user.CharacterY + 1)
+                else if (CharacterY == user.CharacterY + 1)
                 {
-                    Program.GM.user.TakeDamage(attack);
-                    Program.GM.EnemyAttack = name + " attacked " + Program.GM.user.name + " for " + attack + " points of damage!";
+                    user.TakeDamage(attack);
+                    AttackMessage = name + " attacked " + user.GetName() + " for " + attack + " points of damage!";
                 }
             }
-            else if (CharacterY == Program.GM.user.CharacterY)
+            else if (CharacterY == user.CharacterY)
             {
-                if (CharacterX == Program.GM.user.CharacterX - 1)
+                if (CharacterX == user.CharacterX - 1)
                 {
-                    Program.GM.user.TakeDamage(attack);
-                    Program.GM.EnemyAttack = name + " attacked " + Program.GM.user.name + " for " + attack + " points of damage!";
+                    user.TakeDamage(attack);
+                    AttackMessage = name + " attacked " + user.GetName() + " for " + attack + " points of damage!";
                 }
-                else if (CharacterX == Program.GM.user.CharacterX + 1)
+                else if (CharacterX == user.CharacterX + 1)
                 {
-                    Program.GM.user.TakeDamage(attack);
-                    Program.GM.EnemyAttack = name + " attacked " + Program.GM.user.name + " for " + attack + " points of damage!";
+                    user.TakeDamage(attack);
+                    AttackMessage = name + " attacked " + user.GetName() + " for " + attack + " points of damage!";
                 }
             }
             else
             {
-                Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
-                Program.GM.EnemyAttack = name + " ";
-                for (int x = 0; x < 1;)
+
+                
+                if (movementType == 0)
                 {
-                    AiChoice = AiRandomizer.Next(0, 4);
-
-
-                    if (AiChoice == 0)
+                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    AttackMessage = name + " ";
+                    for (int x = 0; x < 1;)
                     {
-                        if (CharacterX == 0)
-                        {
+                        AiChoice = AiRandomizer.Next(0, 4);
 
-                        }
-                        else
+
+                        if (AiChoice == 0)
                         {
-                            if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                            if (CharacterX == 0)
                             {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
+
                             }
                             else
                             {
-                                CharacterX = CharacterX - 1;
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            
-                        }
-                    }
-                    else if (AiChoice == 1)
-                    {
-                        if (CharacterX == 29)
-                        {
+                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
 
+                            }
                         }
-                        else
+                        else if (AiChoice == 1)
                         {
-                            if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                            if (CharacterX == 29)
                             {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
+
                             }
                             else
                             {
-                                CharacterX = CharacterX + 1;
-                                x++;
-                                Program.GM.EnemyAttack = "";
+                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                                {
+                                    x++;
+                                   AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
                             }
                         }
-                    }
-                    else if (AiChoice == 2)
-                    {
-                        if (CharacterY == 29)
+                        else if (AiChoice == 2)
                         {
+                            if (CharacterY == 29)
+                            {
 
-                        }
-                        else
-                        {
-                            if (Map.mapData[CharacterY+1, CharacterX] == "E")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY + 1, CharacterX]  == "C")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
                             }
                             else
                             {
-                                CharacterY = CharacterY + 1;
-                                x++;
-                                Program.GM.EnemyAttack = "";
+                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
                             }
                         }
-                    }
-                    else if (AiChoice == 3)
-                    {
-                        if (CharacterY == 1)
+                        else if (AiChoice == 3)
                         {
+                            if (CharacterY == 1)
+                            {
 
-                        }
-                        else
-                        {
-                            if (Map.mapData[CharacterY - 1, CharacterX] == "E")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
-                            }
-                            else if (Map.mapData[CharacterY -1, CharacterX] == "^")
-                            {
-                                x++;
-                                Program.GM.EnemyAttack = "";
                             }
                             else
                             {
-                                CharacterY = CharacterY - 1;
-                                x++;
-                                Program.GM.EnemyAttack = "";
+                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
                             }
                         }
-                    }
-                    else
-                    {
+                        else
+                        {
 
+                        }
                     }
+
+                } else if (movementType == 1){
+                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    for (int x = 0; x < 1;)
+                    {
+                        AiChoice = AiRandomizer.Next(0, 4);
+
+
+                        if (AiChoice == 0)
+                        {
+                            if (CharacterX == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                                {
+                                    x++;
+                                   AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+
+                            }
+                        }
+                        else if (AiChoice == 1)
+                        {
+                            if (CharacterX == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 2)
+                        {
+                            if (CharacterY == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 3)
+                        {
+                            if (CharacterY == 1)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
+                }
+                else if (movementType == 2)
+                {
+                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    AttackMessage = name + " ";
+                    for (int x = 0; x < 1;)
+                    {
+                        AiChoice = AiRandomizer.Next(0, 4);
+
+
+                        if (AiChoice == 0)
+                        {
+                            if (CharacterX == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+
+                            }
+                        }
+                        else if (AiChoice == 1)
+                        {
+                            if (CharacterX == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 2)
+                        {
+                            if (CharacterY == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 3)
+                        {
+                            if (CharacterY == 1)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
+                }
+                else if (movementType == 3)
+                {
+                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    AttackMessage = name + " ";
+                    for (int x = 0; x < 1;)
+                    {
+                        AiChoice = AiRandomizer.Next(0, 4);
+
+
+                        if (AiChoice == 0)
+                        {
+                            if (CharacterX == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+
+                            }
+                        }
+                        else if (AiChoice == 1)
+                        {
+                            if (CharacterX == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterX = CharacterX + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 2)
+                        {
+                            if (CharacterY == 29)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY + 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else if (AiChoice == 3)
+                        {
+                            if (CharacterY == 1)
+                            {
+
+                            }
+                            else
+                            {
+                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else
+                                {
+                                    CharacterY = CharacterY - 1;
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
                 }
             }
         }
