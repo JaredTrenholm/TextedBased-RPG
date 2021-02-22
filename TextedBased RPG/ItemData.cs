@@ -23,7 +23,14 @@ namespace TextedBased_RPG
 
         public static void SetWeaponID(int WeaponID)
         {
-
+            if (WeaponID == 0)
+            {
+                weaponName = "None";
+            }
+            else if (WeaponID == 1)
+            {
+                weaponName = "Sword";
+            }
         }
 
     }

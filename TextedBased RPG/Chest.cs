@@ -12,16 +12,16 @@ namespace TextedBased_RPG
         public int ItemType; //0 = Weapon
         public int ItemID; //the index of the item type
 
-        public int x;
-        public int y;
+        public int xPos;
+        public int yPos;
 
         private string input;
 
         public Chest()
         {
             
-            x = 0;
-            y = 0;
+            xPos = 0;
+            yPos = 0;
             Opened = false;
             ItemType = 0;
             ItemID = 1;
@@ -32,14 +32,28 @@ namespace TextedBased_RPG
         {
             if (Opened == false)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Map.mapData[y, x] = "C";
-                Console.ForegroundColor = ConsoleColor.White;
+                try
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Map.RenderData[yPos, xPos] = "C";
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                catch
+                {
+                    Console.WriteLine("X: " + xPos);
+                    Console.WriteLine("Y: " + yPos);
+                    Console.ReadKey(true);
+                }
             }
 
 
         }
 
+        public void SetPos(int x, int y)
+        {
+            xPos = x;
+            yPos = y;
+        }
         public void CheckChest()
         {
             if(Opened == false)

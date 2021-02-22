@@ -25,7 +25,7 @@ namespace TextedBased_RPG
         {
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Map.mapData[y, x] = "F";
+            Map.RenderData[y, x] = "F";
             Console.ForegroundColor = ConsoleColor.White;
 
 

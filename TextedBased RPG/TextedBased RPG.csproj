@@ -45,9 +45,10 @@
   <ItemGroup>
     <Compile Include="Chest.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="CharacterSystem.cs" />
+    <Compile Include="Characters.cs" />
     <Compile Include="FriendlyNPC.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="Hud.cs" />
     <Compile Include="ItemData.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />

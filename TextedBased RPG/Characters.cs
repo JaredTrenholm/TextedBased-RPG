@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    abstract class CharacterSystem
+    abstract class Characters
     {
         protected string name;
         protected int health;
@@ -23,8 +23,8 @@ namespace TextedBased_RPG
         public int baseAttack;
         private int BonusAttack = 0;
         public string Weapon = "None";
-        protected int movementType;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
-        protected int SpeciesType;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
+        protected int movementType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
+        protected int SpeciesType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
 
 
 

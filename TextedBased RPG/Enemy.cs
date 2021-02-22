@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    class Enemy : CharacterSystem
+    class Enemy : Characters
     {
         private static Random AiRandomizer = new Random();
         private static int AiChoice;
@@ -44,7 +44,7 @@ namespace TextedBased_RPG
             }
             else
             {
-            Map.mapData[CharacterY, CharacterX] = "E";
+            Map.RenderData[CharacterY, CharacterX] = "E";
             }
         }
         
@@ -84,7 +84,7 @@ namespace TextedBased_RPG
                 
                 if (movementType == 0)
                 {
-                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                     AttackMessage = name + " ";
                     for (int x = 0; x < 1;)
                     {
@@ -99,27 +99,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -141,27 +141,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "~")
                                 {
                                     x++;
                                    AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -182,27 +182,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -223,27 +223,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -263,7 +263,7 @@ namespace TextedBased_RPG
                     }
 
                 } else if (movementType == 1){
-                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                     for (int x = 0; x < 1;)
                     {
                         AiChoice = AiRandomizer.Next(0, 4);
@@ -277,26 +277,26 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
-                                } else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
-                                {
-                                    x++;
-                                    AttackMessage = "";
-                                }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "F")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "^")
                                 {
                                     x++;
                                    AttackMessage = "";
@@ -318,27 +318,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -359,27 +359,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -400,27 +400,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "^")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -442,7 +442,7 @@ namespace TextedBased_RPG
                 }
                 else if (movementType == 2)
                 {
-                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                     AttackMessage = name + " ";
                     for (int x = 0; x < 1;)
                     {
@@ -457,27 +457,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -499,27 +499,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -540,27 +540,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "~")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -581,27 +581,27 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "~")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -623,7 +623,7 @@ namespace TextedBased_RPG
                 }
                 else if (movementType == 3)
                 {
-                    Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                    Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                     AttackMessage = name + " ";
                     for (int x = 0; x < 1;)
                     {
@@ -638,22 +638,22 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -675,22 +675,22 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                                if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "C")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX + 1] == "F")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -711,22 +711,22 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY + 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -747,22 +747,22 @@ namespace TextedBased_RPG
                             }
                             else
                             {
-                                if (Map.mapData[CharacterY - 1, CharacterX] == "E")
+                                if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "C")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "C")
                                 {
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.mapData[CharacterY - 1, CharacterX] == "F")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "F")
                                 {
                                     x++;
                                     AttackMessage = "";

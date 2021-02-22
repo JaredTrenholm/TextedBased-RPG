@@ -11,6 +11,8 @@ namespace TextedBased_RPG
 
         public Player user;
         public Enemy enemy;
+        private Hud HUD;
+
 
 
         public FriendlyNPC npc = new FriendlyNPC();
@@ -27,17 +29,18 @@ namespace TextedBased_RPG
 
         public GameManager()
         {
+            Map.LoadMap(0);
             enemy = new Enemy(Program.GM);
             user = new Player(enemy, Program.GM);
+            HUD = new Hud(user,enemy);
             enemy.GetPlayerTarget(user);
             user.Alive = true;
             enemy.Alive = true;
-            chest.y = 2;
-            chest.x = 12;
-            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking gear.";
+            chest.SetPos(12, 2);
+            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking boots.";
 
             user.SetSpeciesType(0);
-            enemy.SetSpeciesType(1);
+            enemy.SetSpeciesType(0);
             
         }
 
@@ -47,6 +50,7 @@ namespace TextedBased_RPG
             Console.CursorVisible = false;
             for (int x = 0; x < 1;)
             {
+
                 StartRound();
                 Console.Clear();
                 if(enemy.Alive == true)
@@ -56,7 +60,7 @@ namespace TextedBased_RPG
                 else
                 {
                     Console.Clear();
-                    Map.mapData[enemy.CharacterY, enemy.CharacterX] = Map.BaseMapData[enemy.CharacterY, enemy.CharacterX];
+                    Map.RenderData[enemy.CharacterY, enemy.CharacterX] = Map.mapData[enemy.CharacterY, enemy.CharacterX];
                     enemy.SetAttackMessage(" ");
                 }
 
@@ -68,10 +72,11 @@ namespace TextedBased_RPG
                 {
                     x = 1;
                     Console.Clear();
-                    Map.mapData[user.CharacterY, user.CharacterX] = Map.BaseMapData[user.CharacterY, user.CharacterX];
+                    Map.RenderData[user.CharacterY, user.CharacterX] = Map.mapData[user.CharacterY, user.CharacterX];
                 }
+
                 Map.DrawMap();
-                DisplayHUD();
+                HUD.Display();
                 
 
                 if (user.Alive == true)
@@ -102,9 +107,9 @@ namespace TextedBased_RPG
         }
         private void EndRound()
         {
-            if (user.CharacterX == chest.x)
+            if (user.CharacterX == chest.xPos)
             {
-                if (user.CharacterY == chest.y)
+                if (user.CharacterY == chest.yPos)
                 {
                     chest.CheckChest();
                 }
@@ -118,16 +123,7 @@ namespace TextedBased_RPG
             }
         }
 
-        public void DisplayHUD()
-        {
-            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY);
-            Console.WriteLine("Weapon: " + user.Weapon);
-            Console.WriteLine("Attack: " + user.attack);
-            Console.WriteLine(Map.MapTile());
-            Console.WriteLine(user.GetAttackMessage());
-            Console.WriteLine(enemy.GetAttackMessage());
-
-        }
+        
 
         
 

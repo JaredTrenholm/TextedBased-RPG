@@ -17,7 +17,6 @@ namespace TextedBased_RPG
 
         static void Main(string[] args)
         {
-
             GM.GameLoop();
 
             Console.Clear();

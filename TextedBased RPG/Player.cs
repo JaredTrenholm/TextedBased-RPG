@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    class Player : CharacterSystem
+    class Player : Characters
     {
         public int CharacterXOffset = 0;
         public int CharacterYOffset = 0;
         private string input;
         private bool AttackOrMove = false; //false = attack    true = move
         private bool Moving = true;
+
+        public string PlayerAttackMessage;
 
         private Enemy enemy;
         private GameManager GM;
@@ -35,7 +37,7 @@ namespace TextedBased_RPG
         {
             
                 Console.ForegroundColor = ConsoleColor.Red;
-                Map.mapData[CharacterY, CharacterX] = "@";
+                Map.RenderData[CharacterY, CharacterX] = "@";
                 Console.ForegroundColor = ConsoleColor.White;
             
             
@@ -47,19 +49,22 @@ namespace TextedBased_RPG
             {
                 if(CharacterY > MinPos)
                 {
-                    if(Map.mapData[CharacterY-1, CharacterX] == "E")
+                    if(Map.RenderData[CharacterY-1, CharacterX] == "E")
                     {
                         AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
                     }
-                    else if (Map.mapData[CharacterY - 1, CharacterX] == "~")
+                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "~")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot cross without a boat.");
                     }
-                    else if (Map.mapData[CharacterY - 1, CharacterX] == "^")
+                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "^")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot go hiking without hiking boots.");
                     }
                     else
                     {
@@ -72,19 +77,22 @@ namespace TextedBased_RPG
             {
                 if (CharacterX > MinPos)
                 {
-                    if (Map.mapData[CharacterY, CharacterX - 1] == "E")
+                    if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                     {
                         AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
                     }
-                    else if (Map.mapData[CharacterY, CharacterX - 1] == "~")
+                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "~")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot cross without a boat.");
                     }
-                    else if (Map.mapData[CharacterY, CharacterX - 1] == "^")
+                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "^")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot go hiking without hiking boots.");
                     }
                     else
                     {
@@ -97,19 +105,22 @@ namespace TextedBased_RPG
             {
                 if (CharacterY < MaxPosY)
                 {
-                    if (Map.mapData[CharacterY + 1, CharacterX] == "E")
+                    if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                     {
                         AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
                     }
-                    else if (Map.mapData[CharacterY+1, CharacterX] == "~")
+                    else if (Map.RenderData[CharacterY+1, CharacterX] == "~")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot cross without a boat.");
                     }
-                    else if (Map.mapData[CharacterY + 1, CharacterX] == "^")
+                    else if (Map.RenderData[CharacterY + 1, CharacterX] == "^")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot go hiking without hiking boots.");
                     }
                     else
                     {
@@ -122,19 +133,22 @@ namespace TextedBased_RPG
             {
                 if (CharacterX < MaxPosX)
                 {
-                    if (Map.mapData[CharacterY, CharacterX + 1] == "E")
+                    if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                     {
                         AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
                     }
-                    else if (Map.mapData[CharacterY, CharacterX + 1] == "~")
+                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "~")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot cross without a boat.");
                     }
-                    else if (Map.mapData[CharacterY, CharacterX + 1] == "^")
+                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "^")
                     {
                         AttackOrMove = true;
                         Moving = false;
+                        Map.TileDesc("You cannot go hiking without hiking boots.");
                     }
                     else
                     {
@@ -155,12 +169,12 @@ namespace TextedBased_RPG
             if (AttackOrMove == false)
             {
                 enemy.TakeDamage(attack);
-                AttackMessage = GetName() + " attacked " + enemy.GetName() + " for " + attack + " points of damage!";
+                PlayerAttackMessage = GetName() + " attacked " + enemy.GetName() + " for " + attack + " points of damage!";
             }
             else 
             {
-                AttackMessage = " ";
-                Map.mapData[CharacterY, CharacterX] = Map.BaseMapData[CharacterY, CharacterX];
+                PlayerAttackMessage = " ";
+                Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                 if (Moving == true)
                 {
                     if (input == ConsoleKey.W.ToString())
@@ -263,9 +277,10 @@ namespace TextedBased_RPG
                             }
                         }
                     }
+                Map.TileDesc();
                 }
-                
             }
+            
         }
     }
 }
