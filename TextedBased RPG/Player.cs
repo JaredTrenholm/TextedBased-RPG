@@ -16,14 +16,16 @@ namespace TextedBased_RPG
 
         public string PlayerAttackMessage;
 
-        private Enemy enemy;
+        private Enemy[] enemy;
+
+        public Enemy targetFoe;
         private GameManager GM;
 
 
-        public Player(Enemy enemyTarget, GameManager GMTarget)
+        public Player(Enemy[] enemyTarget, GameManager GMTarget)
         {
             enemy = enemyTarget;
-            GM = GMTarget;
+            GM = Program.GM;
             maxHealth = 100;
             health = maxHealth;
             name = "You";
@@ -51,6 +53,52 @@ namespace TextedBased_RPG
                 {
                     if(Map.RenderData[CharacterY-1, CharacterX] == "E")
                     {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY-1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY - 1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY - 1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
                         AttackOrMove = false;
                         Map.TileDesc("You are engaged in a fight.");
                     }
@@ -79,6 +127,52 @@ namespace TextedBased_RPG
                 {
                     if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
                     {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX-1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY, CharacterX-1] == "D")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX - 1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX - 1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
                         AttackOrMove = false;
                         Map.TileDesc("You are engaged in a fight.");
                     }
@@ -107,6 +201,50 @@ namespace TextedBased_RPG
                 {
                     if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
                     {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY+1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    } else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY + 1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    } else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY + 1 == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
                         AttackOrMove = false;
                         Map.TileDesc("You are engaged in a fight.");
                     }
@@ -135,6 +273,52 @@ namespace TextedBased_RPG
                 {
                     if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
                     {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY  == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                    targetFoe = enemy[x];
+                                }
+                            }
+                        }
+                        AttackOrMove = false;
+                        Map.TileDesc("You are engaged in a fight.");
+                    }
+                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
+                    {
+                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
+                        {
+                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
+                            {
+                                if (CharacterY  == Program.GM.enemy[x].CharacterY)
+                                {
+                                    Program.GM.enemy[x].TakeDamage(attack);
+                                    targetFoe = enemy[x];
+                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
+                                }
+                            }
+                        }
                         AttackOrMove = false;
                         Map.TileDesc("You are engaged in a fight.");
                     }
@@ -168,8 +352,8 @@ namespace TextedBased_RPG
             
             if (AttackOrMove == false)
             {
-                enemy.TakeDamage(attack);
-                PlayerAttackMessage = GetName() + " attacked " + enemy.GetName() + " for " + attack + " points of damage!";
+                
+                
             }
             else 
             {

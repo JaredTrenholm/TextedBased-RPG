@@ -10,13 +10,15 @@ namespace TextedBased_RPG
     {
 
         public Player user;
-        public Enemy enemy;
+        public Enemy[] enemy = new Enemy[4];
         private Hud HUD;
+
+        public int EnemyLimit = 4;
 
 
 
         public FriendlyNPC npc = new FriendlyNPC();
-        private Chest chest = new Chest();
+        private Chest[] chest = new Chest[4];
 
 
         /// <summary>
@@ -30,18 +32,56 @@ namespace TextedBased_RPG
         public GameManager()
         {
             Map.LoadMap(0);
-            enemy = new Enemy(Program.GM);
+            for(int x = 1; x< EnemyLimit; x++)
+            {
+            enemy[x] = new Enemy(Program.GM);
+            }
             user = new Player(enemy, Program.GM);
             HUD = new Hud(user,enemy);
-            enemy.GetPlayerTarget(user);
+            for(int x = 1; x < EnemyLimit; x++)
+            {
+                enemy[x].GetPlayerTarget(user);
+            }
             user.Alive = true;
-            enemy.Alive = true;
-            chest.SetPos(12, 2);
+            for (int x = 1; x < EnemyLimit; x++)
+            {
+                enemy[x].Alive = true;
+            }
+            chest[1] = new Chest();
+            chest[2] = new Chest();
+            chest[3] = new Chest();
+            chest[1].SetPos(12, 1);
+            chest[2].SetPos(11, 2);
+            chest[3].SetPos(13, 3);
             npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking boots.";
 
             user.SetSpeciesType(0);
-            enemy.SetSpeciesType(0);
-            
+            for (int x = 1; x < EnemyLimit; x++)
+            {
+                enemy[x].SetSpeciesType(0);
+            }
+
+            enemy[1].CharacterX = 1;
+            enemy[1].CharacterY = 1;
+            enemy[1].WeaponChange(0);
+            enemy[1].SetName("Serdun");
+
+            enemy[2].CharacterX = 2;
+            enemy[2].CharacterY = 2;
+            enemy[2].Avatar = "B";
+            enemy[2].SetSpeciesType(1);
+            enemy[2].SetName("Dory");
+            enemy[1].WeaponChange(1);
+
+            enemy[3].CharacterX = 3;
+            enemy[3].CharacterY = 3;
+            enemy[3].Avatar = "D";
+            enemy[3].SetSpeciesType(3);
+            enemy[3].SetName("Alfynn");
+            enemy[1].WeaponChange(2);
+
+
+
         }
 
 
@@ -53,16 +93,21 @@ namespace TextedBased_RPG
 
                 StartRound();
                 Console.Clear();
-                if(enemy.Alive == true)
+                for (int z = 1; z < EnemyLimit; z++)
                 {
-                    enemy.DrawEnemy();
+                    if (enemy[z].Alive == true)
+                    {
+                        enemy[z].DrawEnemy();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Map.RenderData[enemy[z].CharacterY, enemy[z].CharacterX] = Map.mapData[enemy[z].CharacterY, enemy[z].CharacterX];
+                        enemy[z].SetAttackMessage(" ");
+                    }
                 }
-                else
-                {
-                    Console.Clear();
-                    Map.RenderData[enemy.CharacterY, enemy.CharacterX] = Map.mapData[enemy.CharacterY, enemy.CharacterX];
-                    enemy.SetAttackMessage(" ");
-                }
+                
+                
 
                 if (user.Alive == true)
                 {
@@ -90,10 +135,14 @@ namespace TextedBased_RPG
 
                 }
 
-                if (enemy.Alive == true)
+                for (int z = 1; z < EnemyLimit; z++)
                 {
-                    enemy.EnemyTurn();
+                    if (enemy[z].Alive == true)
+                    {
+                        enemy[z].EnemyTurn();
+                    }
                 }
+                
 
                 EndRound();
                 
@@ -102,25 +151,44 @@ namespace TextedBased_RPG
 
         private void StartRound()
         {
-            chest.DrawChest();
+            chest[1].DrawChest();
+            chest[2].DrawChest();
+            chest[3].DrawChest();
             npc.DrawNPC();
+            user.CheckHealth();
         }
         private void EndRound()
         {
-            if (user.CharacterX == chest.xPos)
-            {
-                if (user.CharacterY == chest.yPos)
+           
+                if (user.CharacterX == chest[1].xPos)
                 {
-                    chest.CheckChest();
+                    if (user.CharacterY == chest[1].yPos)
+                    {
+                        chest[1].CheckChest(0,1);
+                    }
+                } else if (user.CharacterX == chest[2].xPos)
+            {
+                if (user.CharacterY == chest[2].yPos)
+                {
+                    chest[2].CheckChest(0,2);
+                }
+            }
+            else if (user.CharacterX == chest[3].xPos)
+            {
+                if (user.CharacterY == chest[3].yPos)
+                {
+                    chest[3].CheckChest(1, 1);
                 }
             }
             else if (user.CharacterX == npc.x)
-            {
-                if (user.CharacterY == npc.y)
                 {
-                    npc.Talk();
+                    if (user.CharacterY == npc.y)
+                    {
+                        npc.Talk();
+                    }
                 }
-            }
+            
+            user.CheckHealth();
         }
 
         

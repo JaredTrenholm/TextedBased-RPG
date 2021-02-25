@@ -9,6 +9,7 @@ namespace TextedBased_RPG
     abstract class ItemData
     {
         private static string weaponName;
+        private static string itemName;
         public static string GetWeaponName(int WeaponID)
         {
             if(WeaponID == 0)
@@ -18,6 +19,10 @@ namespace TextedBased_RPG
             {
                 weaponName = "Sword";
             }
+            else if (WeaponID == 2)
+            {
+                weaponName = "Short Bow"; //5 attack
+            }
             return weaponName;
         }
 
@@ -25,12 +30,29 @@ namespace TextedBased_RPG
         {
             if (WeaponID == 0)
             {
-                weaponName = "None";
+                weaponName = "None"; //0 attack
             }
             else if (WeaponID == 1)
             {
-                weaponName = "Sword";
+                weaponName = "Sword"; //10 attack
             }
+            else if (WeaponID == 2)
+            {
+                weaponName = "Short Bow"; //5 attack
+            }
+        }
+
+        public static string GetItemName(int ItemID)
+        {
+            if (ItemID == 0)
+            {
+                itemName = "None"; //nothing
+            }
+            else if (ItemID == 1)
+            {
+                itemName = "Potion"; //potion for 25 health
+            }
+            return itemName;
         }
 
     }

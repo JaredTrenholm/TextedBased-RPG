@@ -122,7 +122,28 @@ namespace TextedBased_RPG
                 Weapon = ItemData.GetWeaponName(WeaponID);
                 BonusAttack = 10;
             }
+            else if (ItemData.GetWeaponName(WeaponID) == "Short Bow")
+            {
+                Weapon = ItemData.GetWeaponName(WeaponID);
+                BonusAttack = 5;
+            }
             attack = baseAttack + BonusAttack;
+        }
+
+        public void UseItem(int itemID)
+        {
+            if (ItemData.GetItemName(itemID) == "None")
+            {
+                
+            }
+            else if (ItemData.GetItemName(itemID) == "Potion")
+            {
+                health = health + 25;
+                if (health > maxHealth)
+                {
+                    health = maxHealth;
+                }
+            }
         }
 
         

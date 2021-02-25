@@ -61,6 +61,8 @@ namespace TextedBased_RPG
             else if (RenderData[MapY, MapX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
             else if (RenderData[MapY, MapX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
             else if (RenderData[MapY, MapX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
+            else if (RenderData[MapY, MapX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
+            else if (RenderData[MapY, MapX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
             else if (RenderData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
             else { Console.ForegroundColor = ConsoleColor.White; }
         }

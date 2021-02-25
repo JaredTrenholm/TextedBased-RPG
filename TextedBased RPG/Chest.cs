@@ -9,8 +9,6 @@ namespace TextedBased_RPG
     class Chest
     {
         public bool Opened = false;
-        public int ItemType; //0 = Weapon
-        public int ItemID; //the index of the item type
 
         public int xPos;
         public int yPos;
@@ -23,8 +21,6 @@ namespace TextedBased_RPG
             xPos = 0;
             yPos = 0;
             Opened = false;
-            ItemType = 0;
-            ItemID = 1;
 
         }
 
@@ -54,24 +50,44 @@ namespace TextedBased_RPG
             xPos = x;
             yPos = y;
         }
-        public void CheckChest()
+        public void CheckChest(int itemType, int ItemID)
         {
             if(Opened == false)
             {
-                if (ItemType == 0)
+                if (itemType == 0)
                 {
                     for(int x = 0; x < 1;)
                     {
                         Console.Clear();
                         Console.WriteLine(Program.GM.user.GetName() + " have found a " + ItemData.GetWeaponName(ItemID));
                         Console.WriteLine("Equip it? Y/N");
-                        Opened = true;
                         input = Console.ReadKey(true).Key.ToString();
                         if(input == ConsoleKey.Y.ToString())
                         {
                             Program.GM.user.WeaponChange(ItemID);
                             x = 1;
+                            Opened = true;
                         } else if (input == ConsoleKey.N.ToString())
+                        {
+                            x = 1;
+                        }
+
+                    }
+                } else if (itemType == 1)
+                {
+                    for (int x = 0; x < 1;)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(Program.GM.user.GetName() + " have found a " + ItemData.GetItemName(ItemID));
+                        Console.WriteLine("Use it? Y/N");
+                        input = Console.ReadKey(true).Key.ToString();
+                        if (input == ConsoleKey.Y.ToString())
+                        {
+                            Program.GM.user.UseItem(ItemID);
+                            x = 1;
+                            Opened = true;
+                        }
+                        else if (input == ConsoleKey.N.ToString())
                         {
                             x = 1;
                         }

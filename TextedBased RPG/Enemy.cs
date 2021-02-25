@@ -15,6 +15,8 @@ namespace TextedBased_RPG
         private Player user;
         private GameManager GM;
 
+       public string Avatar;
+
         
 
 
@@ -22,13 +24,14 @@ namespace TextedBased_RPG
         {
             GM = GMTarget;
             
-            maxHealth = 100;
-            health = 50;
+            maxHealth = 25;
+            health = 25;
             Alive = true;
             name = "Your Foe";
             CharacterX = 10;
             CharacterY = 4;
             attack = 5;
+            Avatar = "E";
         }
 
         public void GetPlayerTarget(Player userTarget)
@@ -44,7 +47,7 @@ namespace TextedBased_RPG
             }
             else
             {
-            Map.RenderData[CharacterY, CharacterX] = "E";
+            Map.RenderData[CharacterY, CharacterX] = Avatar;
             }
         }
         
@@ -93,13 +96,21 @@ namespace TextedBased_RPG
 
                         if (AiChoice == 0)
                         {
-                            if (CharacterX == 0)
+                            if (CharacterX == 1)
                             {
 
                             }
                             else
                             {
                                 if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -145,6 +156,15 @@ namespace TextedBased_RPG
                                 {
                                     x++;
                                     AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
                                 }
                                 else if (Map.RenderData[CharacterY, CharacterX + 1] == "~")
                                 {
@@ -183,6 +203,16 @@ namespace TextedBased_RPG
                             else
                             {
                                 if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -228,6 +258,16 @@ namespace TextedBased_RPG
                                     x++;
                                     AttackMessage = "";
                                 }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
                                 else if (Map.RenderData[CharacterY - 1, CharacterX] == "~")
                                 {
                                     x++;
@@ -269,9 +309,9 @@ namespace TextedBased_RPG
                         AiChoice = AiRandomizer.Next(0, 4);
 
 
-                        if (AiChoice == 0)
+                        if (AiChoice == 1)
                         {
-                            if (CharacterX == 0)
+                            if (CharacterX == 1)
                             {
 
                             }
@@ -281,7 +321,18 @@ namespace TextedBased_RPG
                                 {
                                     x++;
                                     AttackMessage = "";
-                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -319,6 +370,15 @@ namespace TextedBased_RPG
                             else
                             {
                                 if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -363,6 +423,15 @@ namespace TextedBased_RPG
                                 {
                                     x++;
                                     AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
+                                    {
+                                        x++;
+                                        AttackMessage = "";
+                                    }
+                                 else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
                                 }
                                 else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
                                 {
@@ -401,6 +470,14 @@ namespace TextedBased_RPG
                             else
                             {
                                 if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -451,13 +528,21 @@ namespace TextedBased_RPG
 
                         if (AiChoice == 0)
                         {
-                            if (CharacterX == 0)
+                            if (CharacterX == 1)
                             {
 
                             }
                             else
                             {
                                 if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX - 1] == "D")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -503,8 +588,16 @@ namespace TextedBased_RPG
                                 {
                                     x++;
                                     AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
                                 }
-                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -545,7 +638,17 @@ namespace TextedBased_RPG
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY+1, CharacterX] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -582,6 +685,16 @@ namespace TextedBased_RPG
                             else
                             {
                                 if (Map.RenderData[CharacterY - 1, CharacterX] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -630,15 +743,25 @@ namespace TextedBased_RPG
                         AiChoice = AiRandomizer.Next(0, 4);
 
 
-                        if (AiChoice == 0)
+                        if (AiChoice == 1)
                         {
-                            if (CharacterX == 0)
+                            if (CharacterX <= 1)
                             {
 
                             }
                             else
                             {
                                 if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -679,8 +802,17 @@ namespace TextedBased_RPG
                                 {
                                     x++;
                                     AttackMessage = "";
+                                } else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
                                 }
-                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY, CharacterX + 1] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -716,7 +848,17 @@ namespace TextedBased_RPG
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY + 1, CharacterX] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
@@ -752,7 +894,17 @@ namespace TextedBased_RPG
                                     x++;
                                     AttackMessage = "";
                                 }
-                                else if (Map.RenderData[CharacterY, CharacterX - 1] == "@")
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
+                                {
+                                    x++;
+                                    AttackMessage = "";
+                                }
+                                else if (Map.RenderData[CharacterY - 1, CharacterX] == "@")
                                 {
                                     x++;
                                     AttackMessage = "";
