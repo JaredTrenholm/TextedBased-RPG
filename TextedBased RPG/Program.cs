@@ -19,16 +19,6 @@ namespace TextedBased_RPG
         {
             GM.GameLoop();
 
-            Console.Clear();
-            Console.WriteLine("GAME OVER!");
-            for(int x = 0; x < gameOverMessage.Length - 1; x++)
-            {
-            Console.Write("-");
-            }
-            Console.WriteLine("-");
-            Console.WriteLine(gameOverMessage);
-            Console.ReadKey(true);
-
         }
     }
 }

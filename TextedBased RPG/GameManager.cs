@@ -87,65 +87,77 @@ namespace TextedBased_RPG
 
         public void GameLoop()
         {
-            Console.CursorVisible = false;
-            for (int x = 0; x < 1;)
+            HUD.MainMenu();
+            if (HUD.inGame == true)
             {
-
-                StartRound();
-                Console.Clear();
-                for (int z = 1; z < EnemyLimit; z++)
+                Console.CursorVisible = false;
+                for (int x = 0; x < 1;)
                 {
-                    if (enemy[z].Alive == true)
+                    if (user.Alive == true)
                     {
-                        enemy[z].DrawEnemy();
+                        StartRound();
+                        Console.Clear();
+                        for (int z = 1; z < EnemyLimit; z++)
+                        {
+                            if (enemy[z].Alive == true)
+                            {
+                                enemy[z].DrawEnemy();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Map.RenderData[enemy[z].CharacterY, enemy[z].CharacterX] = Map.mapData[enemy[z].CharacterY, enemy[z].CharacterX];
+                                enemy[z].SetAttackMessage(" ");
+                            }
+                        }
+
+
+
+                        if (user.Alive == true)
+                        {
+                            user.DrawPlayer();
+                        }
+                        else
+                        {
+                            x = 1;
+                            Console.Clear();
+                            Map.RenderData[user.CharacterY, user.CharacterX] = Map.mapData[user.CharacterY, user.CharacterX];
+                        }
+
+                        Map.DrawMap();
+                        HUD.Display();
+
+
+                        if (user.Alive == true)
+                        {
+                            user.MovePlayer();
+                            user.SetAttackMessage(" ");
+                        }
+                        else
+                        {
+                            x = 1;
+
+                        }
+
+                        for (int z = 1; z < EnemyLimit; z++)
+                        {
+                            if (enemy[z].Alive == true)
+                            {
+                                enemy[z].EnemyTurn();
+                            }
+                        }
+
+
+                        EndRound();
+
                     }
                     else
                     {
                         Console.Clear();
-                        Map.RenderData[enemy[z].CharacterY, enemy[z].CharacterX] = Map.mapData[enemy[z].CharacterY, enemy[z].CharacterX];
-                        enemy[z].SetAttackMessage(" ");
+                        Console.WriteLine("GAME OVER \nYou died.");
+                        Console.ReadKey(true);
                     }
                 }
-                
-                
-
-                if (user.Alive == true)
-                {
-                    user.DrawPlayer();
-                }
-                else
-                {
-                    x = 1;
-                    Console.Clear();
-                    Map.RenderData[user.CharacterY, user.CharacterX] = Map.mapData[user.CharacterY, user.CharacterX];
-                }
-
-                Map.DrawMap();
-                HUD.Display();
-                
-
-                if (user.Alive == true)
-                {
-                    user.MovePlayer();
-                    user.SetAttackMessage(" ");
-                }
-                else
-                {
-                    x = 1;
-
-                }
-
-                for (int z = 1; z < EnemyLimit; z++)
-                {
-                    if (enemy[z].Alive == true)
-                    {
-                        enemy[z].EnemyTurn();
-                    }
-                }
-                
-
-                EndRound();
-                
             }
         }
 

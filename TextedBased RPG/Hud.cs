@@ -14,6 +14,9 @@ namespace TextedBased_RPG
 
         private Enemy PreviousEnemy;
 
+        private string input;
+        public bool inGame = false;
+
         public Hud(Player userTarget, Enemy[] enemyTarget)
         {
             user = userTarget;
@@ -41,6 +44,46 @@ namespace TextedBased_RPG
                 }
             }
 
+        }
+
+        public void MainMenu()
+        {
+            for(int x = 0; x < 1;)
+            {
+                Console.WriteLine("----------------------");
+                Console.WriteLine("Fantasy Rogue-like RPG");
+                Console.WriteLine("----------------------");
+                Console.WriteLine("");
+                Console.WriteLine("P) Play");
+                Console.WriteLine("Q) Quit");
+                input = Console.ReadKey(true).Key.ToString();
+
+                if(input == "P")
+                {
+                    x = 1;
+                    inGame = true;
+                } else if (input == "p")
+                {
+                    x = 1;
+                    inGame = true;
+                }
+                else if(input == "Q")
+                {
+                    inGame = false;
+                    x = 1;
+                }
+                else if (input == "q")
+                {
+                    inGame = false;
+                    x = 1;
+                }
+                else
+                {
+
+                }
+
+            }
+            
         }
 
     }
