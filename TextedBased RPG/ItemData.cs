@@ -10,6 +10,8 @@ namespace TextedBased_RPG
     {
         private static string weaponName;
         private static string itemName;
+
+        private static int attackMod;
         public static string GetWeaponName(int WeaponID)
         {
             if(WeaponID == 0)
@@ -24,6 +26,23 @@ namespace TextedBased_RPG
                 weaponName = "Short Bow"; //5 attack
             }
             return weaponName;
+        }
+
+        public static int GetWeaponAttack(int WeaponID)
+        {
+            if (WeaponID == 0)
+            {
+                attackMod = 0;
+            }
+            else if (WeaponID == 1)
+            {
+                attackMod = 10;
+            }
+            else if (WeaponID == 2)
+            {
+                attackMod = 5;
+            }
+            return attackMod;
         }
 
         public static void SetWeaponID(int WeaponID)

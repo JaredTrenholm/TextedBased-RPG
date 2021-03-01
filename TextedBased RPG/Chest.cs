@@ -15,6 +15,8 @@ namespace TextedBased_RPG
 
         private string input;
 
+        private int attackChange = 0;
+
         public Chest()
         {
             
@@ -60,6 +62,8 @@ namespace TextedBased_RPG
                     {
                         Console.Clear();
                         Console.WriteLine(Program.GM.user.GetName() + " have found a " + ItemData.GetWeaponName(ItemID));
+                        attackChange = Program.GM.user.baseAttack + ItemData.GetWeaponAttack(ItemID);
+                        Console.WriteLine("It will change your attack to " + attackChange + " from " + Program.GM.user.attack +".");
                         Console.WriteLine("Equip it? Y/N");
                         input = Console.ReadKey(true).Key.ToString();
                         if(input == ConsoleKey.Y.ToString())
