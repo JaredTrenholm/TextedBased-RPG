@@ -25,9 +25,11 @@ namespace TextedBased_RPG
         public void Display()
         {
             PreviousEnemy = user.targetFoe;
-            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY);
+            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "                                       ");
             Console.WriteLine("Weapon: " + user.Weapon);
             Console.WriteLine("Attack: " + user.attack);
+            Console.WriteLine("                                                                                                         ");
+            Console.SetCursorPosition(0, 15);
             Console.WriteLine(Map.GetTileDesc());
             Console.WriteLine(user.PlayerAttackMessage);
 
@@ -50,6 +52,7 @@ namespace TextedBased_RPG
         {
             for(int x = 0; x < 1;)
             {
+                Console.Clear();
                 Console.WriteLine("----------------------");
                 Console.WriteLine("Fantasy Rogue-like RPG");
                 Console.WriteLine("----------------------");
@@ -81,7 +84,7 @@ namespace TextedBased_RPG
                 {
 
                 }
-
+                Console.Clear();
             }
             
         }

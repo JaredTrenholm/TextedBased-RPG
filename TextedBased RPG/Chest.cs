@@ -95,6 +95,8 @@ namespace TextedBased_RPG
                     }
                 }
             }
+            Console.Clear();
+
         }
     }
 }

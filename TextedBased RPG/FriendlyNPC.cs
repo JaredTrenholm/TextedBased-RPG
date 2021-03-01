@@ -37,6 +37,7 @@ namespace TextedBased_RPG
             Console.WriteLine();
             Console.WriteLine(Dialogue);
             Console.ReadKey(true);
+            Console.Clear();
         }
     }
 }

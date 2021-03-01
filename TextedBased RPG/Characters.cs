@@ -89,7 +89,12 @@ namespace TextedBased_RPG
             }
         }
 
-        
+        public void HealAll()
+        {
+            health = maxHealth;
+        }
+
+
 
 
         public void TakeDamage(int damage)

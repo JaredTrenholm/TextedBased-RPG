@@ -64,6 +64,8 @@ namespace TextedBased_RPG
             else if (RenderData[MapY, MapX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
             else if (RenderData[MapY, MapX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
             else if (RenderData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
+            else if (RenderData[MapY, MapX] == "T") { Console.ForegroundColor = ConsoleColor.Yellow; }
+            else if (RenderData[MapY, MapX] == "C") { Console.ForegroundColor = ConsoleColor.Cyan; }
             else { Console.ForegroundColor = ConsoleColor.White; }
         }
 
@@ -74,6 +76,7 @@ namespace TextedBased_RPG
             else if (mapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "~") { tile = "You crossed a body of water."; }
             else if (mapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "*") { tile = "You hiked through a forest."; }
             else if (mapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "'") { tile = "You walk through some plains."; }
+            else if (mapData[Program.GM.user.CharacterY, Program.GM.user.CharacterX] == "T") { tile = "You are outside of a town."; }
             else { tile = ""; }
             return tile;
         }

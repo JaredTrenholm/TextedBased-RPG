@@ -22,6 +22,7 @@ namespace TextedBased_RPG
         private GameManager GM;
 
 
+
         public Player(Enemy[] enemyTarget, GameManager GMTarget)
         {
             enemy = enemyTarget;

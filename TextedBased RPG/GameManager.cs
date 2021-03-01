@@ -13,6 +13,8 @@ namespace TextedBased_RPG
         public Enemy[] enemy = new Enemy[4];
         private Hud HUD;
 
+        private Town Midori;
+
         public int EnemyLimit = 4;
 
 
@@ -80,7 +82,7 @@ namespace TextedBased_RPG
             enemy[3].SetName("Alfynn");
             enemy[1].WeaponChange(2);
 
-
+            Midori = new Town("Midori", "Have you heard of the Bandit King down south? Heard he isn't very strong without his goons.", user);
 
         }
 
@@ -96,7 +98,8 @@ namespace TextedBased_RPG
                     if (user.Alive == true)
                     {
                         StartRound();
-                        Console.Clear();
+                        //Console.Clear();
+                        Console.SetCursorPosition(0, 0);
                         for (int z = 1; z < EnemyLimit; z++)
                         {
                             if (enemy[z].Alive == true)
@@ -168,6 +171,7 @@ namespace TextedBased_RPG
             chest[3].DrawChest();
             npc.DrawNPC();
             user.CheckHealth();
+            Midori.Draw();
         }
         private void EndRound()
         {
@@ -199,7 +203,14 @@ namespace TextedBased_RPG
                         npc.Talk();
                     }
                 }
-            
+            else if (user.CharacterX == Midori.x)
+            {
+                if (user.CharacterY == Midori.y)
+                {
+                    Midori.EnterTown();
+                }
+            }
+
             user.CheckHealth();
         }
 
