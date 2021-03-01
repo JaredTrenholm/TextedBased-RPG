@@ -39,7 +39,7 @@ namespace TextedBased_RPG
             user = userTarget;
         }
 
-        public void DrawEnemy()
+        public void Draw()
         {
             if(health <= 0)
             {

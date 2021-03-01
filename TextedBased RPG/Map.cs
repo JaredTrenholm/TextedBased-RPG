@@ -26,7 +26,7 @@ namespace TextedBased_RPG
         public static string[,] mapData;
         public static string[,] RenderData;
 
-        public static void DrawMap()
+        public static void Draw()
         {
             Console.Write("┌");
             for(int i = 0; i < 20; i++)

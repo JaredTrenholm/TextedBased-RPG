@@ -24,7 +24,7 @@ namespace TextedBased_RPG
 
         }
 
-        public void DrawChest()
+        public void Draw()
         {
             if (Opened == false)
             {

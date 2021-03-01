@@ -10,17 +10,17 @@ namespace TextedBased_RPG
     {
 
         public Player user;
-        public Enemy[] enemy = new Enemy[4];
-        private Hud HUD;
-
-        private Town Midori;
-
-        public int EnemyLimit = 4;
-
-
-
-        public FriendlyNPC npc = new FriendlyNPC();
+        private static int EnemyAmount = 4;
+        public Enemy[] enemy = new Enemy[EnemyAmount];
+        public int EnemyLimit = EnemyAmount;
         private Chest[] chest = new Chest[4];
+        private FriendlyNPC npc = new FriendlyNPC();
+        private Hud HUD;
+        private Town town;
+
+
+
+
 
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace TextedBased_RPG
             enemy[3].SetName("Alfynn");
             enemy[1].WeaponChange(2);
 
-            Midori = new Town("Midori", "Have you heard of the Bandit King down south? Heard he isn't very strong without his goons.", user);
+            town = new Town("Midori", "Have you heard of the Bandit King down south? Heard he isn't very strong without his goons.", user);
 
         }
 
@@ -104,7 +104,7 @@ namespace TextedBased_RPG
                         {
                             if (enemy[z].Alive == true)
                             {
-                                enemy[z].DrawEnemy();
+                                enemy[z].Draw();
                             }
                             else
                             {
@@ -118,7 +118,7 @@ namespace TextedBased_RPG
 
                         if (user.Alive == true)
                         {
-                            user.DrawPlayer();
+                            user.Draw();
                         }
                         else
                         {
@@ -127,7 +127,7 @@ namespace TextedBased_RPG
                             Map.RenderData[user.CharacterY, user.CharacterX] = Map.mapData[user.CharacterY, user.CharacterX];
                         }
 
-                        Map.DrawMap();
+                        Map.Draw();
                         HUD.Display();
 
 
@@ -166,12 +166,12 @@ namespace TextedBased_RPG
 
         private void StartRound()
         {
-            chest[1].DrawChest();
-            chest[2].DrawChest();
-            chest[3].DrawChest();
-            npc.DrawNPC();
+            chest[1].Draw();
+            chest[2].Draw();
+            chest[3].Draw();
+            npc.Draw();
+            town.Draw();
             user.CheckHealth();
-            Midori.Draw();
         }
         private void EndRound()
         {
@@ -203,11 +203,11 @@ namespace TextedBased_RPG
                         npc.Talk();
                     }
                 }
-            else if (user.CharacterX == Midori.x)
+            else if (user.CharacterX == town.x)
             {
-                if (user.CharacterY == Midori.y)
+                if (user.CharacterY == town.y)
                 {
-                    Midori.EnterTown();
+                    town.EnterTown();
                 }
             }
 

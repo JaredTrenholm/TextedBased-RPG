@@ -36,7 +36,7 @@ namespace TextedBased_RPG
             baseAttack = 10;
             attack = baseAttack;
         }
-        public void DrawPlayer()
+        public void Draw()
         {
             
                 Console.ForegroundColor = ConsoleColor.Red;

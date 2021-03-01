@@ -21,7 +21,7 @@ namespace TextedBased_RPG
 
         }
 
-        public void DrawNPC()
+        public void Draw()
         {
 
             Console.ForegroundColor = ConsoleColor.Red;
