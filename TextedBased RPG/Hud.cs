@@ -53,12 +53,17 @@ namespace TextedBased_RPG
             for(int x = 0; x < 1;)
             {
                 Console.Clear();
-                Console.WriteLine("----------------------");
-                Console.WriteLine("Fantasy Rogue-like RPG");
-                Console.WriteLine("----------------------");
-                Console.WriteLine("");
-                Console.WriteLine("P) Play");
-                Console.WriteLine("Q) Quit");
+                Console.WriteLine("┌──────────────────────────────────────────────────────────────────────────┐");
+                Console.WriteLine("│                               Text Hero                                  │");
+                Console.WriteLine("│                       Created by: Jared Trenholm                         │");
+                Console.WriteLine("│                                                                          │");
+                Console.WriteLine("│                           Move using WASD.                               │");
+                Console.WriteLine("│ To make choices, press the letter that is represented beside the option. │");
+                Console.WriteLine("└──────────────────────────────────────────────────────────────────────────┘");
+                Console.WriteLine("                               ┌───────┐");
+                Console.WriteLine("                               │P) Play│");
+                Console.WriteLine("                               │Q) Quit│");
+                Console.WriteLine("                               └───────┘");
                 input = Console.ReadKey(true).Key.ToString();
 
                 if(input == "P")
