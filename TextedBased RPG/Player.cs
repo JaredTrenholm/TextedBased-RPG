@@ -16,17 +16,23 @@ namespace TextedBased_RPG
 
         public string PlayerAttackMessage;
 
-        private Enemy[] enemy;
+        private EnemyManager enemies;
 
         public Enemy targetFoe;
-        private GameManager GM;
+
+
+        private ChestManager chests;
+        private Town town;
+        private FriendlyNPC npc;
 
 
 
-        public Player(Enemy[] enemyTarget, GameManager GMTarget)
+        public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, FriendlyNPC npcTarget)
         {
-            enemy = enemyTarget;
-            GM = Program.GM;
+            npc = npcTarget;
+            chests = chestManager;
+            town = townTarget;
+            enemies = enemyManagerTarget;
             maxHealth = 100;
             health = maxHealth;
             name = "You";
@@ -35,319 +41,116 @@ namespace TextedBased_RPG
             CharacterY = 5;
             baseAttack = 10;
             attack = baseAttack;
+            SetSpeciesType(0);
         }
         public void Draw()
         {
             
-                Console.ForegroundColor = ConsoleColor.Red;
-                Map.RenderData[CharacterY, CharacterX] = "@";
-                Console.ForegroundColor = ConsoleColor.White;
+                Renderer.RenderData[CharacterY, CharacterX] = "@";
             
             
         }
-       
-        private bool CheckPlayerInput()
+        public void Update()
         {
+            Chest chestTarget = chests.LocateChest(CharacterX, CharacterY);
+            if (chestTarget != null)
+            {
+                chestTarget.CheckChest();
+            }
+            if (CharacterX == npc.x)
+            {
+                if (CharacterY == npc.y)
+                {
+                    npc.Talk();
+                }
+            }
+            else if (CharacterX == town.x)
+            {
+                if (CharacterY == town.y)
+                {
+                    town.EnterTown();
+                }
+            }
+
+            CheckHealth();
+        }
+            
+       
+        private void CheckPlayerInput()
+        {
+            int xModified = 0;
+            int yModified = 0;
             if (input == ConsoleKey.W.ToString())
             {
-                if(CharacterY > MinPos)
-                {
-                    if(Map.RenderData[CharacterY-1, CharacterX] == "E")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY-1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "D")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY - 1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "B")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY - 1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "~")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot cross without a boat.");
-                    }
-                    else if (Map.RenderData[CharacterY - 1, CharacterX] == "^")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot go hiking without hiking boots.");
-                    }
-                    else
-                    {
-                        AttackOrMove = true;
-                        Moving = true;
-                    }
-                }
+                xModified = CharacterX;
+                yModified = CharacterY - 1;
             }
             else if (input == ConsoleKey.A.ToString())
             {
-                if (CharacterX > MinPos)
-                {
-                    if (Map.RenderData[CharacterY, CharacterX - 1] == "E")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX-1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX-1] == "D")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX - 1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "B")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX - 1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "~")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot cross without a boat.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX - 1] == "^")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot go hiking without hiking boots.");
-                    }
-                    else
-                    {
-                        AttackOrMove = true;
-                        Moving = true;
-                    }
-                }
+                xModified = CharacterX-1;
+                yModified = CharacterY;
             }
             else if (input == ConsoleKey.S.ToString())
             {
-                if (CharacterY < MaxPosY)
-                {
-                    if (Map.RenderData[CharacterY + 1, CharacterX] == "E")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY+1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    } else if (Map.RenderData[CharacterY + 1, CharacterX] == "D")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY + 1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    } else if (Map.RenderData[CharacterY + 1, CharacterX] == "B")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY + 1 == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY+1, CharacterX] == "~")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot cross without a boat.");
-                    }
-                    else if (Map.RenderData[CharacterY + 1, CharacterX] == "^")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot go hiking without hiking boots.");
-                    }
-                    else
-                    {
-                        AttackOrMove = true;
-                        Moving = true;
-                    }
-                }
+                xModified = CharacterX;
+                yModified = CharacterY + 1;
             }
             else if (input == ConsoleKey.D.ToString())
             {
-                if (CharacterX < MaxPosX)
-                {
-                    if (Map.RenderData[CharacterY, CharacterX + 1] == "E")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "D")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY  == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                    targetFoe = enemy[x];
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "B")
-                    {
-                        for (int x = 1; x < Program.GM.EnemyLimit; x++)
-                        {
-                            if (CharacterX + 1 == Program.GM.enemy[x].CharacterX)
-                            {
-                                if (CharacterY  == Program.GM.enemy[x].CharacterY)
-                                {
-                                    Program.GM.enemy[x].TakeDamage(attack);
-                                    targetFoe = enemy[x];
-                                    PlayerAttackMessage = GetName() + " attacked " + enemy[x].GetName() + " for " + attack + " points of damage!";
-                                }
-                            }
-                        }
-                        AttackOrMove = false;
-                        Map.TileDesc("You are engaged in a fight.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "~")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot cross without a boat.");
-                    }
-                    else if (Map.RenderData[CharacterY, CharacterX + 1] == "^")
-                    {
-                        AttackOrMove = true;
-                        Moving = false;
-                        Map.TileDesc("You cannot go hiking without hiking boots.");
-                    }
-                    else
-                    {
-                        AttackOrMove = true;
-                        Moving = true;
-                    }
-                }
+                xModified = CharacterX + 1;
+                yModified = CharacterY;
             }
-            return AttackOrMove;
+
+            if ((xModified < 0) || (xModified >= 30))
+            {
+                xModified = CharacterX;
+            }
+            if ((yModified < 0) || (yModified >= 30))
+            {
+                yModified = CharacterY;
+            }
+
+            targetFoe = enemies.LocateEnemy(xModified, yModified);
+            if(targetFoe != null)
+            {
+                PlayerAttackMessage = GetName() + " attacked " + targetFoe.GetName() + " for " + attack + " points of damage!";
+                targetFoe.TakeDamage(attack);
+                AttackOrMove = false;
+                Moving = false;
+                Renderer.TileDesc("You are engaged in a fight.");
+            } else
+            {
+                AttackOrMove = true;
+            }
+
+            try
+            {
+                Renderer.RenderData[yModified, xModified] = "@";
+                Moving = true;
+                Renderer.RenderData[yModified, xModified] = Map.mapData[yModified, xModified];
+            }
+            catch
+            {
+                Moving = false;
+            }
+
+            string tile = Map.GetTile(yModified, xModified);
+            if(tile == "~")
+            {
+                Moving = false;
+                Renderer.TileDesc("You cannot cross without a boat.");
+            } else if (tile == "^")
+            {
+                Moving = false;
+                Renderer.TileDesc("You cannot cross without a boat.");
+            }
+
         }
         
         public void MovePlayer()
         {
-
+            Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
             input = Console.ReadKey(true).Key.ToString();
             CheckPlayerInput();
             
@@ -358,23 +161,31 @@ namespace TextedBased_RPG
             }
             else 
             {
+                if((CharacterX < 0) || (CharacterX == 30))
+                {
+                    Moving = false;
+                }
+                if ((CharacterY < 0) || (CharacterY == 30))
+                {
+                    Moving = false;
+                }
                 PlayerAttackMessage = " ";
-                Map.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
+                Renderer.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
                 if (Moving == true)
                 {
                     if (input == ConsoleKey.W.ToString())
                     {
-                        if (CharacterYOffset > 0 && CharacterY > 25)
+                        if (CharacterYOffset > 0 && CharacterY > Map.MapYLength - 4)
                         {
                             CharacterY = CharacterY - 1;
                             CharacterYOffset = CharacterYOffset - 1;
                         }
                         else
                         {
-                            if (Map.yOffset > 0)
+                            if (Renderer.yOffset > 0)
                             {
                                 CharacterY = CharacterY - 1;
-                                Map.yOffset = Map.yOffset - 1;
+                                Renderer.yOffset = Renderer.yOffset - 1;
                             }
                             else
                             {
@@ -396,10 +207,10 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            if (Map.xOffset > 0)
+                            if (Renderer.xOffset > 0)
                             {
                                 CharacterX = CharacterX - 1;
-                                Map.xOffset = Map.xOffset - 1;
+                                Renderer.xOffset = Renderer.xOffset - 1;
                             }
                             else
                             {
@@ -421,10 +232,10 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            if (Map.yOffset < 20)
+                            if (Renderer.yOffset < 20)
                             {
                                 CharacterY = CharacterY + 1;
-                                Map.yOffset = Map.yOffset + 1;
+                                Renderer.yOffset = Renderer.yOffset + 1;
                             }
                             else
                             {
@@ -439,17 +250,17 @@ namespace TextedBased_RPG
                     }
                     else if (input == ConsoleKey.D.ToString())
                     {
-                        if (CharacterXOffset > 0 && CharacterX < 10)
+                        if (CharacterXOffset > 0 && CharacterX < Map.MapXLength - 9)
                         {
                             CharacterX = CharacterX + 1;
                             CharacterXOffset = CharacterXOffset - 1;
                         }
                         else
                         {
-                            if (Map.xOffset < 10)
+                            if (Renderer.xOffset < 10)
                             {
                                 CharacterX = CharacterX + 1;
-                                Map.xOffset = Map.xOffset + 1;
+                                Renderer.xOffset = Renderer.xOffset + 1;
                             }
                             else
                             {
@@ -462,7 +273,7 @@ namespace TextedBased_RPG
                             }
                         }
                     }
-                Map.TileDesc();
+                    Renderer.TileDesc();
                 }
             }
             

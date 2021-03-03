@@ -8,16 +8,10 @@ namespace TextedBased_RPG
 {
     class Program
     {
-        public static GameManager GM = new GameManager();
-
-        private static string gameOverMessage = GM.user.GetName() + " have died!";
-
-
-
-
         static void Main(string[] args)
         {
-            GM.GameLoop();
+            GameManager GM = new GameManager();
+            GM.RunGame();
 
         }
     }

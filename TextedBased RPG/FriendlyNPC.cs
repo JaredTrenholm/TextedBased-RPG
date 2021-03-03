@@ -23,12 +23,7 @@ namespace TextedBased_RPG
 
         public void Draw()
         {
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Map.RenderData[y, x] = "F";
-            Console.ForegroundColor = ConsoleColor.White;
-
-
+            Renderer.RenderData[y, x] = "F";
         }
         public void Talk()
         {

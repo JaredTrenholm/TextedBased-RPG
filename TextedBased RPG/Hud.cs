@@ -24,13 +24,32 @@ namespace TextedBased_RPG
         }
         public void Display()
         {
+            string Clear = "                                                                                                                                                                                                                                                                                      ";
+            int HUDy = Console.CursorTop;
+            int HUDx = Console.CursorLeft;
             PreviousEnemy = user.targetFoe;
-            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "                                       ");
-            Console.WriteLine("Weapon: " + user.Weapon);
-            Console.WriteLine("Attack: " + user.attack);
-            Console.WriteLine("                                                                                                         ");
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
             Console.SetCursorPosition(0, 15);
-            Console.WriteLine(Map.GetTileDesc());
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+            Console.WriteLine(Clear);
+
+            Console.SetCursorPosition(HUDx, HUDy);
+
+            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "");
+            Console.WriteLine("Weapon: " + user.Weapon + "");
+            Console.WriteLine("Attack: " + user.attack);
+            Console.WriteLine("");
+            Console.SetCursorPosition(0, 15);
+            Console.WriteLine(Renderer.GetTileDesc());
             Console.WriteLine(user.PlayerAttackMessage);
 
             if (PreviousEnemy != null)
@@ -38,13 +57,15 @@ namespace TextedBased_RPG
                 if (PreviousEnemy.Alive != false)
                 {
                     Console.WriteLine(" ");
-                    Console.WriteLine("Name: " + PreviousEnemy.GetName());
-                    Console.WriteLine("Health: " + PreviousEnemy.GetHealth());
-                    Console.WriteLine("Weapon: " + PreviousEnemy.Weapon);
-                    Console.WriteLine("Attack: " + PreviousEnemy.attack);
-                    Console.WriteLine(PreviousEnemy.GetAttackMessage());
+                    Console.WriteLine("Name: " + PreviousEnemy.GetName() + "");
+                    Console.WriteLine("Health: " + PreviousEnemy.GetHealth() + "");
+                    Console.WriteLine("Weapon: " + PreviousEnemy.Weapon + "");
+                    Console.WriteLine("Attack: " + PreviousEnemy.attack + "");
+                    Console.WriteLine(PreviousEnemy.GetAttackMessage() + "");
                 }
             }
+
+            Console.CursorVisible = false;
 
         }
 

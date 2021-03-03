@@ -19,20 +19,24 @@ namespace TextedBased_RPG
 
 
 
-        public Town(string townName, string DesiredDialogue, Player userTarget)
+        public Town(string townName, string DesiredDialogue)
         {
             Name = townName;
             Dialogue = DesiredDialogue;
-            user = userTarget;
             x = 15;
             y = 10;
 
         }
 
+        public void SetPlayer(Player userTarget)
+        {
+            user = userTarget;
+        }
+
         public void Draw()
         {
 
-            Map.RenderData[y, x] = "T";
+            Renderer.RenderData[y, x] = "T";
 
 
         }
