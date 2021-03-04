@@ -142,7 +142,15 @@ namespace TextedBased_RPG
             } else if (tile == "^")
             {
                 Moving = false;
-                Renderer.TileDesc("You cannot cross without a boat.");
+                Renderer.TileDesc("You cannot cross without hiking boots.");
+            }
+            else if (tile == "*")
+            {
+                Moving = true;
+            }
+            else if (tile == "'")
+            {
+                Moving = true;
             }
 
         }

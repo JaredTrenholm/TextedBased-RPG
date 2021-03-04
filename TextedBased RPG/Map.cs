@@ -59,11 +59,11 @@ namespace TextedBased_RPG
 
         public static string GetTile(int x, int y)
         {
-            if((x == 0) || (x == 30))
+            if((x < 0) || (x == 30))
             {
                 x = player.CharacterX;
             }
-            if ((x == 0) || (x == 30))
+            if ((y < 0) || (y == 30))
             {
                 y = player.CharacterY;
             }
