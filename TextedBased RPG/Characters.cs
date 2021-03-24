@@ -14,13 +14,13 @@ namespace TextedBased_RPG
         public int maxHealth;
         public bool Alive;
         public int MinPos = 0;
-        public int MaxPosY = 29;
-        public int MaxPosX = 29;
+        public int MaxPosY = Global.MAP_Y_LENGTH;
+        public int MaxPosX = Global.MAP_X_LENGTH;
         public int CharacterX;
         public int CharacterY;
         protected int Damagetaken;
         public int attack;
-        public int baseAttack;
+        public int baseAttack = Global.BASE_ATTACK;
         private int BonusAttack = 0;
         public string Weapon = "None";
         protected int movementType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
@@ -143,7 +143,7 @@ namespace TextedBased_RPG
             }
             else if (ItemData.GetItemName(itemID) == "Potion")
             {
-                health = health + 25;
+                health = health + Global.POTION_HEAL;
                 if (health > maxHealth)
                 {
                     health = maxHealth;

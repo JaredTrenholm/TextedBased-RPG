@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace TextedBased_RPG
         private string input;
         public bool inGame = false;
 
-        public Hud(Player userTarget, Enemy[] enemyTarget)
+        public void findTargets(Player userTarget, Enemy[] enemyTarget)
         {
             user = userTarget;
             enemy = enemyTarget;
@@ -28,6 +29,7 @@ namespace TextedBased_RPG
             int HUDy = Console.CursorTop;
             int HUDx = Console.CursorLeft;
             PreviousEnemy = user.targetFoe;
+            Console.WriteLine(Clear);
             Console.WriteLine(Clear);
             Console.WriteLine(Clear);
             Console.WriteLine(Clear);
@@ -45,6 +47,7 @@ namespace TextedBased_RPG
             Console.SetCursorPosition(HUDx, HUDy);
 
             Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "");
+            Console.WriteLine("Potions: " + user.potionNumber + "");
             Console.WriteLine("Weapon: " + user.Weapon + "");
             Console.WriteLine("Attack: " + user.attack);
             Console.WriteLine("");
@@ -98,13 +101,13 @@ namespace TextedBased_RPG
                 }
                 else if(input == "Q")
                 {
-                    inGame = false;
                     x = 1;
+                    System.Environment.Exit(1);
                 }
                 else if (input == "q")
                 {
-                    inGame = false;
                     x = 1;
+                    System.Environment.Exit(1);
                 }
                 else
                 {
@@ -113,6 +116,21 @@ namespace TextedBased_RPG
                 Console.Clear();
             }
             
+        }
+
+        public void Intro()
+        {
+            Console.WriteLine("Welcome to the land of Azara! A once mighty nation, plagued by a bandit threat.");
+            Console.WriteLine("Bandits have invaded most of the southern regions and is advancing up north quickly.");
+            Console.WriteLine("You, on your return to your home village, run into the bandit army, led by Bandit Lord, Serdun.");
+            Console.WriteLine("Will you sneak your way home, defeat the bandits, or die in their war path?");
+            Console.WriteLine(" ");
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey(true);
+            Console.Clear();
+
+
+
         }
 
     }

@@ -17,8 +17,8 @@ namespace TextedBased_RPG
         };
 
 
-        public static int MapYLength = 29;
-        public static int MapXLength = 29;
+        public static int MapYLength = Global.MAP_Y_LENGTH;
+        public static int MapXLength = Global.MAP_X_LENGTH;
 
 
 
@@ -38,12 +38,12 @@ namespace TextedBased_RPG
             if (mapID == 0)
             {
                 mapLoaded = System.IO.File.ReadAllLines("Overworld.txt");
-                int mapLength = Convert.ToInt32(mapLoaded.Length);
-                mapData = new string[mapLength, mapLength];
-                for (int x = 0; x < mapLength; x++)
+                int mapLength = Convert.ToInt32(mapLoaded.Length-1);
+                mapData = new string[Global.MAP_X_LENGTH, Global.MAP_Y_LENGTH];
+                for (int x = 0; x < Global.MAP_X_LENGTH; x++)
                 {
                     string[] mapLineSplit = mapLoaded[x].Split(' ');
-                    for (int y = 0; y < mapLength; y++){
+                    for (int y = 0; y < Global.MAP_Y_LENGTH; y++){
                         mapData[x, y] = mapLineSplit[y];
                     }
                 }
@@ -59,11 +59,11 @@ namespace TextedBased_RPG
 
         public static string GetTile(int x, int y)
         {
-            if((x < 0) || (x == 30))
+            if((x < 0) || (x == Global.MAP_X_LENGTH))
             {
                 x = player.CharacterX;
             }
-            if ((y < 0) || (y == 30))
+            if ((y < 0) || (y == Global.MAP_Y_LENGTH))
             {
                 y = player.CharacterY;
             }

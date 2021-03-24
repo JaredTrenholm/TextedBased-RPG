@@ -8,9 +8,13 @@ namespace TextedBased_RPG
 {
     class Program
     {
+        private static Hud HUD;
         static void Main(string[] args)
         {
             GameManager GM = new GameManager();
+            HUD = new Hud();
+            HUD.MainMenu();
+            HUD.Intro();
             GM.RunGame();
 
         }

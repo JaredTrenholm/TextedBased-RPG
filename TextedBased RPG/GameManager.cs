@@ -18,6 +18,8 @@ namespace TextedBased_RPG
         private EnemyManager enemies;
         private ChestManager chests;
 
+        private GameLoopConditionals gameLoop;
+
 
 
 
@@ -51,14 +53,17 @@ namespace TextedBased_RPG
             npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking boots.";
             player = new Player(enemies, chests, town, npc);
             town.SetPlayer(player);
-            HUD = new Hud(player, enemies.enemy);
+            HUD = new Hud();
+            HUD.findTargets(player, enemies.enemy);
             chests.chestInitialize();
             enemies.enemyInitialize(player, enemies);
             chests.FindPlayer(player);
             Renderer.FindPlayer(player);
             Map.FindPlayer(player);
 
-            while (player.Alive == true)
+            gameLoop = new GameLoopConditionals(enemies, player);
+
+            while (gameLoop.GameLoopActive() == true)
             {
                 Console.SetCursorPosition(0, 0);
                 Console.CursorVisible = false;
@@ -75,8 +80,20 @@ namespace TextedBased_RPG
                 player.Update();
             }
 
-                
-            
+            if(gameLoop.CheckCondition() == 1)
+            {
+                Console.Clear();
+                Console.WriteLine(player.GetName() + " have died!");
+                Console.ReadKey(true);
+            } else if (gameLoop.CheckCondition() == 2)
+            {
+                Console.Clear();
+                Console.WriteLine(player.GetName() + " have defeated all of the bandits!");
+                Console.ReadKey(true);
+            }
+
+
+
         }  
     }
 }

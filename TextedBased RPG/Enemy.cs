@@ -19,15 +19,33 @@ namespace TextedBased_RPG
 
 
 
-        public Enemy(EnemyManager enemies)
+        public Enemy(EnemyManager enemies, int prefabID)
         {
-            enemyManager = enemies;
-            maxHealth = 25;
-            health = 25;
-            Alive = true;
-            name = "Your Foe";
-            attack = 5;
-            Avatar = "E";
+            if (prefabID == 0)
+            {
+                enemyManager = enemies;
+                maxHealth = 20;
+                health = maxHealth;
+                Alive = true;
+                name = "Bandit";
+                attack = Global.BASE_ATTACK/2;
+                Avatar = "E";
+            } else if (prefabID == 1)
+            {
+                enemyManager = enemies;
+                maxHealth = 100;
+                health = maxHealth;
+                Alive = true;
+                name = "Bandit Lord, Serdun";
+                attack = Global.BASE_ATTACK;
+                Avatar = "B";
+            }
+        }
+
+        public void SetPos(int x, int y)
+        {
+            CharacterX = x;
+            CharacterY = y;
         }
 
         public void GetPlayerTarget(Player userTarget)
@@ -37,9 +55,11 @@ namespace TextedBased_RPG
 
         public void Draw()
         {
+            if (Alive == false) return;
+
             if (health <= 0)
             {
-
+                Alive = false;
             }
             else
             {
@@ -79,76 +99,101 @@ namespace TextedBased_RPG
             }
             else
             {
-                AiChoice = AiRandomizer.Next(0, 3); // 0 up 1 right 2 down 3 left
-                int xModified = CharacterX;
-                int yModified = CharacterY;
-                if(AiChoice == 0)
+                for (bool enemyTurn = true; enemyTurn == true;)
                 {
-                    yModified = CharacterY - 1;
-                } else if (AiChoice == 1)
-                {
-                    xModified = CharacterX + 1;
-                }
-                else if (AiChoice == 2)
-                {
-                    yModified = CharacterY + 1;
-                }
-                else if (AiChoice == 3)
-                {
-                    xModified = CharacterX - 1;
-                }
-
-                if(xModified == 0 || xModified == 30)
-                {
-                    xModified = CharacterX;
-                }
-
-                if (yModified == 0 || yModified == 30)
-                {
-                    yModified = CharacterY;
-                }
-                Enemy targetFoe = enemyManager.LocateEnemy(xModified, yModified);
-                if (targetFoe != null)
-                {
-                    return;
-                }
-                else
-                {
-                    string tile = Map.GetTile(yModified, xModified);
-                    if (tile == "~")
+                    AiChoice = AiRandomizer.Next(0, 4); // 0 up 1 right 2 down 3 left
+                    int xModified = CharacterX;
+                    int yModified = CharacterY;
+                    if (AiChoice == 0)
                     {
-                        
-                        
+                        yModified = CharacterY - 1;
                     }
-                    else if (tile == "^")
+                    else if (AiChoice == 1)
                     {
-
-
+                        xModified = CharacterX + 1;
                     }
-                    else if (tile == "F")
+                    else if (AiChoice == 2)
                     {
-
-
+                        yModified = CharacterY + 1;
                     }
-                    else if (tile == "T")
+                    else if (AiChoice == 3)
                     {
-
-
+                        xModified = CharacterX - 1;
                     }
-                    else if (tile == "C")
+
+                    if (xModified == 0 || xModified == 30)
                     {
+                        xModified = CharacterX;
+                    }
 
-
+                    if (yModified == 0 || yModified == 30)
+                    {
+                        yModified = CharacterY;
+                    }
+                    Enemy targetFoe = enemyManager.LocateEnemy(xModified, yModified);
+                    if (targetFoe != null)
+                    {
+                        return;
                     }
                     else
                     {
-                        Renderer.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
-                        CharacterX = xModified;
-                        CharacterY = yModified;
+                        string tile = Map.GetTile(yModified, xModified);
+                        if (tile == "~")
+                        {
+                            if (movementType == 1 || movementType == 3)
+                            {
+                                Renderer.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
+                                CharacterX = xModified;
+                                CharacterY = yModified;
+                                enemyTurn = false;
+                            }
+
+                        }
+                        else if (tile == "^")
+                        {
+                            if (movementType == 2 || movementType == 3)
+                            {
+                                Renderer.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
+                                CharacterX = xModified;
+                                CharacterY = yModified;
+                                enemyTurn = false;
+                            }
+
+                        }
+                        else if (tile == "F")
+                        {
+
+
+                        }
+                        else if (tile == "T")
+                        {
+
+
+                        }
+                        else if (tile == "C")
+                        {
+
+
+                        }
+                        else
+                        {
+                            if (movementType == 1)
+                            {
+
+                            }
+                            else
+                            {
+                                Renderer.RenderData[CharacterY, CharacterX] = Map.mapData[CharacterY, CharacterX];
+                                CharacterX = xModified;
+                                CharacterY = yModified;
+                                enemyTurn = false;
+                            }
+                        }
                     }
+
+
+
                 }
-
-
             }
         }
     }

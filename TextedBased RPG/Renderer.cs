@@ -44,15 +44,15 @@ namespace TextedBased_RPG
         public static void Draw()
         {
             Console.Write("┌");
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Global.RENDER_WIDTH; i++)
             {
                 Console.Write("─");
             }
             Console.WriteLine("┐");
-            for (int y = 0; y < 10; y++)
+            for (int y = 0; y < Global.RENDER_LENGTH; y++)
             {
                 Console.Write("│");
-                for (int x = 0; x < 20; x++)
+                for (int x = 0; x < Global.RENDER_WIDTH; x++)
                 {
                     MapX = x + xOffset;
                     MapY = y + yOffset;
@@ -63,7 +63,7 @@ namespace TextedBased_RPG
                 Console.WriteLine("│");
             }
             Console.Write("└");
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < Global.RENDER_WIDTH; i++)
             {
                 Console.Write("─");
             }

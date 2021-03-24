@@ -102,20 +102,18 @@ namespace TextedBased_RPG
                     for (int x = 0; x < 1;)
                     {
                         Console.Clear();
-                        Console.WriteLine(player.GetName() + " have found a " + ItemData.GetItemName(ItemID));
-                        Console.WriteLine("Use it? Y/N");
-                        input = Console.ReadKey(true).Key.ToString();
-                        if (input == ConsoleKey.Y.ToString())
+                        Console.WriteLine(player.GetName() + " have found a " + ItemData.GetItemName(ItemID) + ".");
+                        player.potionNumber = player.potionNumber + 1;
+                        Opened = true;
+                        if (player.potionNumber > 1)
                         {
-                            player.UseItem(ItemID);
-                            x = 1;
-                            Opened = true;
-                        }
-                        else if (input == ConsoleKey.N.ToString())
+                            Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potions.");
+                        } else
                         {
-                            x = 1;
+                            Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potion.");
                         }
-
+                        Console.ReadKey(true);
+                        x = 1;
                     }
                 }
             Console.Clear();

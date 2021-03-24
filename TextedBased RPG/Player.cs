@@ -21,6 +21,8 @@ namespace TextedBased_RPG
         public Enemy targetFoe;
 
 
+        public int potionNumber = 0;
+
         private ChestManager chests;
         private Town town;
         private FriendlyNPC npc;
@@ -39,7 +41,6 @@ namespace TextedBased_RPG
             Alive = true;
             CharacterX = 14;
             CharacterY = 5;
-            baseAttack = 10;
             attack = baseAttack;
             SetSpeciesType(0);
         }
@@ -101,11 +102,11 @@ namespace TextedBased_RPG
                 yModified = CharacterY;
             }
 
-            if ((xModified < 0) || (xModified >= 30))
+            if ((xModified < 0) || (xModified >= Global.MAP_X_LENGTH+1))
             {
                 xModified = CharacterX;
             }
-            if ((yModified < 0) || (yModified >= 30))
+            if ((yModified < 0) || (yModified >= Global.MAP_Y_LENGTH + 1))
             {
                 yModified = CharacterY;
             }
@@ -160,7 +161,24 @@ namespace TextedBased_RPG
             Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
             input = Console.ReadKey(true).Key.ToString();
-            CheckPlayerInput();
+            if (input == ConsoleKey.P.ToString())
+            {
+                if(potionNumber > 0)
+                {
+                    UseItem(1);
+                    potionNumber = potionNumber - 1;
+                } else
+                {
+                    Console.Clear();
+                    Console.WriteLine("You do not have potions to use.");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                }
+            }
+            else
+            {
+                CheckPlayerInput();
+            }
             
             if (AttackOrMove == false)
             {
@@ -169,11 +187,11 @@ namespace TextedBased_RPG
             }
             else 
             {
-                if((CharacterX < 0) || (CharacterX == 30))
+                if((CharacterX < 0) || (CharacterX == Global.MAP_X_LENGTH + 1))
                 {
                     Moving = false;
                 }
-                if ((CharacterY < 0) || (CharacterY == 30))
+                if ((CharacterY < 0) || (CharacterY == Global.MAP_Y_LENGTH + 1))
                 {
                     Moving = false;
                 }
@@ -240,7 +258,7 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            if (Renderer.yOffset < 20)
+                            if (Renderer.yOffset < Global.PLAYER_Y_OFFSET)
                             {
                                 CharacterY = CharacterY + 1;
                                 Renderer.yOffset = Renderer.yOffset + 1;
@@ -265,7 +283,7 @@ namespace TextedBased_RPG
                         }
                         else
                         {
-                            if (Renderer.xOffset < 10)
+                            if (Renderer.xOffset < Global.PLAYER_X_OFFSET)
                             {
                                 CharacterX = CharacterX + 1;
                                 Renderer.xOffset = Renderer.xOffset + 1;
