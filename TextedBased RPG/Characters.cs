@@ -14,8 +14,8 @@ namespace TextedBased_RPG
         public int maxHealth;
         public bool Alive;
         public int MinPos = 0;
-        public int MaxPosY = Global.MAP_Y_LENGTH;
-        public int MaxPosX = Global.MAP_X_LENGTH;
+        public int MaxPosY = Global.MAP_Y_LENGTH-1;
+        public int MaxPosX = Global.MAP_X_LENGTH-1;
         public int CharacterX;
         public int CharacterY;
         protected int Damagetaken;

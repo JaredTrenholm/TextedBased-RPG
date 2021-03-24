@@ -69,7 +69,11 @@ namespace TextedBased_RPG
             }
             else if (ItemID == 1)
             {
-                itemName = "Potion"; //potion for 25 health
+                itemName = "Potion";
+            }
+            else if (ItemID == 2)
+            {
+                itemName = "Boat"; 
             }
             return itemName;
         }

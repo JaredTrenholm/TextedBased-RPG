@@ -41,10 +41,11 @@ namespace TextedBased_RPG
         }
         public void enemyInitialize(Player playerTarget, EnemyManager enemies)
         {
-
+            int ID = 0;
             for (int x = 1; x < EnemyLimit; x++)
             {
-                enemy[x] = new Enemy(enemies, 0);
+                if (x >= 10) ID = 2;
+                enemy[x] = new Enemy(enemies, ID);
                 enemy[x].SetSpeciesType(0);
                 enemy[x].GetPlayerTarget(playerTarget);
                 enemy[x].SetPos(x, 1);
@@ -56,6 +57,17 @@ namespace TextedBased_RPG
             enemy[0].GetPlayerTarget(playerTarget);
 
 
+        }
+        public bool BossDead()
+        {
+            if (enemy[0].Alive == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public Enemy LocateEnemy(int x, int y)
         {

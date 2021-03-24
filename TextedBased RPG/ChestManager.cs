@@ -19,11 +19,12 @@ namespace TextedBased_RPG
 
         public void chestInitialize()
         {
-            for (int z = 0; z < chestAmount; z++)
+            chest[0] = new Chest(1, 2);
+            for (int z = 1; z < chestAmount; z++)
             {
                 chest[z] = new Chest(0,1);
             }
-            chest[0].SetPos(12, 1);
+            chest[0].SetPos(12, 26);
             chest[1].SetPos(11, 2);
             chest[1].ChangeID(2);
             chest[2].ChangeType(1);

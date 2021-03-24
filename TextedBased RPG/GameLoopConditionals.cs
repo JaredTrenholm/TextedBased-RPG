@@ -13,8 +13,6 @@ namespace TextedBased_RPG
 
         private int Condition = 0; // 0 = None 1 = Player Death 2 = Enemies Killed 3 = Exit Found
 
-        private bool playerDied = false;
-        private bool enemiesKilled = false;
 
         private int EndConditions = 0;
         public GameLoopConditionals(EnemyManager enemiesTarget, Player playerTarget)
@@ -32,6 +30,10 @@ namespace TextedBased_RPG
             {
                 EndConditions = EndConditions + 1;
                 Condition = 2;
+            } else if(enemies.BossDead() == true)
+            {
+                Condition = 3;
+                EndConditions = EndConditions + 1;
             }
             
             if(EndConditions > 0)

@@ -103,17 +103,28 @@ namespace TextedBased_RPG
                     {
                         Console.Clear();
                         Console.WriteLine(player.GetName() + " have found a " + ItemData.GetItemName(ItemID) + ".");
-                        player.potionNumber = player.potionNumber + 1;
-                        Opened = true;
-                        if (player.potionNumber > 1)
+                        if (ItemID == 1)
                         {
-                            Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potions.");
-                        } else
+                            player.potionNumber = player.potionNumber + 1;
+                            Opened = true;
+                            if (player.potionNumber > 1)
+                            {
+                                Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potions.");
+                            }
+                            else
+                            {
+                                Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potion.");
+                            }
+                            Console.ReadKey(true);
+                            x = 1;
+                        } else if(ItemID == 2)
                         {
-                            Console.WriteLine(player.GetName() + " now have " + player.potionNumber + " potion.");
+                            Console.WriteLine(player.GetName() + " can now travel on water!");
+                            player.hasBoat = true;
+                            Opened = true;
+                            Console.ReadKey(true);
+                            x = 1;
                         }
-                        Console.ReadKey(true);
-                        x = 1;
                     }
                 }
             Console.Clear();

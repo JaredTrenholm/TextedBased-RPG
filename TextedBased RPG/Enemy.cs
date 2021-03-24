@@ -40,6 +40,26 @@ namespace TextedBased_RPG
                 attack = Global.BASE_ATTACK;
                 Avatar = "B";
             }
+            else if (prefabID == 2)
+            {
+                enemyManager = enemies;
+                maxHealth = 10;
+                health = maxHealth;
+                Alive = true;
+                name = "Slime";
+                attack = Global.BASE_ATTACK/5;
+                Avatar = "S";
+            }
+            else if (prefabID == 3)
+            {
+                enemyManager = enemies;
+                maxHealth = 10;
+                health = maxHealth;
+                Alive = true;
+                name = "Dog";
+                attack = Global.BASE_ATTACK / 2;
+                Avatar = "D";
+            }
         }
 
         public void SetPos(int x, int y)

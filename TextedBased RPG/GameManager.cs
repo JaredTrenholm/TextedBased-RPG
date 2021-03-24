@@ -89,6 +89,17 @@ namespace TextedBased_RPG
             {
                 Console.Clear();
                 Console.WriteLine(player.GetName() + " have defeated all of the bandits!");
+                Console.WriteLine("Upon defeating Serdun and his army, you finally are at peace and able to head home.");
+                Console.WriteLine("The stories of what you did travelled across the land and bandits feared your name.");
+                Console.ReadKey(true);
+            }
+            else if (gameLoop.CheckCondition() == 3)
+            {
+                Console.Clear();
+                Console.WriteLine(player.GetName() + " have defeated the Bandit Lord!");
+                Console.WriteLine("Upon defeating Serdun, you realize there is work yet to be finished.");
+                Console.WriteLine("You may have shattered the Bandit army, but you did not defeat all of them.");
+                Console.WriteLine("The remaining bandit army caused chaos across the land as they searched for a new leader.");
                 Console.ReadKey(true);
             }
 

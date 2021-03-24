@@ -27,6 +27,8 @@ namespace TextedBased_RPG
         private Town town;
         private FriendlyNPC npc;
 
+        public bool hasBoat = false;
+
 
 
         public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, FriendlyNPC npcTarget)
@@ -138,12 +140,18 @@ namespace TextedBased_RPG
             string tile = Map.GetTile(yModified, xModified);
             if(tile == "~")
             {
-                Moving = false;
-                Renderer.TileDesc("You cannot cross without a boat.");
+                if (hasBoat == false)
+                {
+                    Moving = false;
+                    Renderer.TileDesc("You cannot cross without a boat.");
+                } else
+                {
+                    Moving = true;
+                }
             } else if (tile == "^")
             {
                 Moving = false;
-                Renderer.TileDesc("You cannot cross without hiking boots.");
+                Renderer.TileDesc("You cannot cross the mountains!");
             }
             else if (tile == "*")
             {

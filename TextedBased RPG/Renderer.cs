@@ -56,8 +56,17 @@ namespace TextedBased_RPG
                 {
                     MapX = x + xOffset;
                     MapY = y + yOffset;
+                    if (MapX > Global.MAP_X_LENGTH-1)
+                    {
+                        MapX = Global.MAP_X_LENGTH-1;
+                    }
+
+                    if (MapY > Global.MAP_Y_LENGTH-1)
+                    {
+                        MapY = Global.MAP_Y_LENGTH-1;
+                    }
                     TileColor();
-                    Console.Write(RenderData[y + yOffset, x + xOffset]);
+                    Console.Write(RenderData[MapY, MapX]);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.WriteLine("│");
@@ -71,16 +80,26 @@ namespace TextedBased_RPG
         }
         private static void TileColor()
         {
-            if (RenderData[MapY, MapX] == "^") { Console.ForegroundColor = ConsoleColor.Gray; }
-            else if (RenderData[MapY, MapX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
-            else if (RenderData[MapY, MapX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
-            else if (RenderData[MapY, MapX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
-            else if (RenderData[MapY, MapX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
-            else if (RenderData[MapY, MapX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
-            else if (RenderData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
-            else if (RenderData[MapY, MapX] == "T") { Console.ForegroundColor = ConsoleColor.Yellow; }
-            else if (RenderData[MapY, MapX] == "C") { Console.ForegroundColor = ConsoleColor.Cyan; }
-            else { Console.ForegroundColor = ConsoleColor.White; }
+            try
+            {
+                if (RenderData[MapY, MapX] == "^") { Console.ForegroundColor = ConsoleColor.Gray; }
+                else if (RenderData[MapY, MapX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
+                else if (RenderData[MapY, MapX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
+                else if (RenderData[MapY, MapX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[MapY, MapX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[MapY, MapX] == "S") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[MapY, MapX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
+                else if (RenderData[MapY, MapX] == "T") { Console.ForegroundColor = ConsoleColor.Yellow; }
+                else if (RenderData[MapY, MapX] == "C") { Console.ForegroundColor = ConsoleColor.Cyan; }
+                else { Console.ForegroundColor = ConsoleColor.White; }
+            }
+            catch
+            {
+                Console.Clear();
+                Console.WriteLine(MapX +", " + MapY);
+                Console.ReadKey(true);
+            }
         }
 
         public static string TileDesc()
