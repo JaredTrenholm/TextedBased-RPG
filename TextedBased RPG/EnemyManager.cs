@@ -8,7 +8,7 @@ namespace TextedBased_RPG
 {
     class EnemyManager
     {
-        private static int EnemyAmount = Global.ENEMY_COUNT;
+        private static int EnemyAmount = 25;
         public Enemy[] enemy = new Enemy[EnemyAmount];
         public int EnemyLimit = EnemyAmount;
 
@@ -30,7 +30,7 @@ namespace TextedBased_RPG
                 }
             }
 
-            if(deaths > EnemyLimit)
+            if(deaths >= EnemyLimit)
             {
                 return true;
             } else
@@ -44,7 +44,8 @@ namespace TextedBased_RPG
             int ID = 0;
             for (int x = 1; x < EnemyLimit; x++)
             {
-                if (x >= 10) ID = 2;
+                if (x > 11) ID = 2;
+                if (x > 20) ID = 3;
                 enemy[x] = new Enemy(enemies, ID);
                 enemy[x].SetSpeciesType(0);
                 enemy[x].GetPlayerTarget(playerTarget);
@@ -52,12 +53,43 @@ namespace TextedBased_RPG
             }
 
             enemy[0] = new Enemy(enemies, 1);
-            enemy[0].SetPos(10, 10);
+            enemy[0].SetPos(40, 10);
             enemy[0].SetSpeciesType(0);
             enemy[0].GetPlayerTarget(playerTarget);
 
+            enemy[1].SetPos(41, 11);
+            enemy[2].SetPos(39, 9);
+            enemy[3].SetPos(2, 23);
+            enemy[4].SetPos(2, 22);
+            enemy[5].SetPos(0, 22);
+            enemy[6].SetPos(1, 22);
+            enemy[7].SetPos(0, 20);
+            enemy[8].SetPos(14,25);
+            enemy[9].SetPos(12, 23);
+            enemy[10].SetPos(19, 22);
+            enemy[11].SetPos(18, 20);
+            enemy[12].SetPos(6, 1);
+            enemy[13].SetPos(2, 1);
+            enemy[14].SetPos(2, 2);
+            enemy[15].SetPos(6, 3);
+            enemy[16].SetPos(3, 5);
+            enemy[17].SetPos(0, 6);
+            enemy[18].SetPos(16, 4);
+            enemy[19].SetPos(18, 1);
+            enemy[20].SetPos(23, 0);
+            enemy[21].SetPos(8, 18);
+            enemy[22].SetPos(14, 14);
+            enemy[24].SetPos(22, 14);
+            enemy[23].SetPos(5, 14);
+
+
+
+
+
 
         }
+
+
         public bool BossDead()
         {
             if (enemy[0].Alive == false)
@@ -103,7 +135,6 @@ namespace TextedBased_RPG
                 }
                 else
                 {
-                    Renderer.RenderData[enemy[z].CharacterY, enemy[z].CharacterX] = Map.mapData[enemy[z].CharacterY, enemy[z].CharacterX];
                     enemy[z].SetAttackMessage(" ");
                 }
             }

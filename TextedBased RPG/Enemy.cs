@@ -36,7 +36,7 @@ namespace TextedBased_RPG
                 maxHealth = 100;
                 health = maxHealth;
                 Alive = true;
-                name = "Bandit Lord, Serdun";
+                name = Global.BOSS_NAME;
                 attack = Global.BASE_ATTACK;
                 Avatar = "B";
             }
@@ -80,10 +80,14 @@ namespace TextedBased_RPG
             if (health <= 0)
             {
                 Alive = false;
+                if (Alive == false) return;
             }
             else
             {
-                Renderer.RenderData[CharacterY, CharacterX] = Avatar;
+                try
+                {
+                    Renderer.RenderData[CharacterY, CharacterX] = Avatar;
+                } catch { Console.WriteLine(CharacterX + ", " + CharacterY); }
             }
         }
 
@@ -141,12 +145,12 @@ namespace TextedBased_RPG
                         xModified = CharacterX - 1;
                     }
 
-                    if (xModified == 0 || xModified == 30)
+                    if (xModified <= 0 || xModified >= Global.MAP_X_LENGTH)
                     {
                         xModified = CharacterX;
                     }
 
-                    if (yModified == 0 || yModified == 30)
+                    if (yModified <= 0 || yModified >= Global.MAP_Y_LENGTH)
                     {
                         yModified = CharacterY;
                     }
@@ -191,6 +195,26 @@ namespace TextedBased_RPG
 
                         }
                         else if (tile == "C")
+                        {
+
+
+                        }
+                        else if (tile == "D")
+                        {
+
+
+                        }
+                        else if (tile == "S")
+                        {
+
+
+                        }
+                        else if (tile == "E")
+                        {
+
+
+                        }
+                        else if (tile == "B")
                         {
 
 

@@ -50,18 +50,12 @@ namespace TextedBased_RPG
         {
             if (Opened == false)
             {
-                try
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
+
                     Renderer.RenderData[yPos, xPos] = "C";
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                catch
-                {
-                    Console.WriteLine("X: " + xPos);
-                    Console.WriteLine("Y: " + yPos);
-                    Console.ReadKey(true);
-                }
+            }
+            else
+            {
+
             }
 
 

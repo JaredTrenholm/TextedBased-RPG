@@ -39,7 +39,7 @@ namespace TextedBased_RPG
             enemies = enemyManagerTarget;
             maxHealth = 100;
             health = maxHealth;
-            name = "You";
+            name = Global.PLAYER_NAME;
             Alive = true;
             CharacterX = 14;
             CharacterY = 5;

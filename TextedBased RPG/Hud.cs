@@ -81,7 +81,7 @@ namespace TextedBased_RPG
                 Console.WriteLine("│                               Text Hero                                  │");
                 Console.WriteLine("│                       Created by: Jared Trenholm                         │");
                 Console.WriteLine("│                                                                          │");
-                Console.WriteLine("│                           Move using WASD.                               │");
+                Console.WriteLine("│                           Move using WASD. Use potions with P.           │");
                 Console.WriteLine("│ To make choices, press the letter that is represented beside the option. │");
                 Console.WriteLine("└──────────────────────────────────────────────────────────────────────────┘");
                 Console.WriteLine("                               ┌───────┐");
@@ -122,8 +122,8 @@ namespace TextedBased_RPG
         {
             Console.WriteLine("Welcome to the land of Azara! A once mighty nation, plagued by a bandit threat.");
             Console.WriteLine("Bandits have invaded most of the southern regions and is advancing up north quickly.");
-            Console.WriteLine("You, on your return to your home village, run into the bandit army, led by Bandit Lord, Serdun.");
-            Console.WriteLine("Will you sneak your way home, defeat the bandits, or die in their war path?");
+            Console.WriteLine("You, on your return to your home village, run into the bandit army, led by Bandit Lord, " + Global.BOSS_NAME +".");
+            Console.WriteLine("Will you defeat the bandits, or die in their war path?");
             Console.WriteLine(" ");
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey(true);

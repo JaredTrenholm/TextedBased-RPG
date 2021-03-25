@@ -38,16 +38,24 @@ namespace TextedBased_RPG
             if (mapID == 0)
             {
                 mapLoaded = System.IO.File.ReadAllLines("Overworld.txt");
-                int mapLength = Global.MAP_Y_LENGTH;
-                mapData = new string[Global.MAP_X_LENGTH, Global.MAP_Y_LENGTH];
-                for (int x = 0; x < Global.MAP_X_LENGTH; x++)
+                mapData = new string[Global.MAP_Y_LENGTH, Global.MAP_X_LENGTH];
+                for (int x = 0; x < Global.MAP_Y_LENGTH; x++)
                 {
                     string[] mapLineSplit = mapLoaded[x].Split(' ');
-                    for (int y = 0; y < Global.MAP_Y_LENGTH; y++){
-                        mapData[x, y] = mapLineSplit[y];
+                        for (int y = 0; y < Global.MAP_X_LENGTH; y++)
+                        {
+                    try
+                    {
+                            mapData[x, y] = mapLineSplit[y];
                     }
+                    catch
+                    {
+                            Console.WriteLine(x + ", " + y);
+                            Console.ReadKey(true);
+                    }
+                        }
                 }
-                Renderer.LoadRender(mapData, mapLength);
+                Renderer.LoadRender(mapData);
                 
             }
         }
@@ -67,7 +75,9 @@ namespace TextedBased_RPG
             {
                 y = player.CharacterY;
             }
-            return mapData[x, y];
+
+                return mapData[x, y];
+
         }
     }
 }

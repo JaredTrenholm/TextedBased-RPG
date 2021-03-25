@@ -16,20 +16,18 @@ namespace TextedBased_RPG
         private static Player player;
 
         private static string[,] mapData;
-        private static int mapLength;
         private static string tile;
 
         public static int xOffset = 5; //Highest xoffset right now is ten
         public static int yOffset = 1; //Highest yoffset right now is two
 
-        public static void LoadRender(string[,] mapDataTarget, int mapLengthTarget)
+        public static void LoadRender(string[,] mapDataTarget)
         {
-            mapLength = mapLengthTarget;
             mapData = mapDataTarget;
-            RenderData = new string[mapLength, mapLength];
-            for (int x = 0; x < mapLength; x++)
+            RenderData = new string[Global.MAP_Y_LENGTH, Global.MAP_X_LENGTH];
+            for (int x = 0; x < Global.MAP_X_LENGTH; x++)
             {
-                for (int y = 0; y < mapLength; y++)
+                for (int y = 0; y < Global.MAP_Y_LENGTH; y++)
                 {
                     RenderData[y, x] = mapData[y, x];
                 }
@@ -123,6 +121,11 @@ namespace TextedBased_RPG
         public static string GetTileDesc()
         {
             return tile;
+        }
+
+        public static string GetTile(int x, int y)
+        {
+            return mapData[y,x];
         }
     }
 }

@@ -47,10 +47,11 @@ namespace TextedBased_RPG
         {
             Map.LoadMap(0);
 
+            
             enemies = new EnemyManager();
             chests = new ChestManager();
-            town = new Town("Midori", "Have you heard of the Bandit King down south? Heard he isn't very strong without his goons.");
-            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up without hiking boots.";
+            town = new Town("Cido", "There is a Bandit Lord on a small island in the east. There is a boat to the south you can use.");
+            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up the mountain.";
             player = new Player(enemies, chests, town, npc);
             town.SetPlayer(player);
             HUD = new Hud();
@@ -62,6 +63,7 @@ namespace TextedBased_RPG
             Map.FindPlayer(player);
 
             gameLoop = new GameLoopConditionals(enemies, player);
+
 
             while (gameLoop.GameLoopActive() == true)
             {
@@ -89,15 +91,15 @@ namespace TextedBased_RPG
             {
                 Console.Clear();
                 Console.WriteLine(player.GetName() + " have defeated all of the bandits!");
-                Console.WriteLine("Upon defeating Serdun and his army, you finally are at peace and able to head home.");
-                Console.WriteLine("The stories of what you did travelled across the land and bandits feared your name.");
+                Console.WriteLine("Upon defeating " + Global.BOSS_NAME +" and his army, you finally are at peace and able to head home.");
+                Console.WriteLine("The stories of what you did travel across the land and bandits fear your name.");
                 Console.ReadKey(true);
             }
             else if (gameLoop.CheckCondition() == 3)
             {
                 Console.Clear();
                 Console.WriteLine(player.GetName() + " have defeated the Bandit Lord!");
-                Console.WriteLine("Upon defeating Serdun, you realize there is work yet to be finished.");
+                Console.WriteLine("Upon defeating " + Global.BOSS_NAME + ", you realize there is work yet to be finished.");
                 Console.WriteLine("You may have shattered the Bandit army, but you did not defeat all of them.");
                 Console.WriteLine("The remaining bandit army caused chaos across the land as they searched for a new leader.");
                 Console.ReadKey(true);
