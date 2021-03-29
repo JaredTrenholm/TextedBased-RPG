@@ -19,53 +19,19 @@ namespace TextedBased_RPG
 
 
 
-        public Enemy(EnemyManager enemies, int prefabID)
+        public Enemy()
         {
-            if (prefabID == 0)
-            {
-                enemyManager = enemies;
-                maxHealth = 20;
-                health = maxHealth;
-                Alive = true;
-                name = "Bandit";
-                attack = Global.BASE_ATTACK/2;
-                Avatar = "E";
-            } else if (prefabID == 1)
-            {
-                enemyManager = enemies;
-                maxHealth = 100;
-                health = maxHealth;
-                Alive = true;
-                name = Global.BOSS_NAME;
-                attack = Global.BASE_ATTACK;
-                Avatar = "B";
-            }
-            else if (prefabID == 2)
-            {
-                enemyManager = enemies;
-                maxHealth = 10;
-                health = maxHealth;
-                Alive = true;
-                name = "Slime";
-                attack = Global.BASE_ATTACK/5;
-                Avatar = "S";
-            }
-            else if (prefabID == 3)
-            {
-                enemyManager = enemies;
-                maxHealth = 10;
-                health = maxHealth;
-                Alive = true;
-                name = "Dog";
-                attack = Global.BASE_ATTACK / 2;
-                Avatar = "D";
-            }
         }
 
         public void SetPos(int x, int y)
         {
             CharacterX = x;
             CharacterY = y;
+        }
+
+        public void GrabManager(EnemyManager enemies)
+        {
+            enemyManager = enemies;
         }
 
         public void GetPlayerTarget(Player userTarget)

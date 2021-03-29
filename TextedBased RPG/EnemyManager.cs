@@ -41,21 +41,26 @@ namespace TextedBased_RPG
         }
         public void enemyInitialize(Player playerTarget, EnemyManager enemies)
         {
-            int ID = 0;
             for (int x = 1; x < EnemyLimit; x++)
             {
-                if (x > 11) ID = 2;
-                if (x > 20) ID = 3;
-                enemy[x] = new Enemy(enemies, ID);
+                if (x > 11) enemy[x] = new Slime();
+
+                else if (x > 20) enemy[x] = new Dog();
+
+                else enemy[x] = new Bandit();
+
                 enemy[x].SetSpeciesType(0);
                 enemy[x].GetPlayerTarget(playerTarget);
                 enemy[x].SetPos(x, 1);
+
+                enemy[x].GrabManager(enemies);
             }
 
-            enemy[0] = new Enemy(enemies, 1);
+            enemy[0] = new Boss();
             enemy[0].SetPos(40, 10);
             enemy[0].SetSpeciesType(0);
             enemy[0].GetPlayerTarget(playerTarget);
+            enemy[0].GrabManager(enemies);
 
             enemy[1].SetPos(41, 11);
             enemy[2].SetPos(39, 9);
