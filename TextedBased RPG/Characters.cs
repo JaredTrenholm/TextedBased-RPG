@@ -26,6 +26,8 @@ namespace TextedBased_RPG
         protected int movementType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
         protected int SpeciesType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
 
+        protected ItemManager items;
+
 
 
         public string GetAttackMessage()
@@ -118,18 +120,18 @@ namespace TextedBased_RPG
         public void WeaponChange(int WeaponID)
         {
             
-            if(ItemData.GetWeaponName(WeaponID) == "None")
+            if(items.GetWeaponName(WeaponID) == "None")
             {
-                Weapon = ItemData.GetWeaponName(WeaponID);
+                Weapon = items.GetWeaponName(WeaponID);
                 BonusAttack = 0;
-            } else if (ItemData.GetWeaponName(WeaponID) == "Sword")
+            } else if (items.GetWeaponName(WeaponID) == "Sword")
             {
-                Weapon = ItemData.GetWeaponName(WeaponID);
+                Weapon = items.GetWeaponName(WeaponID);
                 BonusAttack = 10;
             }
-            else if (ItemData.GetWeaponName(WeaponID) == "Short Bow")
+            else if (items.GetWeaponName(WeaponID) == "Short Bow")
             {
-                Weapon = ItemData.GetWeaponName(WeaponID);
+                Weapon = items.GetWeaponName(WeaponID);
                 BonusAttack = 5;
             }
             attack = baseAttack + BonusAttack;
@@ -137,11 +139,11 @@ namespace TextedBased_RPG
 
         public void UseItem(int itemID)
         {
-            if (ItemData.GetItemName(itemID) == "None")
+            if (items.GetItemName(itemID) == "None")
             {
                 
             }
-            else if (ItemData.GetItemName(itemID) == "Potion")
+            else if (items.GetItemName(itemID) == "Potion")
             {
                 health = health + Global.POTION_HEAL;
                 if (health > maxHealth)

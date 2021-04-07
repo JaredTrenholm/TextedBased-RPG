@@ -10,19 +10,21 @@ namespace TextedBased_RPG
     {
         private int chestAmount = 15;
         private Chest[] chest;
+        private ItemManager items;
 
-        public ChestManager()
+        public ChestManager(ItemManager itemTarget)
         {
          chest = new Chest[chestAmount];
+            items = itemTarget;
 
         }
 
         public void chestInitialize()
         {
-            chest[0] = new Chest(1, 2);
+            chest[0] = new Chest(1, 2, items);
             for (int z = 1; z < chestAmount; z++)
             {
-                chest[z] = new Chest(0,1);
+                chest[z] = new Chest(0,1, items);
             }
             chest[0].SetPos(12, 26);
             chest[1].SetPos(11, 2);

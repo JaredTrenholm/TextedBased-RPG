@@ -23,50 +23,52 @@ namespace TextedBased_RPG
             user = userTarget;
             enemy = enemyTarget;
         }
+
+        public void GetEnemy(Enemy enemy)
+        {
+            PreviousEnemy = enemy;
+        }
         public void Display()
         {
-            string Clear = "                                                                                                                                                                                                                                                                                      ";
+            string Clear = "                                                                           ";
             int HUDy = Console.CursorTop;
             int HUDx = Console.CursorLeft;
-            PreviousEnemy = user.targetFoe;
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.SetCursorPosition(0, 15);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
-            Console.WriteLine(Clear);
+            
+
 
             Console.SetCursorPosition(HUDx, HUDy);
 
-            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "");
-            Console.WriteLine("Potions: " + user.potionNumber + "");
-            Console.WriteLine("Weapon: " + user.Weapon + "");
-            Console.WriteLine("Attack: " + user.attack);
+            Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "" + Clear);
+            Console.WriteLine("Potions: " + user.potionNumber + "" + Clear);
+            Console.WriteLine("Weapon: " + user.Weapon + "" + Clear);
+            Console.WriteLine("Attack: " + user.attack + Clear);
             Console.WriteLine("");
-            Console.SetCursorPosition(0, 15);
-            Console.WriteLine(Renderer.GetTileDesc());
-            Console.WriteLine(user.PlayerAttackMessage);
+            Console.SetCursorPosition(0, 16);
+            Console.WriteLine(Renderer.GetTileDesc() + Clear);
+            Console.WriteLine(user.PlayerAttackMessage + Clear);
 
-            if (PreviousEnemy != null)
-            {
-                if (PreviousEnemy.Alive != false)
+            
+                if (PreviousEnemy != null)
                 {
                     Console.WriteLine(" ");
-                    Console.WriteLine("Name: " + PreviousEnemy.GetName() + "");
-                    Console.WriteLine("Health: " + PreviousEnemy.GetHealth() + "");
-                    Console.WriteLine("Weapon: " + PreviousEnemy.Weapon + "");
-                    Console.WriteLine("Attack: " + PreviousEnemy.attack + "");
-                    Console.WriteLine(PreviousEnemy.GetAttackMessage() + "");
+                    Console.WriteLine("Name: " + PreviousEnemy.GetName() + "" + Clear);
+                    Console.WriteLine("Health: " + PreviousEnemy.GetHealth() + "" + Clear);
+                    Console.WriteLine("Weapon: " + PreviousEnemy.Weapon + "" + Clear);
+                    Console.WriteLine("Attack: " + PreviousEnemy.attack + "" + Clear);
+                    Console.WriteLine(PreviousEnemy.GetAttackMessage() + "" + Clear);
                 }
-            }
+                else
+                {
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                    Console.WriteLine(Clear);
+                }
+            
 
             Console.CursorVisible = false;
 

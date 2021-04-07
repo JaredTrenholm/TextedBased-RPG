@@ -10,8 +10,8 @@ namespace TextedBased_RPG
     {
         public static string[,] RenderData;
 
-        private static int MapY;
-        private static int MapX;
+        private static int CameraY;
+        private static int CameraX;
 
         private static Player player;
 
@@ -52,19 +52,19 @@ namespace TextedBased_RPG
                 Console.Write("│");
                 for (int x = 0; x < Global.RENDER_WIDTH; x++)
                 {
-                    MapX = x + xOffset;
-                    MapY = y + yOffset;
-                    if (MapX > Global.MAP_X_LENGTH-1)
+                    CameraX = x + xOffset;
+                    CameraY = y + yOffset;
+                    if (CameraX > Global.MAP_X_LENGTH-1)
                     {
-                        MapX = Global.MAP_X_LENGTH-1;
+                        CameraX = Global.MAP_X_LENGTH-1;
                     }
 
-                    if (MapY > Global.MAP_Y_LENGTH-1)
+                    if (CameraY > Global.MAP_Y_LENGTH-1)
                     {
-                        MapY = Global.MAP_Y_LENGTH-1;
+                        CameraY = Global.MAP_Y_LENGTH-1;
                     }
                     TileColor();
-                    Console.Write(RenderData[MapY, MapX]);
+                    Console.Write(RenderData[CameraY, CameraX]);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.WriteLine("│");
@@ -80,22 +80,22 @@ namespace TextedBased_RPG
         {
             try
             {
-                if (RenderData[MapY, MapX] == "^") { Console.ForegroundColor = ConsoleColor.Gray; }
-                else if (RenderData[MapY, MapX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
-                else if (RenderData[MapY, MapX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
-                else if (RenderData[MapY, MapX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
-                else if (RenderData[MapY, MapX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
-                else if (RenderData[MapY, MapX] == "S") { Console.ForegroundColor = ConsoleColor.Red; }
-                else if (RenderData[MapY, MapX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
-                else if (RenderData[MapY, MapX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
-                else if (RenderData[MapY, MapX] == "T") { Console.ForegroundColor = ConsoleColor.Yellow; }
-                else if (RenderData[MapY, MapX] == "C") { Console.ForegroundColor = ConsoleColor.Cyan; }
+                if (RenderData[CameraY, CameraX] == "^") { Console.ForegroundColor = ConsoleColor.Gray; }
+                else if (RenderData[CameraY, CameraX] == "~") { Console.ForegroundColor = ConsoleColor.Blue; }
+                else if (RenderData[CameraY, CameraX] == "*") { Console.ForegroundColor = ConsoleColor.DarkGreen; }
+                else if (RenderData[CameraY, CameraX] == "E") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[CameraY, CameraX] == "D") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[CameraY, CameraX] == "S") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[CameraY, CameraX] == "B") { Console.ForegroundColor = ConsoleColor.Red; }
+                else if (RenderData[CameraY, CameraX] == "'") { Console.ForegroundColor = ConsoleColor.Green; }
+                else if (RenderData[CameraY, CameraX] == "T") { Console.ForegroundColor = ConsoleColor.Yellow; }
+                else if (RenderData[CameraY, CameraX] == "C") { Console.ForegroundColor = ConsoleColor.Cyan; }
                 else { Console.ForegroundColor = ConsoleColor.White; }
             }
             catch
             {
                 Console.Clear();
-                Console.WriteLine(MapX +", " + MapY);
+                Console.WriteLine(CameraX +", " + CameraY);
                 Console.ReadKey(true);
             }
         }

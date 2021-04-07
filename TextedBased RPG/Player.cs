@@ -29,9 +29,12 @@ namespace TextedBased_RPG
 
         public bool hasBoat = false;
 
+        private Hud HUD;
 
 
-        public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, FriendlyNPC npcTarget)
+
+
+        public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, FriendlyNPC npcTarget, Hud HUDTarget, ItemManager itemTarget)
         {
             npc = npcTarget;
             chests = chestManager;
@@ -45,6 +48,8 @@ namespace TextedBased_RPG
             CharacterY = 5;
             attack = baseAttack;
             SetSpeciesType(0);
+            HUD = HUDTarget;
+            items = itemTarget;
         }
         public void Draw()
         {
@@ -118,12 +123,14 @@ namespace TextedBased_RPG
             {
                 PlayerAttackMessage = GetName() + " attacked " + targetFoe.GetName() + " for " + attack + " points of damage!";
                 targetFoe.TakeDamage(attack);
+                HUD.GetEnemy(targetFoe);
                 AttackOrMove = false;
                 Moving = false;
                 Renderer.TileDesc("You are engaged in a fight.");
             } else
             {
                 AttackOrMove = true;
+                HUD.GetEnemy(targetFoe);
             }
 
             try

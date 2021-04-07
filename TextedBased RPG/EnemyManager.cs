@@ -79,7 +79,7 @@ namespace TextedBased_RPG
             enemy[15].SetPos(6, 3);
             enemy[16].SetPos(3, 5);
             enemy[17].SetPos(0, 6);
-            enemy[18].SetPos(16, 4);
+            enemy[18].SetPos(18, 2);
             enemy[19].SetPos(18, 1);
             enemy[20].SetPos(23, 0);
             enemy[21].SetPos(8, 18);

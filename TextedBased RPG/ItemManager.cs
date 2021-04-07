@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
-    abstract class ItemData
+    class ItemManager
     {
-        private static string weaponName;
-        private static string itemName;
+        private string weaponName;
+        private string itemName;
 
-        private static int attackMod;
-        public static string GetWeaponName(int WeaponID)
+        private int attackMod;
+        public string GetWeaponName(int WeaponID)
         {
             if(WeaponID == 0)
             {
@@ -28,7 +28,7 @@ namespace TextedBased_RPG
             return weaponName;
         }
 
-        public static int GetWeaponAttack(int WeaponID)
+        public int GetWeaponAttack(int WeaponID)
         {
             if (WeaponID == 0)
             {
@@ -45,7 +45,7 @@ namespace TextedBased_RPG
             return attackMod;
         }
 
-        public static void SetWeaponID(int WeaponID)
+        public void SetWeaponID(int WeaponID)
         {
             if (WeaponID == 0)
             {
@@ -61,7 +61,7 @@ namespace TextedBased_RPG
             }
         }
 
-        public static string GetItemName(int ItemID)
+        public string GetItemName(int ItemID)
         {
             if (ItemID == 0)
             {

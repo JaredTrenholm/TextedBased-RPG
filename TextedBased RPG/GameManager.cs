@@ -20,6 +20,8 @@ namespace TextedBased_RPG
 
         private GameLoopConditionals gameLoop;
 
+        private ItemManager items;
+
 
 
 
@@ -45,30 +47,14 @@ namespace TextedBased_RPG
 
         public void RunGame()
         {
-            Map.LoadMap(0);
 
-            
-            enemies = new EnemyManager();
-            chests = new ChestManager();
-            town = new Town("Cido", "There is a Bandit Lord on a small island in the east. There is a boat to the south you can use.");
-            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up the mountain.";
-            player = new Player(enemies, chests, town, npc);
-            town.SetPlayer(player);
-            HUD = new Hud();
-            HUD.findTargets(player, enemies.enemy);
-            chests.chestInitialize();
-            enemies.enemyInitialize(player, enemies);
-            chests.FindPlayer(player);
-            Renderer.FindPlayer(player);
-            Map.FindPlayer(player);
 
-            gameLoop = new GameLoopConditionals(enemies, player);
-
+            InitObjects();
 
             while (gameLoop.GameLoopActive() == true)
             {
-                Console.SetCursorPosition(0, 0);
                 Console.CursorVisible = false;
+                Console.SetCursorPosition(0, 0);
                 npc.Draw();
                 town.Draw();
                 chests.Draw();
@@ -82,16 +68,47 @@ namespace TextedBased_RPG
                 player.Update();
             }
 
-            if(gameLoop.CheckCondition() == 1)
+            GameEnding();
+
+
+
+        }  
+
+        private void InitObjects()
+        {
+            Map.LoadMap(0);
+
+            items = new ItemManager();
+            enemies = new EnemyManager();
+            chests = new ChestManager(items);
+            town = new Town("Cido", "There is a Bandit Lord on a small island in the east. There is a boat to the south you can use.");
+            npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up the mountain.";
+            HUD = new Hud();
+            player = new Player(enemies, chests, town, npc, HUD, items);
+            town.SetPlayer(player);
+            HUD.findTargets(player, enemies.enemy);
+            chests.chestInitialize();
+            enemies.enemyInitialize(player, enemies);
+            chests.FindPlayer(player);
+            Renderer.FindPlayer(player);
+            Map.FindPlayer(player);
+
+            gameLoop = new GameLoopConditionals(enemies, player);
+        }
+
+        private void GameEnding()
+        {
+            if (gameLoop.CheckCondition() == 1)
             {
                 Console.Clear();
                 Console.WriteLine(player.GetName() + " have died!");
                 Console.ReadKey(true);
-            } else if (gameLoop.CheckCondition() == 2)
+            }
+            else if (gameLoop.CheckCondition() == 2)
             {
                 Console.Clear();
                 Console.WriteLine(player.GetName() + " have defeated all of the bandits!");
-                Console.WriteLine("Upon defeating " + Global.BOSS_NAME +" and his army, you finally are at peace and able to head home.");
+                Console.WriteLine("Upon defeating " + Global.BOSS_NAME + " and his army, you finally are at peace and able to head home.");
                 Console.WriteLine("The stories of what you did travel across the land and bandits fear your name.");
                 Console.ReadKey(true);
             }
@@ -104,9 +121,6 @@ namespace TextedBased_RPG
                 Console.WriteLine("The remaining bandit army caused chaos across the land as they searched for a new leader.");
                 Console.ReadKey(true);
             }
-
-
-
-        }  
+        }
     }
 }

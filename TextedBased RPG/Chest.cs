@@ -22,13 +22,16 @@ namespace TextedBased_RPG
 
         private int attackChange = 0;
 
-        public Chest(int itemTypeTarget, int itemIDTarget)
+        private ItemManager items;
+
+        public Chest(int itemTypeTarget, int itemIDTarget, ItemManager itemTarget)
         {
             itemType = itemTypeTarget;
             ItemID = itemIDTarget;
             xPos = 0;
             yPos = 0;
             Opened = false;
+            items = itemTarget;
 
         }
         public void ChangeType(int itemTypeTarget)
@@ -75,8 +78,8 @@ namespace TextedBased_RPG
                     for(int x = 0; x < 1;)
                     {
                         Console.Clear();
-                        Console.WriteLine(player.GetName() + " have found a " + ItemData.GetWeaponName(ItemID));
-                        attackChange = player.baseAttack + ItemData.GetWeaponAttack(ItemID);
+                        Console.WriteLine(player.GetName() + " have found a " + items.GetWeaponName(ItemID));
+                        attackChange = player.baseAttack + items.GetWeaponAttack(ItemID);
                         Console.WriteLine("It will change your attack to " + attackChange + " from " + player.attack +".");
                         Console.WriteLine("Equip it? Y/N");
                         input = Console.ReadKey(true).Key.ToString();
@@ -96,7 +99,7 @@ namespace TextedBased_RPG
                     for (int x = 0; x < 1;)
                     {
                         Console.Clear();
-                        Console.WriteLine(player.GetName() + " have found a " + ItemData.GetItemName(ItemID) + ".");
+                        Console.WriteLine(player.GetName() + " have found a " + items.GetItemName(ItemID) + ".");
                         if (ItemID == 1)
                         {
                             player.potionNumber = player.potionNumber + 1;
