@@ -6,3 +6,19 @@ C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\Texted
 C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.exe
 C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\obj\Debug\TextedBased RPG.pdb
 C:\Users\jared\Desktop\NSCC\Projects\Term Two\Object Oriented Programming\TextedBased RPG\TextedBased RPG\bin\Debug\Overworld.txt
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\bin\Debug\Overworld.txt
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\bin\Debug\TextedBased RPG.exe.config
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\bin\Debug\TextedBased RPG.exe
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\bin\Debug\TextedBased RPG.pdb
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\obj\Debug\TextedBased RPG.csprojAssemblyReference.cache
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\obj\Debug\TextedBased RPG.csproj.CoreCompileInputs.cache
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\obj\Debug\TextedBased RPG.exe
+C:\Users\jumpy\OneDrive\c\csharp\Jared Legacy Project\TextedBased-RPG-main\TextedBased RPG\obj\Debug\TextedBased RPG.pdb
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\bin\Debug\Overworld.txt
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\bin\Debug\TextedBased RPG.exe.config
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\bin\Debug\TextedBased RPG.exe
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\bin\Debug\TextedBased RPG.pdb
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\obj\Debug\TextedBased RPG.csprojAssemblyReference.cache
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\obj\Debug\TextedBased RPG.csproj.CoreCompileInputs.cache
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\obj\Debug\TextedBased RPG.exe
+C:\Users\jumpy\OneDrive\c\csharp\RPG_LEGACY_JaredT\TextedBased RPG\obj\Debug\TextedBased RPG.pdb

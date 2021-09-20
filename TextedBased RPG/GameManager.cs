@@ -15,19 +15,20 @@ namespace TextedBased_RPG
         private FriendlyNPC npc = new FriendlyNPC();
         private Hud HUD;
         private Town town;
+        private Shop shop;
         private EnemyManager enemies;
         private ChestManager chests;
 
         private GameLoopConditionals gameLoop;
 
         private ItemManager items;
+/*
 
 
 
 
 
-
-
+*/
         /// <summary>
         /// 9 left of the player is the map border
         /// 10 right of the player is the map border
@@ -35,7 +36,7 @@ namespace TextedBased_RPG
         /// 5 down of the player is the map border
         /// </summary>
         /// 
-
+/*      constructorrrrrerrrr
         public GameManager()
         {
             
@@ -44,11 +45,9 @@ namespace TextedBased_RPG
 
         }
 
-
+*/
         public void RunGame()
         {
-
-
             InitObjects();
 
             while (gameLoop.GameLoopActive() == true)
@@ -57,6 +56,7 @@ namespace TextedBased_RPG
                 Console.SetCursorPosition(0, 0);
                 npc.Draw();
                 town.Draw();
+                shop.Draw();
                 chests.Draw();
                 enemies.Draw();
                 player.Draw();
@@ -81,11 +81,13 @@ namespace TextedBased_RPG
             items = new ItemManager();
             enemies = new EnemyManager();
             chests = new ChestManager(items);
-            town = new Town("Cido", "There is a Bandit Lord on a small island in the east. There is a boat to the south you can use.");
+            town = new Town("Cido", "There is a Bandit Lord on a small island in the east.\nThere is an old boat to the south you can use.");
+            shop = new Shop("The $hop", $"You sure look like you could use a boat!,\ntoo bad I sold my last one to a guy in {town.Name}! :D HA,HA,HA.");
             npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up the mountain.";
             HUD = new Hud();
-            player = new Player(enemies, chests, town, npc, HUD, items);
+            player = new Player(enemies, chests, town, shop, npc, HUD, items);
             town.SetPlayer(player);
+            shop.SetPlayer(player);
             HUD.findTargets(player, enemies.enemy);
             chests.chestInitialize();
             enemies.enemyInitialize(player, enemies);
