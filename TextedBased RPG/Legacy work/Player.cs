@@ -22,10 +22,12 @@ namespace TextedBased_RPG
 
 
         public int potionNumber = 0;
+        private int money;
+
 
         private ChestManager chests;
         private Town town;
-        private Shop shop;
+        private List<Shop> shops = new List<Shop>();
         private FriendlyNPC npc;
 
         public bool hasBoat = false;
@@ -35,14 +37,15 @@ namespace TextedBased_RPG
 
 
 
-        public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, Shop shopTarget, FriendlyNPC npcTarget, Hud HUDTarget, ItemManager itemTarget)
+        public Player(EnemyManager enemyManagerTarget, ChestManager chestManager, Town townTarget, List<Shop> shopsTarget, FriendlyNPC npcTarget, Hud HUDTarget, ItemManager itemTarget)
         {
             npc = npcTarget;
             chests = chestManager;
             town = townTarget;
-            shop = shopTarget;
+            shops = shopsTarget;
             enemies = enemyManagerTarget;
             maxHealth = 100;
+            money = 0;
             health = maxHealth;
             name = Global.PLAYER_NAME;
             Alive = true;
@@ -53,6 +56,8 @@ namespace TextedBased_RPG
             HUD = HUDTarget;
             items = itemTarget;
         }
+        public int Money { get { return money; } }
+
         public void Draw()
         {
             
@@ -81,11 +86,14 @@ namespace TextedBased_RPG
                     town.EnterTown();
                 }
             }
-            else if (CharacterX == shop.x)
-            {
-                if (CharacterY == shop.y)
+            for (int i = 0; i < shops.Count; i++)
+            { 
+                if (CharacterX == shops[i].x)
                 {
-                    shop.EnterShop();
+                    if (CharacterY == shops[i].y)
+                    {
+                        shops[i].EnterShop();
+                    }
                 }
             }
 
@@ -189,7 +197,7 @@ namespace TextedBased_RPG
             {
                 if(potionNumber > 0)
                 {
-                    UseItem(1);
+                    UseItem(ITEM.POTION); 
                     potionNumber = potionNumber - 1;
                 } else
                 {
@@ -327,6 +335,15 @@ namespace TextedBased_RPG
                 }
             }
             
+        }
+
+        public void CashGain(int amount)
+        {
+            money = money + amount;
+        }
+        public void CashSpend(int amount)
+        {
+            money = money - amount;
         }
     }
 }

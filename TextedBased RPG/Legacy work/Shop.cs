@@ -8,13 +8,17 @@ namespace TextedBased_RPG
 {
     class Shop : InteractiveArea
     {
-    
+        private int priceOfPotion = 10;
+        private int priceOfSword = 20;
+        private int priceOfBow = 15;
+        private ItemManager items;
         //constructor
-        public Shop(string name, string DesiredDialogue) : base(name, DesiredDialogue)
+        public Shop(string name, string DesiredDialogue, int x, int y, ItemManager itemsTarget) : base(name, DesiredDialogue)
         {
-            x = 16;
-            y = 7;
+            base.x = x;
+            base.y = y;
             avatar = "$";
+            items = itemsTarget;
         }
 
         public void EnterShop()
@@ -27,7 +31,7 @@ namespace TextedBased_RPG
                 Console.WriteLine(lastAction);
                 Console.WriteLine("");
                 Console.WriteLine("What do you want to do?");
-                Console.WriteLine("B) Buy\nT) Talk\nL) Leave");
+                Console.WriteLine("B) Buy\nS) Sell\nT) Talk\nL) Leave");
 
                 input = Console.ReadKey(true).Key;
                 switch (input)
@@ -43,22 +47,68 @@ namespace TextedBased_RPG
                             Console.WriteLine(lastAction);
                             Console.WriteLine();
                             Console.WriteLine("What would you like to buy?");
-                            Console.WriteLine("N) Nothing\nP) Potion\nL) Leave");
+                            Console.WriteLine($"S) {items.GetWeaponName(ITEM.SWORD)} / ATTK^{items.GetWeaponAttack(ITEM.SWORD)} - {priceOfSword}$\nB) {items.GetWeaponName(ITEM.SHORTBOW)} / ATTK^{items.GetWeaponAttack(ITEM.SHORTBOW)} - {priceOfBow}$\nP) Potion - {priceOfPotion}$\nR) Return");
                             
                             input = Console.ReadKey(true).Key;
                             switch(input)
                             {
+                                case ConsoleKey.S:
+                                    if (user.Money >= priceOfSword)
+                                    {
+                                        Console.Clear();
+                                        lastAction = $"you purchase a {items.GetWeaponName(ITEM.SWORD)}";
+                                        int attackChange = user.baseAttack + items.GetWeaponAttack(ITEM.SWORD);
+                                        Console.WriteLine($"purchasing a {items.GetWeaponName(ITEM.SWORD)} \nwill change your attack to " + attackChange + " from " + user.attack + ".");
+                                        user.CashSpend(priceOfSword);
+                                        user.WeaponChange(ITEM.SWORD);
+                                        Console.ReadKey(true);
+                                    }
+                                    else
+                                    {
+                                        lastAction = "come back with more cash";
+                                    }
+                                    break;
 
+                                case ConsoleKey.B:
+                                    if (user.Money >= priceOfBow)
+                                    {
+                                        Console.Clear();
+                                        lastAction = $"you purchased a {items.GetWeaponName(ITEM.SHORTBOW)}";
+                                        int attackChange = user.baseAttack + items.GetWeaponAttack(ITEM.SHORTBOW);
+                                        Console.WriteLine($"purchasing a {items.GetWeaponName(ITEM.SHORTBOW)} \nwill change your attack to " + attackChange + " from " + user.attack + ".");
+                                        user.CashSpend(priceOfBow);
+                                        user.WeaponChange(ITEM.SHORTBOW);
+                                        Console.ReadKey(true);
+                                    }
+                                    else
+                                    {
+                                        lastAction = "come back with more cash";
+                                    }
+                                    break;
 
+                                case ConsoleKey.P:
+                                    if (user.Money >= priceOfPotion)
+                                    { 
+                                        lastAction = $"you buy a potion with {priceOfPotion}$";
+                                        user.CashSpend(priceOfPotion);
+                                        user.potionNumber++;
+                                    }
+                                    else
+                                    {
+                                        lastAction = "come back with more cash";
+                                    }
+                                    break;
 
-
-                                case ConsoleKey.L:
+                                case ConsoleKey.R:
                                     shopping = false;
                                     break;
                             }
                             Console.Clear();
                         }
                         break;
+
+                    case ConsoleKey.S://sell
+
 
                     case ConsoleKey.T:
                         Console.Clear();

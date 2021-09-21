@@ -10,25 +10,26 @@ namespace TextedBased_RPG
     {
 
         private Player player;
-        
-        
+
+
+        private Random random = new Random();
         private FriendlyNPC npc = new FriendlyNPC();
         private Hud HUD;
         private Town town;
-        private Shop shop;
+        private List<Shop> shops = new List<Shop>();
         private EnemyManager enemies;
         private ChestManager chests;
 
         private GameLoopConditionals gameLoop;
 
         private ItemManager items;
-/*
+        /*
 
 
 
 
 
-*/
+        */
         /// <summary>
         /// 9 left of the player is the map border
         /// 10 right of the player is the map border
@@ -36,16 +37,12 @@ namespace TextedBased_RPG
         /// 5 down of the player is the map border
         /// </summary>
         /// 
-/*      constructorrrrrerrrr
-        public GameManager()
+        //constructor
+       /* public GameManager()
         {
             
+        }*/
 
-            
-
-        }
-
-*/
         public void RunGame()
         {
             InitObjects();
@@ -56,7 +53,9 @@ namespace TextedBased_RPG
                 Console.SetCursorPosition(0, 0);
                 npc.Draw();
                 town.Draw();
-                shop.Draw();
+                shops[0].Draw();
+                shops[1].Draw();
+                shops[2].Draw();
                 chests.Draw();
                 enemies.Draw();
                 player.Draw();
@@ -79,15 +78,19 @@ namespace TextedBased_RPG
             Map.LoadMap(0);
 
             items = new ItemManager();
-            enemies = new EnemyManager();
-            chests = new ChestManager(items);
+            enemies = new EnemyManager(random);
+            chests = new ChestManager(items, random);
             town = new Town("Cido", "There is a Bandit Lord on a small island in the east.\nThere is an old boat to the south you can use.");
-            shop = new Shop("The $hop", $"You sure look like you could use a boat!,\ntoo bad I sold my last one to a guy in {town.Name}! :D HA,HA,HA.");
+            shops.Add(new Shop("The $hop", $"You sure look like you could use a boat!,\ntoo bad I sold my last one to a guy in {town.Name}! :D HA,HA,HA.", 16, 7, items)); // I-0
+            shops.Add(new Shop("CommerceSuperCentre", "I didn't know what these other shop keepers should say", 18, 8, items)); // I-1
+            shops.Add(new Shop("Lorem Ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 19, 9, items)); // I-2
             npc.Dialogue = "To my north is water. You cannot cross without a boat.\nTo my east is a mountain. You cannot hike up the mountain.";
             HUD = new Hud();
-            player = new Player(enemies, chests, town, shop, npc, HUD, items);
+            player = new Player(enemies, chests, town, shops, npc, HUD, items);
             town.SetPlayer(player);
-            shop.SetPlayer(player);
+            shops[0].SetPlayer(player);
+            shops[1].SetPlayer(player);
+            shops[2].SetPlayer(player);
             HUD.findTargets(player, enemies.enemy);
             chests.chestInitialize();
             enemies.enemyInitialize(player, enemies);

@@ -6,74 +6,78 @@ using System.Threading.Tasks;
 
 namespace TextedBased_RPG
 {
+    enum ITEM
+    { 
+        NULL,
+        SWORD,
+        SHORTBOW,
+        POTION,
+        BOAT,
+        MONEY
+    }
+    enum ITEMTYPE
+    { 
+       NULL,
+       ITEM,
+       WEAPON
+    }
     class ItemManager
     {
         private string weaponName;
         private string itemName;
 
         private int attackMod;
-        public string GetWeaponName(int WeaponID)
+        public string GetWeaponName(ITEM WeaponID)
         {
-            if(WeaponID == 0)
+            if(WeaponID == ITEM.NULL)
             {
                 weaponName = "None";
-            } else if (WeaponID == 1)
+            } 
+            else if (WeaponID == ITEM.SWORD)
             {
                 weaponName = "Sword";
             }
-            else if (WeaponID == 2)
+            else if (WeaponID == ITEM.SHORTBOW)
             {
                 weaponName = "Short Bow"; //5 attack
             }
             return weaponName;
         }
 
-        public int GetWeaponAttack(int WeaponID)
+        public int GetWeaponAttack(ITEM WeaponID)
         {
-            if (WeaponID == 0)
+            if (WeaponID == ITEM.NULL)
             {
                 attackMod = 0;
             }
-            else if (WeaponID == 1)
+            else if (WeaponID == ITEM.SWORD)
             {
                 attackMod = 10;
             }
-            else if (WeaponID == 2)
+            else if (WeaponID == ITEM.SHORTBOW)
             {
                 attackMod = 5;
             }
             return attackMod;
         }
 
-        public void SetWeaponID(int WeaponID)
+        public string GetItemName(ITEM ItemID)
         {
-            if (WeaponID == 0)
-            {
-                weaponName = "None"; //0 attack
-            }
-            else if (WeaponID == 1)
-            {
-                weaponName = "Sword"; //10 attack
-            }
-            else if (WeaponID == 2)
-            {
-                weaponName = "Short Bow"; //5 attack
-            }
-        }
-
-        public string GetItemName(int ItemID)
-        {
-            if (ItemID == 0)
+            if (ItemID == ITEM.NULL)
             {
                 itemName = "None"; //nothing
             }
-            else if (ItemID == 1)
+            else if (ItemID == ITEM.POTION)
             {
                 itemName = "Potion";
             }
-            else if (ItemID == 2)
+            else if (ItemID == ITEM.BOAT)
             {
-                itemName = "Boat"; 
+                itemName = "Boat";
+            }
+            else if (ItemID == ITEM.MONEY)
+            {
+                itemName = "Money";
             }
             return itemName;
         }

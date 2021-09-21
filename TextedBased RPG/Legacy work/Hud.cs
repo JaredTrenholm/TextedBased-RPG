@@ -39,6 +39,7 @@ namespace TextedBased_RPG
             Console.SetCursorPosition(HUDx, HUDy);
 
             Console.WriteLine("Health: " + user.GetHealth() + "       " + user.CharacterX + ", " + user.CharacterY + "" + Clear);
+            Console.WriteLine($"Money$: {user.Money}");
             Console.WriteLine("Potions: " + user.potionNumber + "" + Clear);
             Console.WriteLine("Weapon: " + user.Weapon + "" + Clear);
             Console.WriteLine("Attack: " + user.attack + Clear);
