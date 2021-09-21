@@ -9,7 +9,7 @@ namespace TextedBased_RPG
     class Slime : Enemy
     {
 
-        public Slime(Random random) : base(random)
+        public Slime()
         {
             maxHealth = 10;
             health = maxHealth;

@@ -11,11 +11,9 @@ namespace TextedBased_RPG
         private static int EnemyAmount = 25;
         public Enemy[] enemy = new Enemy[EnemyAmount];
         public int EnemyLimit = EnemyAmount;
-        private Random random;
 
-        public EnemyManager(Random randomTarget)
+        public EnemyManager()
         {
-            random = randomTarget;
         }
 
         public bool AllDeadCheck()
@@ -45,11 +43,11 @@ namespace TextedBased_RPG
         {
             for (int x = 1; x < EnemyLimit; x++)
             {
-                if (x > 11) enemy[x] = new Slime(random);
+                if (x > 11) enemy[x] = new Slime();
 
-                else if (x > 20) enemy[x] = new Dog(random);
+                else if (x > 20) enemy[x] = new Dog();
 
-                else enemy[x] = new Bandit(random);
+                else enemy[x] = new Bandit();
 
                 enemy[x].SetSpeciesType(0);
                 enemy[x].GetPlayerTarget(playerTarget);
@@ -58,7 +56,7 @@ namespace TextedBased_RPG
                 enemy[x].GrabManager(enemies);
             }
 
-            enemy[0] = new Boss(random);
+            enemy[0] = new Boss();
             enemy[0].SetPos(40, 10);
             enemy[0].SetSpeciesType(0);
             enemy[0].GetPlayerTarget(playerTarget);

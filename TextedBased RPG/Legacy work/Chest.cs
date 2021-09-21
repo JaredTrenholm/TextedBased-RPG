@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TextedBased_RPG
-{ 
-
+{
     class Chest
     {
         public bool Opened = false;
@@ -16,16 +15,16 @@ namespace TextedBased_RPG
         public int xPos;
         public int yPos;
 
+
+        private int itemType;
+        private int ItemID;
         private string input;
 
         private int attackChange = 0;
 
-        private Random random;
-        private ITEM ItemID;
-        private ITEMTYPE itemType;
         private ItemManager items;
 
-        public Chest(ITEMTYPE itemTypeTarget, ITEM itemIDTarget, ItemManager itemTarget, Random randomTarget)
+        public Chest(int itemTypeTarget, int itemIDTarget, ItemManager itemTarget)
         {
             itemType = itemTypeTarget;
             ItemID = itemIDTarget;
@@ -33,13 +32,13 @@ namespace TextedBased_RPG
             yPos = 0;
             Opened = false;
             items = itemTarget;
-            random = randomTarget;
+
         }
-        public void ChangeType(ITEMTYPE itemTypeTarget)
+        public void ChangeType(int itemTypeTarget)
         {
             itemType = itemTypeTarget;
         }
-        public void ChangeID(ITEM itemIDTarget)
+        public void ChangeID(int itemIDTarget)
         {
             ItemID = itemIDTarget;
         }
@@ -68,7 +67,7 @@ namespace TextedBased_RPG
         {
             if(Opened == false)
             {
-                if (itemType == ITEMTYPE.WEAPON)
+                if (itemType == 0)
                 {
                     for(int x = 0; x < 1;)
                     {
@@ -89,13 +88,13 @@ namespace TextedBased_RPG
                         }
 
                     }
-                } else if (itemType == ITEMTYPE.ITEM)
+                } else if (itemType == 1)
                 {
                     for (int x = 0; x < 1;)
                     {
                         Console.Clear();
                         Console.WriteLine(player.GetName() + " have found a " + items.GetItemName(ItemID) + ".");
-                        if (ItemID == ITEM.POTION)
+                        if (ItemID == 1)
                         {
                             player.potionNumber = player.potionNumber + 1;
                             Opened = true;
@@ -109,21 +108,10 @@ namespace TextedBased_RPG
                             }
                             Console.ReadKey(true);
                             x = 1;
-                        }
-                        else if (ItemID == ITEM.BOAT)
+                        } else if(ItemID == 2)
                         {
                             Console.WriteLine(player.GetName() + " can now travel on water!");
                             player.hasBoat = true;
-                            Opened = true;
-                            Console.ReadKey(true);
-                            x = 1;
-                        }
-                        else if (ItemID == ITEM.MONEY)
-                        {
-                            int money;
-                            money = random.Next(5, 15);
-                            Console.WriteLine($"player found {money} dollars");
-                            player.CashGain(money);
                             Opened = true;
                             Console.ReadKey(true);
                             x = 1;

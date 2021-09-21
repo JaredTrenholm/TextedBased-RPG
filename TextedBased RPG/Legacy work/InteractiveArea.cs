@@ -25,6 +25,8 @@ namespace TextedBased_RPG
         {
             this.name = name;
             dialogue = desiredDialogue;
+            x = 15;
+            y = 10;
             //avatar init in Child
         }
 

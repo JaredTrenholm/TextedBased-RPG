@@ -28,7 +28,7 @@ namespace TextedBased_RPG
                 Console.WriteLine(lastAction);
                 Console.WriteLine("");
                 Console.WriteLine("What do you want to do?");
-                Console.WriteLine("T) Talk\nH) Heal - 2$\nL) Leave");
+                Console.WriteLine("T) Talk\nH) Heal\nL) Leave");
 
                 input = Console.ReadKey(true).Key;
 
@@ -45,7 +45,6 @@ namespace TextedBased_RPG
 
                     case ConsoleKey.H:
                         lastAction = "You rested and made sure you were at perfect health before leaving!";
-                        user.CashSpend(2);
                         user.HealAll();
                         break;
 

@@ -9,7 +9,7 @@ namespace TextedBased_RPG
     class Dog : Enemy
     {
 
-        public Dog(Random random) : base(random)
+        public Dog()
         {
             
             maxHealth = 10;

@@ -8,7 +8,7 @@ namespace TextedBased_RPG
 {
     class Boss : Enemy
     {
-        public Boss(Random random) : base(random)
+        public Boss()
         {
             maxHealth = 100;
             health = maxHealth;

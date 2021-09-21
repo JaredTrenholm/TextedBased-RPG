@@ -50,21 +50,21 @@
     <Compile Include="Dog.cs" />
     <Compile Include="Legacy work\Enemy.cs" />
     <Compile Include="Characters.cs" />
-    <Compile Include="Legacy work\EnemyManager.cs" />
+    <Compile Include="EnemyManager.cs" />
     <Compile Include="FriendlyNPC.cs" />
     <Compile Include="GameLoopConditionals.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Legacy work\Hud.cs" />
     <Compile Include="Legacy work\ItemManager.cs" />
-    <Compile Include="Legacy work\ChestManager.cs" />
+    <Compile Include="ChestManager.cs" />
     <Compile Include="Legacy work\InteractiveArea.cs" />
     <Compile Include="Legacy work\Shop.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Legacy work\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderer.cs" />
+    <Compile Include="Legacy work\Renderer.cs" />
     <Compile Include="Slime.cs" />
     <Compile Include="Legacy work\Town.cs" />
   </ItemGroup>

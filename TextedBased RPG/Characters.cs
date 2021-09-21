@@ -117,7 +117,7 @@ namespace TextedBased_RPG
             }
         }
 
-        public void WeaponChange(ITEM WeaponID)
+        public void WeaponChange(int WeaponID)
         {
             
             if(items.GetWeaponName(WeaponID) == "None")
@@ -137,7 +137,7 @@ namespace TextedBased_RPG
             attack = baseAttack + BonusAttack;
         }
 
-        public void UseItem(ITEM itemID)
+        public void UseItem(int itemID)
         {
             if (items.GetItemName(itemID) == "None")
             {
