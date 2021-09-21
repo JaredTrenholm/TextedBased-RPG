@@ -82,5 +82,27 @@ namespace TextedBased_RPG
             return itemName;
         }
 
+        public int GetItemPrice(ITEM itemID)
+        {
+            int price = 0;
+            if (itemID == ITEM.NULL)
+            {
+                price = 0;
+            }
+            else if (itemID == ITEM.POTION)
+            {
+                price = 10;
+            }
+            else if (itemID == ITEM.SHORTBOW)
+            {
+                price = 15;
+            }
+            else if (itemID == ITEM.SWORD)
+            {
+                price = 20;
+            }
+            return price;
+        }
+
     }
 }

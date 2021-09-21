@@ -23,12 +23,13 @@ namespace TextedBased_RPG
         public int baseAttack = Global.BASE_ATTACK;
         private int BonusAttack = 0;
         public string Weapon = "None";
+        private ITEM heldWeapon;
         protected int movementType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
         protected int SpeciesType = 0;   // 0 = normal; 1 = aquatic; 2 = mountain; 3 = flying;
 
         protected ItemManager items;
 
-
+        public ITEM HeldWeapon { get { return heldWeapon; } set { heldWeapon = value; } }
 
         public string GetAttackMessage()
         {
@@ -123,15 +124,18 @@ namespace TextedBased_RPG
             if(items.GetWeaponName(WeaponID) == "None")
             {
                 Weapon = items.GetWeaponName(WeaponID);
+                heldWeapon = ITEM.NULL;
                 BonusAttack = 0;
             } else if (items.GetWeaponName(WeaponID) == "Sword")
             {
                 Weapon = items.GetWeaponName(WeaponID);
+                heldWeapon = ITEM.SWORD;
                 BonusAttack = 10;
             }
             else if (items.GetWeaponName(WeaponID) == "Short Bow")
             {
                 Weapon = items.GetWeaponName(WeaponID);
+                heldWeapon = ITEM.SHORTBOW; 
                 BonusAttack = 5;
             }
             attack = baseAttack + BonusAttack;
