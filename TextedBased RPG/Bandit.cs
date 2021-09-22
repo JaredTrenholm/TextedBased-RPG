@@ -9,7 +9,7 @@ namespace TextedBased_RPG
     class Bandit : Enemy
     {
 
-        public Bandit()
+        public Bandit(Random random) : base(random)
         {
             maxHealth = 20;
             health = maxHealth;

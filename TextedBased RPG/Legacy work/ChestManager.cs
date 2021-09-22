@@ -11,25 +11,46 @@ namespace TextedBased_RPG
         private int chestAmount = 15;
         private Chest[] chest;
         private ItemManager items;
+        private Random random;
 
-        public ChestManager(ItemManager itemTarget)
+
+        public ChestManager(ItemManager itemTarget, Random randomTarget)
         {
-         chest = new Chest[chestAmount];
+            chest = new Chest[chestAmount];
             items = itemTarget;
-
+            random = randomTarget;
         }
 
         public void chestInitialize()
         {
-            chest[0] = new Chest(1, 2, items);
+            int contents = 99; 
+            chest[0] = new Chest(ITEMTYPE.ITEM, ITEM.RAFT, items, random);
             for (int z = 1; z < chestAmount; z++)
             {
-                chest[z] = new Chest(0,1, items);
+                int randomNumber;
+                randomNumber = random.Next(1, 10);
+                if (randomNumber >= 5)
+                { 
+                    contents = (int)ITEM.POTION;
+                }
+                else if (randomNumber <= 6)
+                {
+                    contents = (int)ITEM.MONEY;
+                    //Console.ReadKey(true);
+                }
+                chest[z] = new Chest(ITEMTYPE.ITEM, (ITEM)contents, items, random);
             }
+
+            //changes?
+            chest[1].ChangeID(ITEM.RAFT);
+            chest[2].ChangeID(ITEM.BOW);
+            chest[2].ChangeType(ITEMTYPE.WEAPON);
+            chest[3].ChangeID(ITEM.SWORD);
+            chest[3].ChangeType(ITEMTYPE.WEAPON);
+
+            //chest postitions
             chest[0].SetPos(12, 26);
             chest[1].SetPos(11, 2);
-            chest[1].ChangeID(2);
-            chest[2].ChangeType(1);
             chest[2].SetPos(13, 3);
             chest[3].SetPos(12, 1);
             chest[4].SetPos(1, 3);
@@ -44,19 +65,13 @@ namespace TextedBased_RPG
             chest[13].SetPos(27, 3);
             chest[14].SetPos(27, 0);
 
-            for (int z = 4; z < chestAmount; z++)
-            {
-                chest[z].ChangeType(1);
-            }
-
-
         }
 
         public void FindPlayer(Player playerTarget)
         {
             for(int z = 0; z < chestAmount; z++)
             {
-            chest[z].FindPlayer(playerTarget);
+                chest[z].FindPlayer(playerTarget);
             }
         }
 
