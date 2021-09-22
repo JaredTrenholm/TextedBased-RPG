@@ -24,7 +24,7 @@ namespace TextedBased_RPG
         public void chestInitialize()
         {
             int contents = 99; 
-            chest[0] = new Chest(ITEMTYPE.ITEM, ITEM.BOAT, items, random);
+            chest[0] = new Chest(ITEMTYPE.ITEM, ITEM.RAFT, items, random);
             for (int z = 1; z < chestAmount; z++)
             {
                 int randomNumber;
@@ -42,8 +42,8 @@ namespace TextedBased_RPG
             }
 
             //changes?
-            chest[1].ChangeID(ITEM.BOAT);
-            chest[2].ChangeID(ITEM.SHORTBOW);
+            chest[1].ChangeID(ITEM.RAFT);
+            chest[2].ChangeID(ITEM.BOW);
             chest[2].ChangeType(ITEMTYPE.WEAPON);
             chest[3].ChangeID(ITEM.SWORD);
             chest[3].ChangeType(ITEMTYPE.WEAPON);

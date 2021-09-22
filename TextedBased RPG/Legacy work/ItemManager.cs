@@ -10,9 +10,9 @@ namespace TextedBased_RPG
     { 
         NULL,
         SWORD,
-        SHORTBOW,
+        BOW,
         POTION,
-        BOAT,
+        RAFT,
         MONEY
     }
     enum ITEMTYPE
@@ -37,9 +37,9 @@ namespace TextedBased_RPG
             {
                 weaponName = "Sword";
             }
-            else if (WeaponID == ITEM.SHORTBOW)
+            else if (WeaponID == ITEM.BOW)
             {
-                weaponName = "Short Bow"; //5 attack
+                weaponName = "Bow"; //5 attack
             }
             return weaponName;
         }
@@ -54,7 +54,7 @@ namespace TextedBased_RPG
             {
                 attackMod = 10;
             }
-            else if (WeaponID == ITEM.SHORTBOW)
+            else if (WeaponID == ITEM.BOW)
             {
                 attackMod = 5;
             }
@@ -71,9 +71,9 @@ namespace TextedBased_RPG
             {
                 itemName = "Potion";
             }
-            else if (ItemID == ITEM.BOAT)
+            else if (ItemID == ITEM.RAFT)
             {
-                itemName = "Boat";
+                itemName = "Raft";
             }
             else if (ItemID == ITEM.MONEY)
             {
@@ -93,13 +93,17 @@ namespace TextedBased_RPG
             {
                 price = 10;
             }
-            else if (itemID == ITEM.SHORTBOW)
+            else if (itemID == ITEM.BOW)
             {
                 price = 15;
             }
             else if (itemID == ITEM.SWORD)
             {
                 price = 20;
+            }
+            else if (itemID == ITEM.RAFT)
+            {
+                price = 30;
             }
             return price;
         }

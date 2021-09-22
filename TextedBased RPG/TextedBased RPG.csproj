@@ -53,7 +53,7 @@
     <Compile Include="Legacy work\EnemyManager.cs" />
     <Compile Include="FriendlyNPC.cs" />
     <Compile Include="GameLoopConditionals.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="Legacy work\GameManager.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Legacy work\Hud.cs" />
     <Compile Include="Legacy work\ItemManager.cs" />

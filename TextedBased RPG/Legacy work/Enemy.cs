@@ -40,7 +40,19 @@ namespace TextedBased_RPG
         {
             user = userTarget;
         }
-
+        override public void CheckHealth()
+        {
+            if (health <= 0)
+            {
+                Console.ReadKey(true);
+                int vEarnings;
+                vEarnings = random.Next(5, 25);
+                Console.SetCursorPosition(0, 24);
+                Console.WriteLine($"you gained {vEarnings}$");
+                user.CashGain(vEarnings);
+                Alive = false;
+            }
+        }
         public void Draw()
         {
             if (Alive == false) return;
@@ -59,16 +71,9 @@ namespace TextedBased_RPG
 
         public void EnemyTurn()
         {
-            if (health <= 0) // for some reason this is where enemies come to die, so legacy code will be put here too
-            {
-                int vEarnings;
-                vEarnings = random.Next(5, 25);
-                Console.SetCursorPosition(0, 24);
-                Console.WriteLine($"you gained {vEarnings}$");
-                user.CashGain(vEarnings);
-                Alive = false;
-                if (Alive == false) return;
-            }
+            CheckHealth();
+            if (Alive == false) return;
+            
             else 
             {
                 if (CharacterX == user.CharacterX)

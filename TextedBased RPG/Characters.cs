@@ -40,7 +40,7 @@ namespace TextedBased_RPG
         {
             AttackMessage = Message;
         }
-        public void CheckHealth()
+        virtual public void CheckHealth()
         {
 
             if (health <= 0)
@@ -121,21 +121,21 @@ namespace TextedBased_RPG
         public void WeaponChange(ITEM WeaponID)
         {
             
-            if(items.GetWeaponName(WeaponID) == "None")
+            if(WeaponID == ITEM.NULL)
             {
                 Weapon = items.GetWeaponName(WeaponID);
                 heldWeapon = ITEM.NULL;
                 BonusAttack = 0;
-            } else if (items.GetWeaponName(WeaponID) == "Sword")
+            } else if (WeaponID == ITEM.SWORD)
             {
                 Weapon = items.GetWeaponName(WeaponID);
                 heldWeapon = ITEM.SWORD;
                 BonusAttack = 10;
             }
-            else if (items.GetWeaponName(WeaponID) == "Short Bow")
+            else if (WeaponID == ITEM.BOW)
             {
                 Weapon = items.GetWeaponName(WeaponID);
-                heldWeapon = ITEM.SHORTBOW; 
+                heldWeapon = ITEM.BOW; 
                 BonusAttack = 5;
             }
             attack = baseAttack + BonusAttack;

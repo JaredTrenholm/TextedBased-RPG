@@ -77,6 +77,7 @@ namespace TextedBased_RPG
                         attackChange = player.baseAttack + items.GetWeaponAttack(ItemID);
                         Console.WriteLine("It will change your attack to " + attackChange + " from " + player.attack +".");
                         Console.WriteLine("Equip it? Y/N");
+
                         input = Console.ReadKey(true).Key.ToString();
                         if(input == ConsoleKey.Y.ToString())
                         {
@@ -110,7 +111,7 @@ namespace TextedBased_RPG
                             Console.ReadKey(true);
                             x = 1;
                         }
-                        else if (ItemID == ITEM.BOAT)
+                        else if (ItemID == ITEM.RAFT)
                         {
                             Console.WriteLine(player.GetName() + " can now travel on water!");
                             player.hasBoat = true;
