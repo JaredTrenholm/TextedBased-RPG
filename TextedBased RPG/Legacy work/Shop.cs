@@ -8,20 +8,21 @@ namespace TextedBased_RPG
 {
     class Shop : InteractiveArea
     {
-        private int shopTax = 3; // added to sold items
+        private int tax = 0; // added to sold items, set in constructor
         private ItemManager items; 
         public List<ITEM> itemsInShop = new List<ITEM>(); 
         private string itemsToBuy; // string that shows what player can  buy  at the shop
         private string itemsToSell; // ^^ but                            sell
 
         //constructor
-        public Shop(string name, string DesiredDialogue, int x, int y, ItemManager itemsTarget, List<ITEM> itemsForStock) : base(name, DesiredDialogue)
+        public Shop(string name, string DesiredDialogue, int x, int y, ItemManager itemsTarget, List<ITEM> itemsForStock, int thisShopTax) : base(name, DesiredDialogue)
         {
             base.x = x;
             base.y = y;
             avatar = "$";
             items = itemsTarget;
             itemsInShop = itemsForStock;
+            tax = thisShopTax;
             SetBuyAndSellString();
         }
         
@@ -33,21 +34,21 @@ namespace TextedBased_RPG
         {
             if (itemsInShop.Contains(ITEM.POTION))
             {
-                itemsToBuy = itemsToBuy + $"\n{items.GetItemName(ITEM.POTION)[0]}) {items.GetItemName(ITEM.POTION)} - {items.GetItemPrice(ITEM.POTION) + shopTax}$";
+                itemsToBuy = itemsToBuy + $"\n{items.GetItemName(ITEM.POTION)[0]}) {items.GetItemName(ITEM.POTION)} - {items.GetItemPrice(ITEM.POTION) + tax}$";
                 itemsToSell = itemsToSell + $"\n{items.GetItemName(ITEM.POTION)[0]}) {items.GetItemName(ITEM.POTION)} - {items.GetItemPrice(ITEM.POTION) }$";
             }
             if (itemsInShop.Contains(ITEM.RAFT))
             {
-                itemsToBuy = itemsToBuy + $"\n{items.GetItemName(ITEM.RAFT)[0]}) {items.GetItemName(ITEM.RAFT)} - {items.GetItemPrice(ITEM.RAFT) + shopTax}$";
+                itemsToBuy = itemsToBuy + $"\n{items.GetItemName(ITEM.RAFT)[0]}) {items.GetItemName(ITEM.RAFT)} - {items.GetItemPrice(ITEM.RAFT) + tax}$";
                 itemsToSell = itemsToSell + $"\n{items.GetItemName(ITEM.RAFT)[0]}) {items.GetItemName(ITEM.RAFT)} - {items.GetItemPrice(ITEM.RAFT)}$";
             }
             if (itemsInShop.Contains(ITEM.SWORD))
             {
-                itemsToBuy = itemsToBuy + $"\n{items.GetWeaponName(ITEM.SWORD)[0]}) {items.GetWeaponName(ITEM.SWORD)} / ATTK^{items.GetWeaponAttack(ITEM.SWORD)} - {items.GetItemPrice(ITEM.SWORD)}$";
+                itemsToBuy = itemsToBuy + $"\n{items.GetWeaponName(ITEM.SWORD)[0]}) {items.GetWeaponName(ITEM.SWORD)} / ATTK^{items.GetWeaponAttack(ITEM.SWORD)} - {items.GetItemPrice(ITEM.SWORD) + tax}$";
             }
             if (itemsInShop.Contains(ITEM.BOW))
             {
-                itemsToBuy = itemsToBuy + $"\n{items.GetWeaponName(ITEM.BOW)[0]}) {items.GetWeaponName(ITEM.BOW)} / ATTK^{items.GetWeaponAttack(ITEM.BOW)} - {items.GetItemPrice(ITEM.BOW)}$";
+                itemsToBuy = itemsToBuy + $"\n{items.GetWeaponName(ITEM.BOW)[0]}) {items.GetWeaponName(ITEM.BOW)} / ATTK^{items.GetWeaponAttack(ITEM.BOW)} - {items.GetItemPrice(ITEM.BOW) + tax}$";
             }
         }
         private void BuyOutput() // Exchanges Money for a taxed item
@@ -58,10 +59,10 @@ namespace TextedBased_RPG
                 if (user.Money >= items.GetItemPrice(ITEM.SWORD)) // buy method
                 {
                     Console.Clear();
-                    lastAction = $"you purchase a {items.GetWeaponName(ITEM.SWORD)} for {items.GetItemPrice(ITEM.SWORD) + shopTax}";
+                    lastAction = $"you purchase a {items.GetWeaponName(ITEM.SWORD)} for {items.GetItemPrice(ITEM.SWORD) + tax}";
                     int attackChange = user.baseAttack + items.GetWeaponAttack(ITEM.SWORD);
                     Console.WriteLine($"purchasing a {items.GetWeaponName(ITEM.SWORD)} \nwill change your attack to " + attackChange + " from " + user.attack + ".");
-                    user.CashSpend(items.GetItemPrice(ITEM.SWORD) + shopTax);
+                    user.CashSpend(items.GetItemPrice(ITEM.SWORD) + tax);
                     user.WeaponChange(ITEM.SWORD);
                     Console.ReadKey(true);
                 }
@@ -75,10 +76,10 @@ namespace TextedBased_RPG
                 if (user.Money >= items.GetItemPrice(ITEM.BOW))
                 {
                     Console.Clear();
-                    lastAction = $"you purchased a {items.GetWeaponName(ITEM.BOW)} for {items.GetItemPrice(ITEM.BOW) + shopTax}";
+                    lastAction = $"you purchased a {items.GetWeaponName(ITEM.BOW)} for {items.GetItemPrice(ITEM.BOW) + tax}";
                     int attackChange = user.baseAttack + items.GetWeaponAttack(ITEM.BOW);
                     Console.WriteLine($"purchasing a {items.GetWeaponName(ITEM.BOW)} \nwill change your attack to " + attackChange + " from " + user.attack + ".");
-                    user.CashSpend(items.GetItemPrice(ITEM.BOW) + shopTax);
+                    user.CashSpend(items.GetItemPrice(ITEM.BOW) + tax);
                     user.WeaponChange(ITEM.BOW);
                     Console.ReadKey(true);
                 }
@@ -91,8 +92,8 @@ namespace TextedBased_RPG
             {
                 if (user.Money >= items.GetItemPrice(ITEM.POTION))
                 {
-                    lastAction = $"you buy a {items.GetItemName(ITEM.POTION)} with {items.GetItemPrice(ITEM.POTION) + shopTax}$";
-                    user.CashSpend(items.GetItemPrice(ITEM.POTION) + shopTax);
+                    lastAction = $"you buy a {items.GetItemName(ITEM.POTION)} with {items.GetItemPrice(ITEM.POTION) + tax}$";
+                    user.CashSpend(items.GetItemPrice(ITEM.POTION) + tax);
                     user.potionNumber++;
                 }
                 else
@@ -104,8 +105,8 @@ namespace TextedBased_RPG
             {
                 if (user.Money >= items.GetItemPrice(ITEM.RAFT) && !user.hasBoat)
                 {
-                    lastAction = $"You buy a {items.GetItemName(ITEM.RAFT)} with {items.GetItemPrice(ITEM.RAFT) + shopTax}$";
-                    user.CashSpend(items.GetItemPrice(ITEM.RAFT) + shopTax);
+                    lastAction = $"You buy a {items.GetItemName(ITEM.RAFT)} with {items.GetItemPrice(ITEM.RAFT) + tax}$";
+                    user.CashSpend(items.GetItemPrice(ITEM.RAFT) + tax);
                     user.hasBoat = true;
                 }
                 else if (user.hasBoat)
@@ -202,7 +203,7 @@ namespace TextedBased_RPG
                 Console.WriteLine(itemsToSell);
                 if (user.HeldWeapon != ITEM.NULL) // only shows up if player has weapon to sell
                 { 
-                    Console.WriteLine($"W) {user.Weapon} - {items.GetItemPrice(user.HeldWeapon)-shopTax}$"); // Sell prompt
+                    Console.WriteLine($"W) {user.Weapon} - {items.GetItemPrice(user.HeldWeapon)-tax}$"); // Sell prompt
                 }
                 Console.WriteLine("R) Return");
 

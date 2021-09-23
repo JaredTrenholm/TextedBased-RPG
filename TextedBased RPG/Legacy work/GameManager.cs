@@ -52,7 +52,7 @@ namespace TextedBased_RPG
             stockListForShop1.Add(ITEM.POTION);
             stockListForShop1.Add(ITEM.SWORD);
             stockListForShop1.Add(ITEM.BOW);
-            shops.Add(new Shop("The $hop", $"You sure look like you could use a boat!,\ntoo bad I sold my last one to a guy in {town.Name}! :D HA,HA,HA.", 16, 7, items, stockListForShop1)); // I-0
+            shops.Add(new Shop("The $hop", $"You sure look like you could use a boat!,\ntoo bad I sold my last one to a guy in {town.Name}! :D HA,HA,HA.", 16, 7, items, stockListForShop1, 3)); // I-0
             shops[0].itemsInShop = shops[0].itemsInShop;
             shops[0].SetPlayer(player);
 
@@ -60,11 +60,11 @@ namespace TextedBased_RPG
             stockListForShop2.Add(ITEM.SWORD);
             stockListForShop2.Add(ITEM.BOW);
             stockListForShop2.Add(ITEM.RAFT);
-            shops.Add(new Shop("CommerceSuperCentre", "I didn't know what these other shop keepers should say", 18, 8, items, stockListForShop2)); // I-1
+            shops.Add(new Shop("CommerceSuperCentre", "I didn't know what these other shop keepers should say", 18, 8, items, stockListForShop2, 6)); // I-1
             shops[1].SetPlayer(player);
 
             stockListForShop3.Add(ITEM.SWORD);
-            shops.Add(new Shop("Lorem Ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 19, 9, items, stockListForShop3)); // I-2
+            shops.Add(new Shop("Lorem Ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", 19, 9, items, stockListForShop3, 19)); // I-2
             shops[2].SetPlayer(player);
         }
 
